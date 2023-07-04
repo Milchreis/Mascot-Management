@@ -10,3 +10,7 @@ A management sim game created for the [A-Game-By-Its-Cover-Jam 2023](https://itc
 > Behind every cute mascot lies shrewd business backing. Guide your company's mascot to popularity and success in the world's first mascot management sim!
 
 From the [Famicase exhibition 2023](https://famicase.com/23/index.html)
+
+## Self-chosen limitations
+ - GameBoy Advance resolution (240x160)
+ - limited color palette (https://lospec.com/palette-list/axulart-32-color-palette)
