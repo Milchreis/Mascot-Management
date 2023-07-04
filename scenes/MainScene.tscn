@@ -35,3 +35,5 @@ margin_right = 53.0
 margin_bottom = 15.0
 theme = ExtResource( 2 )
 text = "job application"
+
+[node name="PolaroidSelector" type="Node2D" parent="Desk/JobApplication"]

@@ -1,6 +1,7 @@
 extends Node2D
 
 var Mascot = load("res://scripts/Mascot.gd")
+var Polaroid = preload("res://scenes/Polaroid.tscn")
 
 var balance:int = 100
 var client_statisfaction:float = 0
@@ -27,7 +28,10 @@ func onDayIsOver() -> void:
 	print("Days over " + str(passedDays))
 
 	var mascot1 = createMascot()
-	print(mascot1.nickname)
+	print(mascot1._to_string())
+	var polaroid = Polaroid.instance()
+	polaroid.mascot = mascot1
+	$Desk/JobApplication/PolaroidSelector.add_child(polaroid)
 
 func createMascot() -> Mascot:
 	randomize()

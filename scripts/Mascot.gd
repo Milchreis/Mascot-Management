@@ -11,5 +11,15 @@ export var xp:float = rand_range(0.0, 5.0)
 
 export var salaryPerDay:int = rand_range(10, 50)
 
+export var spriteImage:String = "res://gfx/mascots/ape1.png"
+
 # TODO: 
 #  - salary depending on properties
+
+func _to_string():
+	return (
+		"nickname="+nickname +
+		", crazy="+str(crazy) +
+		", raliable="+str(reliable) + 
+		", xp="+str(xp)+
+		", salaryPerDay="+str(salaryPerDay))
