@@ -7,7 +7,7 @@ var model:GameModel
 var applications:Array = []
 
 func _ready():		
-	for n in range(0, 3):
+	for _n in range(0, 3):
 		applications.append(createMascot())
 	
 	for mascot in applications:

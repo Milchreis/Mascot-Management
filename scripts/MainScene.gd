@@ -7,7 +7,7 @@ func _ready():
 	$Desk.model = model
 	$Desk/JobApplication.model = model
 
-func _process(delta):
+func _process(_delta):
 	if model.client_statisfaction < 100.0: 
 		model.client_statisfaction += 0.1
 	
