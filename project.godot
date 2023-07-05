@@ -10,11 +10,23 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "GameModel",
+"language": "GDScript",
+"path": "res://scripts/GameModel.gd"
+}, {
+"base": "Control",
+"class": "JobApplication",
+"language": "GDScript",
+"path": "res://scripts/JobApplication.gd"
+}, {
+"base": "Node",
 "class": "Mascot",
 "language": "GDScript",
 "path": "res://scripts/Mascot.gd"
 } ]
 _global_script_class_icons={
+"GameModel": "",
+"JobApplication": "",
 "Mascot": ""
 }
 
