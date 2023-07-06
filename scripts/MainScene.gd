@@ -3,9 +3,13 @@ extends Node2D
 var GameModel = load("res://scripts/GameModel.gd")
 var model:GameModel = GameModel.new()
 
+onready var start_time = OS.get_ticks_msec()
+
 func _ready():
 	$Desk.model = model
 	$Desk/JobApplication.model = model
+	
+	$Desk/JobApplication.createPool(1)
 
 func _process(_delta):
 	if model.client_statisfaction < 100.0: 

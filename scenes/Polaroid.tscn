@@ -1,27 +1,37 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Polaroid.gd" type="Script" id=1]
+[ext_resource path="res://gfx/stats.png" type="Texture" id=2]
+[ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 3 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
 
 [node name="Polaroid" type="Control"]
-margin_left = 17.0
-margin_top = 45.0
-margin_right = 69.0
-margin_bottom = 110.0
+margin_right = 52.0
+margin_bottom = 65.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="bg" type="ColorRect" parent="."]
 margin_left = 1.0
 margin_top = 1.0
-margin_right = 53.0
-margin_bottom = 66.0
+margin_right = 59.0
+margin_bottom = 70.0
 color = Color( 0.403922, 0.384314, 0.603922, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="fg" type="ColorRect" parent="."]
-margin_right = 52.0
-margin_bottom = 65.0
+margin_right = 58.0
+margin_bottom = 69.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -29,13 +39,55 @@ __meta__ = {
 [node name="pic" type="ColorRect" parent="."]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 48.0
-margin_bottom = 48.0
+margin_right = 53.0
+margin_bottom = 53.0
 color = Color( 0.690196, 0.815686, 0.494118, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Sprite" type="Sprite" parent="pic"]
-position = Vector2( 22, 22 )
+position = Vector2( 49, 49 )
 offset = Vector2( -22, -22 )
+
+[node name="salary" type="Label" parent="."]
+margin_left = 9.0
+margin_top = 57.0
+margin_right = 52.0
+margin_bottom = 65.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.4, 0.666667, 0.364706, 1 )
+text = "500$"
+align = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StatsPanel" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 72.0
+margin_right = 1.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Stats" type="Sprite" parent="StatsPanel"]
+position = Vector2( 12, 12 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="crazyPosition" type="Node2D" parent="StatsPanel"]
+position = Vector2( 14, 1 )
+
+[node name="reliabPosition" type="Node2D" parent="StatsPanel"]
+position = Vector2( 14, 5.5 )
+
+[node name="xpPosition" type="Node2D" parent="StatsPanel"]
+position = Vector2( 14, 10 )
+__meta__ = {
+"_edit_lock_": true
+}

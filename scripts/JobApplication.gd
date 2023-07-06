@@ -6,8 +6,9 @@ var Polaroid = preload("res://scenes/Polaroid.tscn")
 var model:GameModel
 var applications:Array = []
 
-func _ready():		
-	for _n in range(0, 3):
+func createPool(size=3) -> void:
+	print("in pool")
+	for _n in range(0, size):
 		applications.append(createMascot())
 	
 	for mascot in applications:

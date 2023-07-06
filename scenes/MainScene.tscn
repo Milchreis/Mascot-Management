@@ -42,5 +42,6 @@ theme = ExtResource( 2 )
 text = "job application"
 
 [node name="PolaroidSelector" type="Node2D" parent="Desk/JobApplication"]
+position = Vector2( 10, 46 )
 
 [connection signal="timeout" from="DayTimer" to="." method="onDayIsOver"]
