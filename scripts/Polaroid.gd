@@ -1,5 +1,7 @@
 extends Control
 
+signal select(mascot)
+
 export(bool) var showStats = true
 export(int) var salaryPerDay = 10
 
@@ -11,6 +13,7 @@ var dotFilled = load("res://gfx/dot_filled.png")
 func _ready():
 	$pic/Sprite.texture = load(mascot.spriteImage)
 	$salary.text = str(mascot.salaryPerDay) + "$/d"
+	$name.text = mascot.nickname
 	setStats($StatsPanel/crazyPosition, mascot.crazy)
 	setStats($StatsPanel/reliabPosition, mascot.reliable)
 	setStats($StatsPanel/xpPosition, mascot.xp)
@@ -18,6 +21,12 @@ func _ready():
 
 func _process(_delta):
 	$StatsPanel.visible = showStats
+
+## temporary mouse input for hiring mascots
+func _input(event):
+	if event is InputEventMouseButton and get_global_rect().has_point(event.position):
+		if event.pressed:   
+			emit_signal("select", mascot)
 
 func setStats(positionNode, propertyValue):
 	for n in range(0, 5):
@@ -29,3 +38,4 @@ func setStats(positionNode, propertyValue):
 		stat.position = positionNode.position
 		stat.position.x += n * (stat.texture.get_width()+1)
 		positionNode.add_child(stat)
+

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/Polaroid.gd" type="Script" id=1]
 [ext_resource path="res://gfx/stats.png" type="Texture" id=2]
-[ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://fonts/dogicapixelbold.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -12,8 +12,8 @@ font_data = ExtResource( 3 )
 default_font = SubResource( 1 )
 
 [node name="Polaroid" type="Control"]
-margin_right = 52.0
-margin_bottom = 65.0
+margin_right = 59.0
+margin_bottom = 70.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -62,6 +62,16 @@ align = 2
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="name" type="Label" parent="."]
+margin_left = 2.0
+margin_top = 3.0
+margin_right = 54.0
+margin_bottom = 11.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "Name"
+clip_text = true
 
 [node name="StatsPanel" type="Control" parent="."]
 anchor_right = 1.0
