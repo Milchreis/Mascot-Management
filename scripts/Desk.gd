@@ -10,7 +10,7 @@ func _process(_delta):
 	updateBalanceView()
 
 func updateSatisfactionView() -> void:
-	$Appbar/ClientSatisfaction/Background/Progess.value = int(model.client_statisfaction)
+	$Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
 
 func updateBalanceView() -> void:
 	$Appbar/Balance/Amount.text = str(model.balance) + "$"

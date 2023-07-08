@@ -3,6 +3,7 @@ extends Control
 signal select(mascot)
 
 export(bool) var showStats = true
+export(bool) var showName = true
 export(int) var salaryPerDay = 10
 
 var mascot:Mascot
@@ -21,6 +22,7 @@ func _ready():
 
 func _process(_delta):
 	$StatsPanel.visible = showStats
+	$name.visible = showName
 
 ## temporary mouse input for hiring mascots
 func _input(event):

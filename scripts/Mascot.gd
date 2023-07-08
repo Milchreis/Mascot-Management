@@ -10,8 +10,10 @@ export var reliable:float = rand_range(0.0, 5.0)
 export var xp:float = rand_range(0.0, 5.0)
 
 export var salaryPerDay:int = rand_range(10, 50)
-
 export var spriteImage:String = "res://gfx/mascots/ape1.png"
+
+var client_satisfaction:float = 0
+var jobs:int = 0
 
 # TODO: 
 #  - salary depending on properties

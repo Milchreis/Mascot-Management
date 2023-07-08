@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -7,6 +7,13 @@
 [ext_resource path="res://scripts/JobApplication.gd" type="Script" id=5]
 [ext_resource path="res://fonts/dogicapixelbold.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://scripts/Inventory.gd" type="Script" id=7]
+[ext_resource path="res://gfx/red_button_theme.tres" type="Theme" id=8]
+[ext_resource path="res://scripts/MascotDetails.gd" type="Script" id=9]
+[ext_resource path="res://gfx/progressbar_fg.png" type="Texture" id=10]
+[ext_resource path="res://gfx/progressbar_bg.png" type="Texture" id=11]
+[ext_resource path="res://gfx/client-satisfaction.png" type="Texture" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.160784, 0.184314, 0.396078, 1 )
@@ -23,6 +30,7 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
+Button/styles/focus = SubResource( 6 )
 Button/styles/hover = SubResource( 4 )
 Button/styles/normal = SubResource( 3 )
 Button/styles/pressed = SubResource( 5 )
@@ -75,6 +83,7 @@ text = "inv"
 position = Vector2( 10, 46 )
 
 [node name="Inventory" type="Control" parent="Desk"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -95, -13 )
@@ -110,6 +119,89 @@ text = "j.a."
 [node name="PolaroidList" type="Node2D" parent="Desk/Inventory"]
 position = Vector2( 10, 46 )
 
+[node name="MascotDetails" type="Control" parent="Desk"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -95, -13 )
+script = ExtResource( 9 )
+
+[node name="Header" type="ColorRect" parent="Desk/MascotDetails"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -38.0
+margin_top = 20.0
+margin_right = 38.0
+margin_bottom = 36.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button" type="Button" parent="Desk/MascotDetails/Header"]
+margin_left = 126.0
+margin_top = -14.0
+margin_right = 155.0
+theme = SubResource( 2 )
+text = "inv"
+
+[node name="Train" type="Button" parent="Desk/MascotDetails"]
+margin_left = 82.0
+margin_top = 27.0
+margin_right = 141.0
+margin_bottom = 41.0
+theme = SubResource( 2 )
+text = "Training"
+
+[node name="Fire" type="Button" parent="Desk/MascotDetails"]
+margin_left = 146.0
+margin_top = 27.0
+margin_right = 205.0
+margin_bottom = 41.0
+theme = ExtResource( 8 )
+text = "Fire!"
+align = 0
+
+[node name="ClientSatisfaction" type="Control" parent="Desk/MascotDetails"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.0
+margin_top = 123.0
+margin_right = -40.0
+margin_bottom = 145.0
+
+[node name="Background" type="ColorRect" parent="Desk/MascotDetails/ClientSatisfaction"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -22.0
+margin_top = 6.0
+margin_right = 24.0
+margin_bottom = 16.0
+color = Color( 0.603922, 0.560784, 0.878431, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Desk/MascotDetails/ClientSatisfaction/Background"]
+position = Vector2( -8, 4 )
+texture = ExtResource( 12 )
+
+[node name="Progess" type="TextureProgress" parent="Desk/MascotDetails/ClientSatisfaction/Background"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -22.0
+margin_top = 1.0
+margin_right = 22.0
+margin_bottom = 9.0
+max_value = 1.0
+step = 0.1
+texture_under = ExtResource( 11 )
+texture_progress = ExtResource( 10 )
+nine_patch_stretch = true
+
 [connection signal="timeout" from="DayTimer" to="." method="onDayIsOver"]
 [connection signal="pressed" from="Desk/JobApplication/Header/Button" to="." method="onOpenInventory"]
-[connection signal="pressed" from="Desk/Inventory/Header/Button" to="." method="onJobApplicationOpen"]
+[connection signal="select" from="Desk/Inventory" to="." method="onOpenMascotDetails"]
+[connection signal="pressed" from="Desk/Inventory/Header/Button" to="." method="onOpenJobApplication"]
+[connection signal="pressed" from="Desk/MascotDetails/Header/Button" to="." method="onOpenInventory"]
+[connection signal="pressed" from="Desk/MascotDetails/Train" to="Desk/MascotDetails" method="onTraining"]
+[connection signal="pressed" from="Desk/MascotDetails/Fire" to="Desk/MascotDetails" method="onFire"]

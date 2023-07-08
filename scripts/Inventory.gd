@@ -1,4 +1,5 @@
 extends Control
+signal select(mascot)
 
 var Polaroid = preload("res://scenes/Polaroid.tscn")
 
@@ -27,3 +28,4 @@ func onClose():
 
 func onSelect(mascot:Mascot):
 	print("open details for ", mascot._to_string())
+	emit_signal("select", mascot)

@@ -43,6 +43,7 @@ window/size/height=160
 window/size/test_width=960
 window/size/test_height=640
 window/dpi/allow_hidpi=true
+mouse_cursor/custom_image="res://gfx/cursor.png"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
