@@ -11,6 +11,8 @@ A management sim game created for the [A-Game-By-Its-Cover-Jam 2023](https://itc
 
 From the [Famicase exhibition 2023](https://famicase.com/23/index.html)
 
+Thank you Rory for the permission :)
+
 ## Self-chosen limitations
  - GameBoy Advance resolution (240x160)
  - limited color palette (https://lospec.com/palette-list/axulart-32-color-palette)
