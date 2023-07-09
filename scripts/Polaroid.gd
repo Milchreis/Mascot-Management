@@ -14,7 +14,7 @@ var dotFilled = load("res://gfx/dot_filled.png")
 func _ready():
 	$pic/Sprite.texture = load(mascot.spriteImage)
 	$salary.text = str(mascot.salaryPerDay) + "$/d"
-	$name.text = mascot.nickname
+	$name.text = mascot.nickname.to_upper()
 	
 	createStats($StatsPanel/crazyPosition, mascot.crazy)
 	createStats($StatsPanel/reliabPosition, mascot.reliable)

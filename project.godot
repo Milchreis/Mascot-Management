@@ -34,6 +34,10 @@ _global_script_class_icons={
 
 config/name="Mascot-Management"
 run/main_scene="res://scenes/MainScene.tscn"
+boot_splash/show_image=false
+boot_splash/image="res://loading-icon.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.png"
 
 [display]
