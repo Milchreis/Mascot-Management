@@ -38,10 +38,6 @@ Button/styles/pressed = SubResource( 5 )
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="DayTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
-
 [node name="Desk" parent="." instance=ExtResource( 1 )]
 script = ExtResource( 4 )
 
@@ -198,10 +194,10 @@ texture_under = ExtResource( 11 )
 texture_progress = ExtResource( 10 )
 nine_patch_stretch = true
 
-[connection signal="timeout" from="DayTimer" to="." method="onDayIsOver"]
 [connection signal="pressed" from="Desk/JobApplication/Header/Button" to="." method="onOpenInventory"]
 [connection signal="select" from="Desk/Inventory" to="." method="onOpenMascotDetails"]
 [connection signal="pressed" from="Desk/Inventory/Header/Button" to="." method="onOpenJobApplication"]
+[connection signal="close" from="Desk/MascotDetails" to="." method="onMascotFire"]
 [connection signal="pressed" from="Desk/MascotDetails/Header/Button" to="." method="onOpenInventory"]
 [connection signal="pressed" from="Desk/MascotDetails/Train" to="Desk/MascotDetails" method="onTraining"]
 [connection signal="pressed" from="Desk/MascotDetails/Fire" to="Desk/MascotDetails" method="onFire"]

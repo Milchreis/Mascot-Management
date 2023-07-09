@@ -15,14 +15,19 @@ func _ready():
 	$pic/Sprite.texture = load(mascot.spriteImage)
 	$salary.text = str(mascot.salaryPerDay) + "$/d"
 	$name.text = mascot.nickname
-	setStats($StatsPanel/crazyPosition, mascot.crazy)
-	setStats($StatsPanel/reliabPosition, mascot.reliable)
-	setStats($StatsPanel/xpPosition, mascot.xp)
-	print(mascot.to_string())
+	
+	createStats($StatsPanel/crazyPosition, mascot.crazy)
+	createStats($StatsPanel/reliabPosition, mascot.reliable)
+	createStats($StatsPanel/xpPosition, mascot.xp)
 
 func _process(_delta):
 	$StatsPanel.visible = showStats
 	$name.visible = showName
+	
+	if showStats:
+		setStats($StatsPanel/crazyPosition, mascot.crazy)
+		setStats($StatsPanel/reliabPosition, mascot.reliable)
+		setStats($StatsPanel/xpPosition, mascot.xp)
 
 ## temporary mouse input for hiring mascots
 func _input(event):
@@ -30,14 +35,17 @@ func _input(event):
 		if event.pressed:   
 			emit_signal("select", mascot)
 
-func setStats(positionNode, propertyValue):
+func createStats(positionNode, propertyValue):
 	for n in range(0, 5):
 		var stat = Sprite.new()
-		
 		if n < int(propertyValue):stat.texture = dotFilled
 		else: stat.texture = dotEmpty
-		
 		stat.position = positionNode.position
-		stat.position.x += n * (stat.texture.get_width()+1)
+		stat.position.x += n * (stat.texture.get_width()+1)		
 		positionNode.add_child(stat)
-
+		
+func setStats(positionNode, propertyValue):
+	for n in range(0, 5):
+		var stat:Sprite = positionNode.get_children()[n]
+		if n < int(propertyValue):stat.texture = dotFilled
+		else: stat.texture = dotEmpty

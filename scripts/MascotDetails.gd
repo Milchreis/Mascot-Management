@@ -1,9 +1,11 @@
 extends Control
+signal close
 
 var Polaroid = preload("res://scenes/Polaroid.tscn")
 
 var model:GameModel
 var employee:Mascot
+var polaroid:Node
 
 func _process(_delta):
 	if employee:
@@ -12,17 +14,19 @@ func _process(_delta):
 func onOpen(mascot:Mascot):
 	visible = true
 	employee = mascot
-	var polaroid = Polaroid.instance()
+	polaroid = Polaroid.instance()
 	polaroid.mascot = mascot
 	polaroid.rect_position = Vector2(10, 27)
 	add_child(polaroid)
 
 func onClose():
 	visible = false
+	if polaroid:
+		remove_child(polaroid)
 
 func onTraining():
-	pass # Replace with function body.
-
+	model.startTraining(employee)
 
 func onFire():
-	pass # Replace with function body.
+	model.fire(employee)
+	emit_signal("close")
