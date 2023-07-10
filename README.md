@@ -11,8 +11,14 @@ A management sim game created for the [A-Game-By-Its-Cover-Jam 2023](https://itc
 
 From the [Famicase exhibition 2023](https://famicase.com/23/index.html)
 
-Thank you Rory for the permission :)
+Thank you Rory for the permission 😊
 
 ## Self-chosen limitations
  - GameBoy Advance resolution (240x160)
  - limited color palette (https://lospec.com/palette-list/axulart-32-color-palette)
+
+## Used tools
+ - [Godot 3.5.1](https://godotengine.org/download/)
+ - [Aseprite 1.3](https://www.aseprite.org/)
+ - [FontStruct](https://fontstruct.com/)
+ - [VS Code](https://code.visualstudio.com/) for code liniting and git
