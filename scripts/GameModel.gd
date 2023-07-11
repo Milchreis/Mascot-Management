@@ -38,7 +38,6 @@ func getClientSatisfaction() -> float:
 
 func updateEmployees() -> void:
 	for employee in employees:
-		# salary
 		balance -= employee.salaryPerDay
 		employee.updateTraining()
 

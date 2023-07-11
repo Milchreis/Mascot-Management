@@ -5,6 +5,8 @@ var Polaroid = preload("res://scenes/Polaroid.tscn")
 
 var model:GameModel
 var applications:Array = []
+var isLeft := false
+var isRight := true
 
 func onOpen():
 	visible = true
@@ -14,11 +16,14 @@ func onOpen():
 		polaroid.rect_position.x = i * (polaroid.rect_size.x + gap)
 		polaroid.connect("select", self, "onHire")
 		$PolaroidSelector.add_child(polaroid)
+
+	isLeft = false
 	
 func onClose():
-	visible = false
 	for polaroid in $PolaroidSelector.get_children():
 		polaroid.disconnect("select", self, "onHire")
+
+	isLeft = true
 		
 func createPool(size=3) -> void:
 	for i in range(0, size):

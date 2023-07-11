@@ -7,30 +7,54 @@ func _ready():
 	add_child(model)
 	
 	$Desk.model = model
-	$Desk/JobApplication.model = model
-	$Desk/Inventory.model = model
-	$Desk/MascotDetails.model = model
+	$Desk/Areas/JobApplication.model = model
+	$Desk/Areas/Inventory.model = model
+	$Desk/Areas/MascotDetails.model = model
 	
-	$Desk/JobApplication.createPool(3)
+	$Desk/Areas/JobApplication.createPool(3)
 	onOpenJobApplication()
 
 func _process(_delta):
 	pass
 	
 func onOpenInventory():
-	$Desk/JobApplication.onClose()
-	$Desk/MascotDetails.onClose()
-	$Desk/Inventory.onOpen()
+	slideRight()
+	$Desk/Areas/JobApplication.onClose()
+	$Desk/Areas/MascotDetails.onClose()
+	$Desk/Areas/Inventory.onOpen()
 
 func onOpenJobApplication():
-	$Desk/Inventory.onClose()
-	$Desk/MascotDetails.onClose()
-	$Desk/JobApplication.onOpen()
+	slideLeft()
+	$Desk/Areas/Inventory.onClose()
+	$Desk/Areas/MascotDetails.onClose()
+	$Desk/Areas/JobApplication.onOpen()
 
 func onOpenMascotDetails(mascot:Mascot):
-	$Desk/Inventory.onClose()
-	$Desk/JobApplication.onClose()
-	$Desk/MascotDetails.onOpen(mascot)
+	slideRight()
+	$Desk/Areas/Inventory.onClose()
+	$Desk/Areas/JobApplication.onClose()
+	$Desk/Areas/MascotDetails.onOpen(mascot)
+
+func onBackToInventory():
+	slideLeft()
+	$Desk/Areas/JobApplication.onClose()
+	$Desk/Areas/MascotDetails.onClose()
+	$Desk/Areas/Inventory.onOpen()
 
 func onMascotFire():
-	onOpenInventory()
+	onBackToInventory()
+
+func slideLeft():
+	var panels = $Desk/Areas
+	var tween := create_tween() \
+		.set_trans(Tween.TRANS_QUINT) \
+		.set_ease(Tween.EASE_OUT) \
+		.tween_property(panels, "position", Vector2(panels.position.x + 240, 0), 0.3)
+
+func slideRight():		
+	var panels = $Desk/Areas
+	var tween := create_tween() \
+		.set_trans(Tween.TRANS_QUINT) \
+		.set_ease(Tween.EASE_OUT) \
+		.tween_property(panels, "position", Vector2(panels.position.x - 240, 0), 0.3)
+

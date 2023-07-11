@@ -16,6 +16,7 @@ func onOpen(mascot:Mascot):
 	employee = mascot
 	polaroid = Polaroid.instance()
 	polaroid.mascot = mascot
+	polaroid.showHover = false
 	polaroid.rect_position = Vector2(10, 27)
 	add_child(polaroid)
 

@@ -19,6 +19,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="hoverBg" type="ColorRect" parent="."]
+visible = false
+margin_left = -3.0
+margin_top = -3.0
+margin_right = 62.0
+margin_bottom = 102.0
+color = Color( 0.603922, 0.560784, 0.878431, 1 )
+
 [node name="bg" type="ColorRect" parent="."]
 margin_left = 1.0
 margin_top = 1.0
@@ -84,11 +92,38 @@ __meta__ = {
 }
 
 [node name="Stats" type="Sprite" parent="StatsPanel"]
+visible = false
 position = Vector2( 12, 12 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="impro" type="Label" parent="StatsPanel"]
+margin_right = 52.0
+margin_bottom = 8.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "IMPRO."
+clip_text = true
+
+[node name="reliab" type="Label" parent="StatsPanel"]
+margin_top = 9.0
+margin_right = 52.0
+margin_bottom = 17.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "RELIAB."
+clip_text = true
+
+[node name="moves" type="Label" parent="StatsPanel"]
+margin_top = 18.0
+margin_right = 52.0
+margin_bottom = 26.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "MOVES"
+clip_text = true
 
 [node name="crazyPosition" type="Node2D" parent="StatsPanel"]
 position = Vector2( 14, 1 )

@@ -4,6 +4,7 @@ signal select(mascot)
 
 export(bool) var showStats = true
 export(bool) var showName = true
+export(bool) var showHover = true
 export(int) var salaryPerDay = 10
 
 var mascot:Mascot
@@ -24,6 +25,8 @@ func _ready():
 func _process(_delta):
 	$StatsPanel.visible = showStats
 	$name.visible = showName
+	
+	if showHover: $hoverBg.visible = get_global_rect().has_point(get_global_mouse_position())
 	
 	if showStats:
 		setStats($StatsPanel/crazyPosition, mascot.crazy)

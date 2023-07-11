@@ -20,7 +20,7 @@ export var salaryPerDay:int = rand_range(10, 50)
 export var spriteImage:String = sprites[randi() % sprites.size()]
 export var bgColor:String = bg_colors[randi() % bg_colors.size()]
 
-var client_satisfaction:float = 0.30
+var client_satisfaction:float = 0.80
 var jobs:int = 0
 
 var in_training := false

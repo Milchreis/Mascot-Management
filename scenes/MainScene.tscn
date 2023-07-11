@@ -40,14 +40,15 @@ script = ExtResource( 3 )
 [node name="Desk" parent="." instance=ExtResource( 1 )]
 script = ExtResource( 4 )
 
-[node name="JobApplication" type="Control" parent="Desk"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -95, -13 )
+[node name="Areas" type="Node2D" parent="Desk"]
+position = Vector2( -240, 0 )
+
+[node name="JobApplication" type="Control" parent="Desk/Areas"]
+margin_right = 240.0
+margin_bottom = 160.0
 script = ExtResource( 5 )
 
-[node name="Header" type="ColorRect" parent="Desk/JobApplication"]
+[node name="Header" type="ColorRect" parent="Desk/Areas/JobApplication"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -59.0
@@ -56,7 +57,7 @@ margin_right = 59.0
 margin_bottom = 36.0
 color = Color( 0.388235, 0.364706, 0.588235, 1 )
 
-[node name="Label" type="Label" parent="Desk/JobApplication/Header"]
+[node name="Label" type="Label" parent="Desk/Areas/JobApplication/Header"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -54.0
@@ -67,24 +68,23 @@ theme = ExtResource( 2 )
 text = "job application"
 align = 1
 
-[node name="Button" type="Button" parent="Desk/JobApplication/Header"]
+[node name="Button" type="Button" parent="Desk/Areas/JobApplication/Header"]
 margin_left = 146.0
 margin_top = -14.0
 margin_right = 175.0
 theme = SubResource( 2 )
 text = "inv"
 
-[node name="PolaroidSelector" type="Node2D" parent="Desk/JobApplication"]
+[node name="PolaroidSelector" type="Node2D" parent="Desk/Areas/JobApplication"]
 position = Vector2( 10, 46 )
 
-[node name="Inventory" type="Control" parent="Desk"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -95, -13 )
+[node name="Inventory" type="Control" parent="Desk/Areas"]
+margin_left = 240.0
+margin_right = 480.0
+margin_bottom = 160.0
 script = ExtResource( 7 )
 
-[node name="Header" type="ColorRect" parent="Desk/Inventory"]
+[node name="Header" type="ColorRect" parent="Desk/Areas/Inventory"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -38.0
@@ -93,7 +93,7 @@ margin_right = 38.0
 margin_bottom = 36.0
 color = Color( 0.388235, 0.364706, 0.588235, 1 )
 
-[node name="Label" type="Label" parent="Desk/Inventory/Header"]
+[node name="Label" type="Label" parent="Desk/Areas/Inventory/Header"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -37.0
@@ -104,23 +104,29 @@ theme = ExtResource( 2 )
 text = "Inventory"
 align = 1
 
-[node name="Button" type="Button" parent="Desk/Inventory/Header"]
+[node name="Button" type="Button" parent="Desk/Areas/Inventory/Header"]
 margin_left = 126.0
 margin_top = -14.0
 margin_right = 155.0
 theme = SubResource( 2 )
 text = "j.a."
 
-[node name="PolaroidList" type="Node2D" parent="Desk/Inventory"]
+[node name="PolaroidList" type="Node2D" parent="Desk/Areas/Inventory"]
 position = Vector2( 10, 46 )
 
-[node name="MascotDetails" type="Control" parent="Desk"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -95, -13 )
+[node name="MascotDetails" type="Control" parent="Desk/Areas"]
+margin_left = 480.0
+margin_right = 720.0
+margin_bottom = 160.0
 script = ExtResource( 9 )
 
-[node name="Header" type="ColorRect" parent="Desk/MascotDetails"]
+[node name="ColorRect" type="ColorRect" parent="Desk/Areas/MascotDetails"]
+margin_top = 20.0
+margin_right = 78.0
+margin_bottom = 160.0
+color = Color( 0.603922, 0.560784, 0.878431, 1 )
+
+[node name="Header" type="ColorRect" parent="Desk/Areas/MascotDetails"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -38.0
@@ -132,14 +138,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Button" type="Button" parent="Desk/MascotDetails/Header"]
+[node name="Button" type="Button" parent="Desk/Areas/MascotDetails/Header"]
 margin_left = 126.0
 margin_top = -14.0
 margin_right = 155.0
 theme = SubResource( 2 )
 text = "inv"
 
-[node name="Train" type="Button" parent="Desk/MascotDetails"]
+[node name="Train" type="Button" parent="Desk/Areas/MascotDetails"]
 margin_left = 82.0
 margin_top = 27.0
 margin_right = 141.0
@@ -147,7 +153,7 @@ margin_bottom = 41.0
 theme = SubResource( 2 )
 text = "Training"
 
-[node name="Fire" type="Button" parent="Desk/MascotDetails"]
+[node name="Fire" type="Button" parent="Desk/Areas/MascotDetails"]
 margin_left = 146.0
 margin_top = 27.0
 margin_right = 205.0
@@ -156,7 +162,7 @@ theme = ExtResource( 8 )
 text = "Fire!"
 align = 0
 
-[node name="ClientSatisfaction" type="Control" parent="Desk/MascotDetails"]
+[node name="ClientSatisfaction" type="Control" parent="Desk/Areas/MascotDetails"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -110.0
@@ -164,7 +170,7 @@ margin_top = 123.0
 margin_right = -40.0
 margin_bottom = 145.0
 
-[node name="Background" type="ColorRect" parent="Desk/MascotDetails/ClientSatisfaction"]
+[node name="Background" type="ColorRect" parent="Desk/Areas/MascotDetails/ClientSatisfaction"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -22.0
@@ -176,12 +182,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Desk/MascotDetails/ClientSatisfaction/Background"]
+[node name="Sprite" type="Sprite" parent="Desk/Areas/MascotDetails/ClientSatisfaction/Background"]
 modulate = Color( 0.388235, 0.364706, 0.588235, 1 )
 position = Vector2( -8, 4 )
 texture = ExtResource( 12 )
 
-[node name="Progess" type="TextureProgress" parent="Desk/MascotDetails/ClientSatisfaction/Background"]
+[node name="Progess" type="TextureProgress" parent="Desk/Areas/MascotDetails/ClientSatisfaction/Background"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -22.0
@@ -193,10 +199,10 @@ step = 0.1
 texture_progress = ExtResource( 10 )
 nine_patch_stretch = true
 
-[connection signal="pressed" from="Desk/JobApplication/Header/Button" to="." method="onOpenInventory"]
-[connection signal="select" from="Desk/Inventory" to="." method="onOpenMascotDetails"]
-[connection signal="pressed" from="Desk/Inventory/Header/Button" to="." method="onOpenJobApplication"]
-[connection signal="close" from="Desk/MascotDetails" to="." method="onMascotFire"]
-[connection signal="pressed" from="Desk/MascotDetails/Header/Button" to="." method="onOpenInventory"]
-[connection signal="pressed" from="Desk/MascotDetails/Train" to="Desk/MascotDetails" method="onTraining"]
-[connection signal="pressed" from="Desk/MascotDetails/Fire" to="Desk/MascotDetails" method="onFire"]
+[connection signal="pressed" from="Desk/Areas/JobApplication/Header/Button" to="." method="onOpenInventory"]
+[connection signal="select" from="Desk/Areas/Inventory" to="." method="onOpenMascotDetails"]
+[connection signal="pressed" from="Desk/Areas/Inventory/Header/Button" to="." method="onOpenJobApplication"]
+[connection signal="close" from="Desk/Areas/MascotDetails" to="." method="onMascotFire"]
+[connection signal="pressed" from="Desk/Areas/MascotDetails/Header/Button" to="." method="onBackToInventory"]
+[connection signal="pressed" from="Desk/Areas/MascotDetails/Train" to="Desk/Areas/MascotDetails" method="onTraining"]
+[connection signal="pressed" from="Desk/Areas/MascotDetails/Fire" to="Desk/Areas/MascotDetails" method="onFire"]
