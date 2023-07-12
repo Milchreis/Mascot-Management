@@ -12,9 +12,9 @@ var bg_colors = ["#7be1f6", "#ffe3ae", "#cdbbab", "#b0d07e", "#ffbae1"]
 
 export var nickname:String = RandomNames.get_first_name()
 
-export var crazy:float = rand_range(0.0, 5.0)
+export var improvisation:float = rand_range(0.0, 5.0)
 export var reliable:float = rand_range(0.0, 5.0)
-export var xp:float = rand_range(0.0, 5.0)
+export var charisma:float = rand_range(0.0, 5.0)
 
 export var salaryPerDay:int = rand_range(10, 50)
 export var spriteImage:String = sprites[randi() % sprites.size()]
@@ -45,13 +45,13 @@ func updateTraining() -> void:
 		in_training_days = 0
 		
 		reliable = min(reliable + rand_range(0.0, 1.0), 5)
-		crazy = min(crazy + rand_range(0.0, 1.0), 5)
-		xp += 1
+		improvisation = min(improvisation + rand_range(0.0, 1.0), 5)
+		charisma = min(charisma + rand_range(0.0, 1.0), 5)
 
 func _to_string() -> String:
 	return (
 		"nickname="+nickname +
-		", crazy="+str(crazy) +
+		", improvisation="+str(improvisation) +
 		", raliable="+str(reliable) + 
-		", xp="+str(xp)+
+		", charisma="+str(charisma)+
 		", salaryPerDay="+str(salaryPerDay))

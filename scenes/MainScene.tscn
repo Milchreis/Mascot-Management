@@ -111,6 +111,19 @@ margin_right = 155.0
 theme = SubResource( 2 )
 text = "j.a."
 
+[node name="noEmployees" type="Label" parent="Desk/Areas/Inventory"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -77.5
+margin_top = -5.5
+margin_right = 77.5
+margin_bottom = 5.5
+theme = ExtResource( 2 )
+text = "You have no employees"
+align = 1
+
 [node name="PolaroidList" type="Node2D" parent="Desk/Areas/Inventory"]
 position = Vector2( 10, 46 )
 
@@ -119,12 +132,18 @@ margin_left = 480.0
 margin_right = 720.0
 margin_bottom = 160.0
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="ColorRect" type="ColorRect" parent="Desk/Areas/MascotDetails"]
+[node name="LeftSideBackground" type="ColorRect" parent="Desk/Areas/MascotDetails"]
 margin_top = 20.0
 margin_right = 78.0
 margin_bottom = 160.0
 color = Color( 0.603922, 0.560784, 0.878431, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Header" type="ColorRect" parent="Desk/Areas/MascotDetails"]
 anchor_left = 0.5
@@ -198,6 +217,15 @@ max_value = 1.0
 step = 0.1
 texture_progress = ExtResource( 10 )
 nine_patch_stretch = true
+
+[node name="Events" type="ScrollContainer" parent="Desk/Areas/MascotDetails"]
+margin_left = 82.0
+margin_top = 48.0
+margin_right = 82.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 155, 113 )
+
+[node name="Wrapper" type="VBoxContainer" parent="Desk/Areas/MascotDetails/Events"]
 
 [connection signal="pressed" from="Desk/Areas/JobApplication/Header/Button" to="." method="onOpenInventory"]
 [connection signal="select" from="Desk/Areas/Inventory" to="." method="onOpenMascotDetails"]

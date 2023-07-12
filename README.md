@@ -22,3 +22,4 @@ Thank you Rory for the permission 😊
  - [Aseprite 1.3](https://www.aseprite.org/)
  - [FontStruct](https://fontstruct.com/)
  - [VS Code](https://code.visualstudio.com/) for code liniting and git
+ - [ChatGTP](https://chat.openai.com) for generating events

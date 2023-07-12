@@ -5,9 +5,9 @@
 # Version: 0.3
 
 var FILES = {
-	'first:male' : 'res://names/male.first.txt',
-	'first:female' : 'res://names/female.first.txt',
-	'last' : 'res://names/all.last.txt'
+	'first:male' : 'res://data/male.first.txt',
+	'first:female' : 'res://data/female.first.txt',
+	'last' : 'res://data/all.last.txt'
 }
 
 # Based upon the source code for the random choice function from Python 2.7.

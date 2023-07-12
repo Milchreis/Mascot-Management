@@ -1,6 +1,7 @@
 extends Node2D
 
 var GameModel = load("res://scripts/GameModel.gd")
+
 var model:GameModel = GameModel.new()
 
 func _ready():
@@ -13,7 +14,7 @@ func _ready():
 	
 	$Desk/Areas/JobApplication.createPool(3)
 	onOpenJobApplication()
-
+	
 func _process(_delta):
 	pass
 	
@@ -45,16 +46,18 @@ func onMascotFire():
 	onBackToInventory()
 
 func slideLeft():
+	var width = 240
 	var panels = $Desk/Areas
 	var tween := create_tween() \
-		.set_trans(Tween.TRANS_QUINT) \
+		.set_trans(Tween.TRANS_CUBIC) \
 		.set_ease(Tween.EASE_OUT) \
-		.tween_property(panels, "position", Vector2(panels.position.x + 240, 0), 0.3)
+		.tween_property(panels, "position", Vector2(panels.position.x + width, 0), 0.4)
 
-func slideRight():		
+func slideRight():
+	var width = 240	
 	var panels = $Desk/Areas
 	var tween := create_tween() \
-		.set_trans(Tween.TRANS_QUINT) \
+		.set_trans(Tween.TRANS_CUBIC) \
 		.set_ease(Tween.EASE_OUT) \
-		.tween_property(panels, "position", Vector2(panels.position.x - 240, 0), 0.3)
+		.tween_property(panels, "position", Vector2(panels.position.x - width, 0), 0.4)
 

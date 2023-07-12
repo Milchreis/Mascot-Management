@@ -1,12 +1,15 @@
 extends Node
 class_name GameModel
 
+var RandomEvents = load("res://scripts/random_events.gd").new()
+
 export(int) var balance = 500
 export(int) var passedDays = 0
 export(float) var dayDurationInSeconds = 10.0
 
 export(Array) var employees = []
 
+var openEvents = []
 var dayTimer := Timer.new()
 
 func _ready() -> void:
@@ -14,6 +17,9 @@ func _ready() -> void:
 	dayTimer.autostart = true
 	dayTimer.wait_time = dayDurationInSeconds
 	add_child(dayTimer)
+	
+	for n in range(0, 10):
+		openEvents.append(RandomEvents.get_random_event())
 
 func onDayIsOver() -> void:
 	passedDays+=1

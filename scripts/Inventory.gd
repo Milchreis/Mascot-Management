@@ -4,11 +4,8 @@ signal select(mascot)
 var Polaroid = preload("res://scenes/Polaroid.tscn")
 
 var model:GameModel
-var isLeft := false
-var isRight := true
 
 func onOpen():
-	visible = true
 	for i in range(0, model.employees.size()):
 		var employee = model.employees[i]
 		var x = i % 4
@@ -21,8 +18,8 @@ func onOpen():
 		polaroid.rect_position.y = y * (polaroid.rect_size.y + gap)
 		polaroid.connect("select", self, "onSelect")
 		$PolaroidList.add_child(polaroid)
-	
-	isRight = false
+		
+	$noEmployees.visible = model.employees.size() == 0
 	
 func onClose():
 	for child in $PolaroidList.get_children():

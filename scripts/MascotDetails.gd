@@ -2,6 +2,7 @@ extends Control
 signal close
 
 var Polaroid = preload("res://scenes/Polaroid.tscn")
+var EventScene = preload("res://scenes/Event.tscn")
 
 var model:GameModel
 var employee:Mascot
@@ -12,16 +13,19 @@ func _process(_delta):
 		$ClientSatisfaction/Background/Progess.value = employee.client_satisfaction
 
 func onOpen(mascot:Mascot):
-	visible = true
 	employee = mascot
 	polaroid = Polaroid.instance()
 	polaroid.mascot = mascot
 	polaroid.showHover = false
 	polaroid.rect_position = Vector2(10, 27)
 	add_child(polaroid)
+	
+	for event in model.openEvents:
+		var eventScene = EventScene.instance()
+		eventScene.event = event
+		$Events/Wrapper.add_child(eventScene)
 
 func onClose():
-	visible = false
 	if polaroid:
 		remove_child(polaroid)
 

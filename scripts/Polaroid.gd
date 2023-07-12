@@ -18,9 +18,9 @@ func _ready():
 	$name.text = mascot.nickname.to_upper()
 	$pic.color = mascot.bgColor
 	
-	createStats($StatsPanel/crazyPosition, mascot.crazy)
+	createStats($StatsPanel/improPosition, mascot.improvisation)
 	createStats($StatsPanel/reliabPosition, mascot.reliable)
-	createStats($StatsPanel/xpPosition, mascot.xp)
+	createStats($StatsPanel/charismaPosition, mascot.charisma)
 
 func _process(_delta):
 	$StatsPanel.visible = showStats
@@ -29,9 +29,9 @@ func _process(_delta):
 	if showHover: $hoverBg.visible = get_global_rect().has_point(get_global_mouse_position())
 	
 	if showStats:
-		setStats($StatsPanel/crazyPosition, mascot.crazy)
+		setStats($StatsPanel/improPosition, mascot.improvisation)
 		setStats($StatsPanel/reliabPosition, mascot.reliable)
-		setStats($StatsPanel/xpPosition, mascot.xp)
+		setStats($StatsPanel/charismaPosition, mascot.charisma)
 
 ## temporary mouse input for hiring mascots
 func _input(event):
