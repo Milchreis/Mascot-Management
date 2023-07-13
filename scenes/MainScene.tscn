@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -34,6 +34,28 @@ Button/styles/hover = SubResource( 4 )
 Button/styles/normal = SubResource( 3 )
 Button/styles/pressed = SubResource( 5 )
 
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+expand_margin_left = 8.0
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.768627, 0.780392, 0.933333, 1 )
+expand_margin_left = 8.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxLine" id=10]
+
+[sub_resource type="Theme" id=9]
+VScrollBar/styles/grabber = SubResource( 7 )
+VScrollBar/styles/grabber_highlight = SubResource( 11 )
+VScrollBar/styles/grabber_pressed = SubResource( 12 )
+VScrollBar/styles/scroll = SubResource( 8 )
+VScrollBar/styles/scroll_focus = SubResource( 10 )
+
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -65,7 +87,7 @@ margin_top = 4.0
 margin_right = 53.0
 margin_bottom = 15.0
 theme = ExtResource( 2 )
-text = "job application"
+text = "Applicants"
 align = 1
 
 [node name="Button" type="Button" parent="Desk/Areas/JobApplication/Header"]
@@ -87,27 +109,31 @@ script = ExtResource( 7 )
 [node name="Header" type="ColorRect" parent="Desk/Areas/Inventory"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -38.0
+margin_left = -51.0
 margin_top = 20.0
-margin_right = 38.0
+margin_right = 51.0
 margin_bottom = 36.0
+size_flags_horizontal = 3
 color = Color( 0.388235, 0.364706, 0.588235, 1 )
 
 [node name="Label" type="Label" parent="Desk/Areas/Inventory/Header"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -37.0
-margin_top = 4.0
-margin_right = 36.0
-margin_bottom = 15.0
+anchor_bottom = 0.5
+margin_left = -45.5
+margin_top = -5.5
+margin_right = 45.5
+margin_bottom = 5.5
 theme = ExtResource( 2 )
-text = "Inventory"
+text = "Your Mascots"
 align = 1
 
-[node name="Button" type="Button" parent="Desk/Areas/Inventory/Header"]
-margin_left = 126.0
-margin_top = -14.0
-margin_right = 155.0
+[node name="Button" type="Button" parent="Desk/Areas/Inventory"]
+margin_left = 208.0
+margin_top = 6.0
+margin_right = 237.0
+margin_bottom = 20.0
 theme = SubResource( 2 )
 text = "j.a."
 
@@ -166,17 +192,17 @@ text = "inv"
 
 [node name="Train" type="Button" parent="Desk/Areas/MascotDetails"]
 margin_left = 82.0
-margin_top = 27.0
+margin_top = 23.0
 margin_right = 141.0
-margin_bottom = 41.0
+margin_bottom = 37.0
 theme = SubResource( 2 )
 text = "Training"
 
 [node name="Fire" type="Button" parent="Desk/Areas/MascotDetails"]
 margin_left = 146.0
-margin_top = 27.0
+margin_top = 23.0
 margin_right = 205.0
-margin_bottom = 41.0
+margin_bottom = 37.0
 theme = ExtResource( 8 )
 text = "Fire!"
 align = 0
@@ -220,16 +246,22 @@ nine_patch_stretch = true
 
 [node name="Events" type="ScrollContainer" parent="Desk/Areas/MascotDetails"]
 margin_left = 82.0
-margin_top = 48.0
-margin_right = 82.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 155, 113 )
+margin_top = 41.0
+margin_right = 239.0
+margin_bottom = 161.0
+rect_min_size = Vector2( 130, 113 )
+theme = SubResource( 9 )
+scroll_horizontal_enabled = false
 
 [node name="Wrapper" type="VBoxContainer" parent="Desk/Areas/MascotDetails/Events"]
+margin_right = 157.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="pressed" from="Desk/Areas/JobApplication/Header/Button" to="." method="onOpenInventory"]
 [connection signal="select" from="Desk/Areas/Inventory" to="." method="onOpenMascotDetails"]
-[connection signal="pressed" from="Desk/Areas/Inventory/Header/Button" to="." method="onOpenJobApplication"]
+[connection signal="pressed" from="Desk/Areas/Inventory/Button" to="." method="onOpenJobApplication"]
 [connection signal="close" from="Desk/Areas/MascotDetails" to="." method="onMascotFire"]
 [connection signal="pressed" from="Desk/Areas/MascotDetails/Header/Button" to="." method="onBackToInventory"]
 [connection signal="pressed" from="Desk/Areas/MascotDetails/Train" to="Desk/Areas/MascotDetails" method="onTraining"]

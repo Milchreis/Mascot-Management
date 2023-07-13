@@ -20,65 +20,102 @@ font_data = ExtResource( 4 )
 size = 8
 font_data = ExtResource( 3 )
 
-[node name="Event" type="Control"]
-margin_right = 100.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 150, 60 )
-rect_pivot_offset = Vector2( -161, 34 )
+[node name="Event" type="MarginContainer"]
+margin_right = 144.0
+margin_bottom = 167.0
+rect_min_size = Vector2( 130, 0 )
 script = ExtResource( 2 )
 
 [node name="bg" type="ColorRect" parent="."]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 151.0
-margin_bottom = 61.0
+margin_right = 148.0
+margin_bottom = 169.0
 color = Color( 0.403922, 0.384314, 0.603922, 1 )
 
 [node name="fg" type="ColorRect" parent="."]
-margin_right = 150.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 50, 0 )
+margin_right = 148.0
+margin_bottom = 169.0
 
-[node name="title" type="Label" parent="."]
-margin_left = 2.0
-margin_top = 3.0
-margin_right = 145.0
-margin_bottom = 11.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 148.0
+margin_bottom = 169.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="spacer_top" type="Control" parent="VBoxContainer"]
+margin_right = 148.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 4.0
+margin_right = 148.0
+margin_bottom = 14.0
+
+[node name="spacer_bot2" type="Control" parent="VBoxContainer/HBoxContainer3"]
+margin_bottom = 10.0
+
+[node name="title" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 4.0
+margin_right = 148.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+size_flags_horizontal = 3
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
 custom_fonts/font = SubResource( 3 )
 text = "Title"
-clip_text = true
+autowrap = true
 
-[node name="description" type="Label" parent="."]
-margin_left = 2.0
-margin_top = 11.0
-margin_right = 3.0
-margin_bottom = 28.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 148.0
+margin_bottom = 150.0
+
+[node name="spacer_bot2" type="Control" parent="VBoxContainer/HBoxContainer2"]
+margin_bottom = 132.0
+
+[node name="description" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 4.0
+margin_right = 148.0
+margin_bottom = 132.0
 rect_min_size = Vector2( 144, 35 )
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
 custom_fonts/font = SubResource( 4 )
-text = "description
-"
+text = "Shopping Mall Flash Mob;\"Join our vibrant flash mob at the shopping mall. The mascot will be a key participant, energizing the crowd with charismatic dance moves and improvisational antics. It's crucial to reliably deliver an engaging performance that surprises and delights shoppers."
 autowrap = true
 
-[node name="costs" type="Label" parent="."]
+[node name="spacer_bot" type="Control" parent="VBoxContainer"]
+margin_top = 154.0
+margin_right = 148.0
+margin_bottom = 154.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 158.0
+margin_right = 148.0
+margin_bottom = 165.0
+
+[node name="spacer_left" type="Control" parent="VBoxContainer/HBoxContainer"]
+margin_bottom = 7.0
+
+[node name="costs" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 4.0
-margin_top = 50.0
-margin_right = 40.0
-margin_bottom = 58.0
+margin_right = 44.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 40, 0 )
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0.4, 0.666667, 0.364706, 1 )
 text = "10$/d"
 clip_text = true
 
-[node name="duration" type="Label" parent="."]
-margin_left = 44.0
-margin_top = 50.0
-margin_right = 96.0
-margin_bottom = 58.0
+[node name="duration" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 88.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 40, 0 )
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
 text = "2 DAYS"
 clip_text = true
+
+[node name="spacer_bot2" type="Control" parent="VBoxContainer"]
+margin_top = 169.0
+margin_right = 148.0
+margin_bottom = 169.0
