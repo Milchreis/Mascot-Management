@@ -8,56 +8,51 @@ func _ready():
 	add_child(model)
 	
 	$Desk.model = model
-	$Desk/Areas/JobApplication.model = model
-	$Desk/Areas/Inventory.model = model
-	$Desk/Areas/MascotDetails.model = model
+	$Areas/Stats.model = model
+	$Areas/JobApplication.model = model
+	$Areas/Inventory.model = model
+	$Areas/MascotDetails.model = model
 	
-	$Desk/Areas/JobApplication.createPool(3)
+	$Areas/JobApplication.createPool(3)
 	onOpenJobApplication()
 	
 func _process(_delta):
-	pass
-	
+	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
+	$Desk/Appbar/Day/Background/Progess.value = model.getDayProgress()
+
+func onOpenStatistics():
+	slideTo(240)
+	$Areas/JobApplication.onClose()
+	$Areas/MascotDetails.onClose()
+	$Areas/Inventory.onClose()
+	$Areas/Stats.onOpen()
+
 func onOpenInventory():
-	slideRight()
-	$Desk/Areas/JobApplication.onClose()
-	$Desk/Areas/MascotDetails.onClose()
-	$Desk/Areas/Inventory.onOpen()
+	slideTo(-240)
+	$Areas/JobApplication.onClose()
+	$Areas/MascotDetails.onClose()
+	$Areas/Stats.onClose()
+	$Areas/Inventory.onOpen()
 
 func onOpenJobApplication():
-	slideLeft()
-	$Desk/Areas/Inventory.onClose()
-	$Desk/Areas/MascotDetails.onClose()
-	$Desk/Areas/JobApplication.onOpen()
+	slideTo(0)
+	$Areas/Inventory.onClose()
+	$Areas/MascotDetails.onClose()
+	$Areas/Stats.onClose()
+	$Areas/JobApplication.onOpen()
 
 func onOpenMascotDetails(mascot:Mascot):
-	slideRight()
-	$Desk/Areas/Inventory.onClose()
-	$Desk/Areas/JobApplication.onClose()
-	$Desk/Areas/MascotDetails.onOpen(mascot)
-
-func onBackToInventory():
-	slideLeft()
-	$Desk/Areas/JobApplication.onClose()
-	$Desk/Areas/MascotDetails.onClose()
-	$Desk/Areas/Inventory.onOpen()
+	slideTo(-480)
+	$Areas/Inventory.onClose()
+	$Areas/JobApplication.onClose()
+	$Areas/Stats.onClose()
+	$Areas/MascotDetails.onOpen(mascot)
 
 func onMascotFire():
-	onBackToInventory()
+	onOpenInventory()
 
-func slideLeft():
-	var width = 240
-	var panels = $Desk/Areas
+func slideTo(x):
 	var tween := create_tween() \
 		.set_trans(Tween.TRANS_CUBIC) \
 		.set_ease(Tween.EASE_OUT) \
-		.tween_property(panels, "position", Vector2(panels.position.x + width, 0), 0.4)
-
-func slideRight():
-	var width = 240	
-	var panels = $Desk/Areas
-	var tween := create_tween() \
-		.set_trans(Tween.TRANS_CUBIC) \
-		.set_ease(Tween.EASE_OUT) \
-		.tween_property(panels, "position", Vector2(panels.position.x - width, 0), 0.4)
-
+		.tween_property($Areas, "position", Vector2(x, 0), 0.4)

@@ -6,6 +6,8 @@ var Polaroid = preload("res://scenes/Polaroid.tscn")
 var model:GameModel
 var applications:Array = []
 
+var lastHired = null
+
 func onOpen():
 	for i in range(0, applications.size()):
 		var polaroid = applications[i]
@@ -34,9 +36,20 @@ func onHire(mascot:Mascot):
 	model.employees.append(mascot)
 	for application in applications:
 		if application.mascot == mascot:
-			applications.erase(application)
-			$PolaroidSelector.remove_child(application)
+			lastHired = application
+			var tween := create_tween() \
+				.set_trans(Tween.TRANS_CUBIC) \
+				.set_ease(Tween.EASE_OUT) \
+				.tween_property(application, "rect_position", Vector2(240, application.rect_min_size.y), 0.4) \
+				.connect("finished", self, "clearLastHired")
+
+func clearLastHired():
+	if lastHired == null: return
 	
+	applications.erase(lastHired)
+	$PolaroidSelector.remove_child(lastHired)
+	lastHired = null
+
 func createMascot() -> Mascot:
 	randomize()
 	return Mascot.new()

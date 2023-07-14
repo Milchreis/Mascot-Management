@@ -1,4 +1,4 @@
-extends ColorRect
+extends Control
 
 var model:GameModel
 

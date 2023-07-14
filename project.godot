@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Mascot",
 "language": "GDScript",
 "path": "res://scripts/Mascot.gd"
+}, {
+"base": "Control",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://scripts/Stats.gd"
 } ]
 _global_script_class_icons={
 "Event": "",
 "GameModel": "",
 "JobApplication": "",
-"Mascot": ""
+"Mascot": "",
+"Stats": ""
 }
 
 [application]

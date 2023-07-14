@@ -25,6 +25,11 @@ func _ready():
 func _process(_delta):
 	$StatsPanel.visible = showStats
 	$name.visible = showName
+	$Busy.visible = mascot.in_training or mascot.isInEvent()
+	$DaysRemaining.visible = mascot.in_training or mascot.isInEvent()
+	$DaysRemaining.text = str(mascot.getRemainingDays())
+	# todo
+	$Ill.visible = false
 	
 	if showHover: $hoverBg.visible = get_global_rect().has_point(get_global_mouse_position())
 	
@@ -36,7 +41,7 @@ func _process(_delta):
 ## temporary mouse input for hiring mascots
 func _input(event):
 	if event is InputEventMouseButton and get_global_rect().has_point(event.position):
-		if event.pressed:   
+		if event.button_index == BUTTON_LEFT:
 			emit_signal("select", mascot)
 
 func createStats(positionNode, propertyValue):

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Polaroid.gd" type="Script" id=1]
 [ext_resource path="res://gfx/stats.png" type="Texture" id=2]
 [ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://gfx/clock.png" type="Texture" id=4]
+[ext_resource path="res://gfx/ill.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=3]
 size = 6
@@ -16,6 +18,7 @@ margin_right = 59.0
 margin_bottom = 70.0
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_horizontal_guides_": [ 62.0 ],
 "_edit_lock_": true
 }
 
@@ -58,6 +61,29 @@ __meta__ = {
 position = Vector2( 49, 49 )
 offset = Vector2( -22, -22 )
 
+[node name="Busy" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.4, 0.666667, 0.364706, 1 )
+position = Vector2( 7, 59 )
+texture = ExtResource( 4 )
+
+[node name="Ill" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.811765, 0.364706, 0.545098, 1 )
+position = Vector2( 7, 58 )
+texture = ExtResource( 5 )
+
+[node name="DaysRemaining" type="Label" parent="."]
+visible = false
+margin_left = 11.0
+margin_top = 57.0
+margin_right = 21.0
+margin_bottom = 64.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.396078, 0.658824, 0.360784, 1 )
+text = "3"
+clip_text = true
+
 [node name="salary" type="Label" parent="."]
 margin_left = 9.0
 margin_top = 57.0
@@ -72,10 +98,10 @@ __meta__ = {
 }
 
 [node name="name" type="Label" parent="."]
-margin_left = 2.0
-margin_top = 3.0
+margin_left = 5.0
+margin_top = 5.0
 margin_right = 54.0
-margin_bottom = 11.0
+margin_bottom = 13.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
 text = "Name"
