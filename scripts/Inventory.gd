@@ -6,6 +6,7 @@ var Polaroid = preload("res://scenes/Polaroid.tscn")
 var model:GameModel
 
 func onOpen():
+	onClose()
 	for i in range(0, model.employees.size()):
 		var employee = model.employees[i]
 		var x = i % 4
@@ -17,12 +18,12 @@ func onOpen():
 		polaroid.rect_position.x = x * (polaroid.rect_size.x + gap)
 		polaroid.rect_position.y = y * (polaroid.rect_size.y + gap)
 		polaroid.connect("select", self, "onSelect")
-		$PolaroidList.add_child(polaroid)
+		$PolaroidList/GridContainer.add_child(polaroid)
 		
 	$noEmployees.visible = model.employees.size() == 0
 	
 func onClose():
-	for child in $PolaroidList.get_children():
+	for child in $PolaroidList/GridContainer.get_children():
 		child.disconnect("select", self, "onSelect")
 		child.queue_free()
 

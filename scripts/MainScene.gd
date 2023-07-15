@@ -6,6 +6,7 @@ var model:GameModel = GameModel.new()
 
 func _ready():
 	add_child(model)
+	model.connect("day_passed", $Desk, "onDayPassed")
 	
 	$Desk.model = model
 	$Areas/Stats.model = model
@@ -13,7 +14,7 @@ func _ready():
 	$Areas/Inventory.model = model
 	$Areas/MascotDetails.model = model
 	
-	$Areas/JobApplication.createPool(3)
+	$Areas/JobApplication.createPool(4)
 	onOpenJobApplication()
 	
 func _process(_delta):
@@ -22,6 +23,7 @@ func _process(_delta):
 
 func onOpenStatistics():
 	slideTo(240)
+	$Desk/ClickPlayer.play()
 	$Areas/JobApplication.onClose()
 	$Areas/MascotDetails.onClose()
 	$Areas/Inventory.onClose()
@@ -29,6 +31,7 @@ func onOpenStatistics():
 
 func onOpenInventory():
 	slideTo(-240)
+	$Desk/ClickPlayer.play()
 	$Areas/JobApplication.onClose()
 	$Areas/MascotDetails.onClose()
 	$Areas/Stats.onClose()
@@ -36,6 +39,7 @@ func onOpenInventory():
 
 func onOpenJobApplication():
 	slideTo(0)
+	$Desk/ClickPlayer.play()
 	$Areas/Inventory.onClose()
 	$Areas/MascotDetails.onClose()
 	$Areas/Stats.onClose()
@@ -43,6 +47,7 @@ func onOpenJobApplication():
 
 func onOpenMascotDetails(mascot:Mascot):
 	slideTo(-480)
+	$Desk/ClickPlayer.play()
 	$Areas/Inventory.onClose()
 	$Areas/JobApplication.onClose()
 	$Areas/Stats.onClose()

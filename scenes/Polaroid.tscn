@@ -15,7 +15,8 @@ default_font = SubResource( 3 )
 
 [node name="Polaroid" type="Control"]
 margin_right = 59.0
-margin_bottom = 70.0
+margin_bottom = 9.0
+rect_min_size = Vector2( 59, 70 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 62.0 ],

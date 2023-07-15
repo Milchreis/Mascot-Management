@@ -40,7 +40,7 @@ func onHire(mascot:Mascot):
 			var tween := create_tween() \
 				.set_trans(Tween.TRANS_CUBIC) \
 				.set_ease(Tween.EASE_OUT) \
-				.tween_property(application, "rect_position", Vector2(240, application.rect_min_size.y), 0.4) \
+				.tween_property(application, "rect_position", Vector2(240, 0), 0.4) \
 				.connect("finished", self, "clearLastHired")
 
 func clearLastHired():

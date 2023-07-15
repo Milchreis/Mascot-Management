@@ -18,6 +18,9 @@ func _ready():
 	$name.text = mascot.nickname.to_upper()
 	$pic.color = mascot.bgColor
 	
+	if showStats: $hoverBg.rect_size.y = 105
+	else: $hoverBg.rect_size.y = rect_min_size.y
+	
 	createStats($StatsPanel/improPosition, mascot.improvisation)
 	createStats($StatsPanel/reliabPosition, mascot.reliable)
 	createStats($StatsPanel/charismaPosition, mascot.charisma)

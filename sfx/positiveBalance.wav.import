@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/positiveBalance.wav-00a6cd2e49b352708e4c25baf3e66b0f.sample"
+
+[deps]
+
+source_file="res://sfx/positiveBalance.wav"
+dest_files=[ "res://.import/positiveBalance.wav-00a6cd2e49b352708e4c25baf3e66b0f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

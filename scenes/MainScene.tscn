@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -15,28 +15,8 @@
 [ext_resource path="res://gfx/employees_btn.png" type="Texture" id=13]
 [ext_resource path="res://gfx/graphs_btn.png" type="Texture" id=14]
 [ext_resource path="res://scripts/Stats.gd" type="Script" id=15]
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.388235, 0.364706, 0.588235, 1 )
-expand_margin_left = 8.0
-
-[sub_resource type="StyleBoxEmpty" id=11]
-
-[sub_resource type="StyleBoxEmpty" id=12]
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.768627, 0.780392, 0.933333, 1 )
-expand_margin_left = 8.0
-anti_aliasing = false
-
-[sub_resource type="StyleBoxLine" id=10]
-
-[sub_resource type="Theme" id=9]
-VScrollBar/styles/grabber = SubResource( 7 )
-VScrollBar/styles/grabber_highlight = SubResource( 11 )
-VScrollBar/styles/grabber_pressed = SubResource( 12 )
-VScrollBar/styles/scroll = SubResource( 8 )
-VScrollBar/styles/scroll_focus = SubResource( 10 )
+[ext_resource path="res://gfx/Scroll_theme.tres" type="Theme" id=16]
+[ext_resource path="res://sfx/click.wav" type="AudioStream" id=17]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 3 )
@@ -53,6 +33,11 @@ color = Color( 0.768627, 0.780392, 0.933333, 1 )
 
 [node name="Desk" parent="." instance=ExtResource( 1 )]
 script = ExtResource( 4 )
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="Desk"]
+stream = ExtResource( 17 )
+volume_db = -15.0
+pitch_scale = 0.5
 
 [node name="StatisticsBtn" type="Button" parent="Desk"]
 margin_left = 173.0
@@ -186,8 +171,22 @@ theme = ExtResource( 2 )
 text = "You have no employees"
 align = 1
 
-[node name="PolaroidList" type="Node2D" parent="Areas/Inventory"]
-position = Vector2( 10, 26 )
+[node name="PolaroidList" type="ScrollContainer" parent="Areas/Inventory"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.0
+margin_top = 21.0
+margin_right = 110.0
+margin_bottom = 141.0
+rect_min_size = Vector2( 220, 120 )
+theme = ExtResource( 16 )
+
+[node name="GridContainer" type="GridContainer" parent="Areas/Inventory/PolaroidList"]
+margin_right = 220.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
 
 [node name="MascotDetails" type="Control" parent="Areas"]
 margin_left = 480.0
@@ -295,7 +294,7 @@ margin_top = 21.0
 margin_right = 239.0
 margin_bottom = 141.0
 rect_min_size = Vector2( 130, 113 )
-theme = SubResource( 9 )
+theme = ExtResource( 16 )
 scroll_horizontal_enabled = false
 
 [node name="Wrapper" type="VBoxContainer" parent="Areas/MascotDetails/Events"]
