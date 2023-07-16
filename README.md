@@ -21,5 +21,6 @@ Thank you Rory for the permission 😊
  - [Godot 3.5.1](https://godotengine.org/download/)
  - [Aseprite 1.3](https://www.aseprite.org/)
  - [FontStruct](https://fontstruct.com/)
+ - [JSFXR](https://sfxr.me/)
  - [VS Code](https://code.visualstudio.com/) for code liniting and git
  - [ChatGTP](https://chat.openai.com) for generating events
