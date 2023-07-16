@@ -17,6 +17,7 @@ func _ready():
 	$salary.text = str(mascot.salaryPerDay) + "$/d"
 	$name.text = mascot.nickname.to_upper()
 	$pic.color = mascot.bgColor
+	$pic/AnimationPlayer.play("idle")
 	
 	if showStats: $hoverBg.rect_size.y = 105
 	else: $hoverBg.rect_size.y = rect_min_size.y
@@ -31,21 +32,30 @@ func _process(_delta):
 	$Busy.visible = mascot.in_training or mascot.isInEvent()
 	$DaysRemaining.visible = mascot.in_training or mascot.isInEvent()
 	$DaysRemaining.text = str(mascot.getRemainingDays())
+	$pic/Sprite.flip_h = get_global_mouse_position().x > $pic/Sprite.global_position.x
 	# todo
 	$Ill.visible = false
 	
-	if showHover: $hoverBg.visible = get_global_rect().has_point(get_global_mouse_position())
+	if showHover: 
+		$hoverBg.visible = isMouseOver(get_global_mouse_position())
 	
 	if showStats:
 		setStats($StatsPanel/improPosition, mascot.improvisation)
 		setStats($StatsPanel/reliabPosition, mascot.reliable)
 		setStats($StatsPanel/charismaPosition, mascot.charisma)
 
-## temporary mouse input for hiring mascots
 func _input(event):
-	if event is InputEventMouseButton and get_global_rect().has_point(event.position):
+	if event is InputEventMouseButton and isMouseOver(event.position):
 		if event.button_index == BUTTON_LEFT:
+			print(get_parent().get_global_rect())
 			emit_signal("select", mascot)
+
+func isMouseOver(_position):
+	# it's a little hacky, but the InputEventMouseButton doesn't work with scroll together
+	# and the Polroid-scene as Button doesn't fire the signal on click.
+	var scrollAreaBeginY = 43
+	return (get_global_rect().has_point(_position) 
+		and _position.y > scrollAreaBeginY)
 
 func createStats(positionNode, propertyValue):
 	for n in range(0, 5):

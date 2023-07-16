@@ -9,29 +9,26 @@ var applications:Array = []
 var lastHired = null
 
 func onOpen():
-	for i in range(0, applications.size()):
-		var polaroid = applications[i]
-		var gap = 15
-		polaroid.rect_position.x = i * (polaroid.rect_size.x + gap)
+	onClose()
+	for polaroid in applications:
 		polaroid.connect("select", self, "onHire")
-		$PolaroidSelector.add_child(polaroid)
+		$PolaroidSelector/GridContainer.add_child(polaroid)
 	
 func onClose():
-	for polaroid in $PolaroidSelector.get_children():
+	for polaroid in $PolaroidSelector/GridContainer.get_children():
 		polaroid.disconnect("select", self, "onHire")
 
 func createPool(size=3) -> void:
 	for i in range(0, size):
-		var gap = 15
 		var polaroid = Polaroid.instance()
 		polaroid.mascot = createMascot()
-		polaroid.rect_position.x = i * (polaroid.rect_size.x + gap)
 		polaroid.connect("select", self, "onHire")
-		$PolaroidSelector.add_child(polaroid)
+		$PolaroidSelector/GridContainer.add_child(polaroid)
 		applications.append(polaroid)
 
 func onHire(mascot:Mascot):
 	print("hire ", mascot._to_string())
+	$HirePlayer.play()
 	
 	model.employees.append(mascot)
 	for application in applications:
@@ -47,7 +44,7 @@ func clearLastHired():
 	if lastHired == null: return
 	
 	applications.erase(lastHired)
-	$PolaroidSelector.remove_child(lastHired)
+	$PolaroidSelector/GridContainer.remove_child(lastHired)
 	lastHired = null
 
 func createMascot() -> Mascot:

@@ -10,10 +10,7 @@
 
 [node name="Desk" type="Control"]
 margin_right = 240.0
-margin_bottom = 160.0
-__meta__ = {
-"_edit_lock_": true
-}
+margin_bottom = 20.0
 
 [node name="Appbar" type="ColorRect" parent="."]
 margin_right = 240.0

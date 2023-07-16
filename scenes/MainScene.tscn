@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scripts/Stats.gd" type="Script" id=15]
 [ext_resource path="res://gfx/Scroll_theme.tres" type="Theme" id=16]
 [ext_resource path="res://sfx/click.wav" type="AudioStream" id=17]
+[ext_resource path="res://sfx/hire.wav" type="AudioStream" id=18]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 3 )
@@ -30,41 +31,6 @@ anchor_bottom = 1.0
 margin_right = 1.0
 rect_min_size = Vector2( 240, 160 )
 color = Color( 0.768627, 0.780392, 0.933333, 1 )
-
-[node name="Desk" parent="." instance=ExtResource( 1 )]
-script = ExtResource( 4 )
-
-[node name="ClickPlayer" type="AudioStreamPlayer" parent="Desk"]
-stream = ExtResource( 17 )
-volume_db = -15.0
-pitch_scale = 0.5
-
-[node name="StatisticsBtn" type="Button" parent="Desk"]
-margin_left = 173.0
-margin_top = 5.0
-margin_right = 193.0
-margin_bottom = 20.0
-theme = ExtResource( 6 )
-icon = ExtResource( 14 )
-icon_align = 1
-
-[node name="ApplicantsBtn" type="Button" parent="Desk"]
-margin_left = 195.0
-margin_top = 5.0
-margin_right = 215.0
-margin_bottom = 20.0
-theme = ExtResource( 6 )
-icon = ExtResource( 11 )
-icon_align = 1
-
-[node name="EmployeesBtn" type="Button" parent="Desk"]
-margin_left = 217.0
-margin_top = 5.0
-margin_right = 237.0
-margin_bottom = 20.0
-theme = ExtResource( 6 )
-icon = ExtResource( 13 )
-icon_align = 1
 
 [node name="Areas" type="Node2D" parent="."]
 position = Vector2( -240, 0 )
@@ -96,8 +62,18 @@ theme = ExtResource( 2 )
 text = "Statistics"
 align = 1
 
-[node name="PolaroidSelector" type="Node2D" parent="Areas/Stats"]
-position = Vector2( 16, 24 )
+[node name="noStats" type="Label" parent="Areas/Stats"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -94.5
+margin_top = -25.5
+margin_right = 87.5
+margin_bottom = -14.5
+theme = ExtResource( 2 )
+text = "Stats not implemented yet"
+align = 1
 
 [node name="JobApplication" type="Control" parent="Areas"]
 margin_top = 20.0
@@ -126,8 +102,26 @@ theme = ExtResource( 2 )
 text = "Applicants"
 align = 1
 
-[node name="PolaroidSelector" type="Node2D" parent="Areas/JobApplication"]
-position = Vector2( 16, 24 )
+[node name="HirePlayer" type="AudioStreamPlayer" parent="Areas/JobApplication"]
+stream = ExtResource( 18 )
+volume_db = -7.828
+
+[node name="PolaroidSelector" type="ScrollContainer" parent="Areas/JobApplication"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -104.0
+margin_top = 24.0
+margin_right = 116.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 220, 120 )
+theme = ExtResource( 16 )
+
+[node name="GridContainer" type="GridContainer" parent="Areas/JobApplication/PolaroidSelector"]
+margin_right = 220.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
 
 [node name="Inventory" type="Control" parent="Areas"]
 margin_left = 240.0
@@ -303,10 +297,45 @@ margin_bottom = 120.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="Desk/StatisticsBtn" to="." method="onOpenStatistics"]
-[connection signal="pressed" from="Desk/ApplicantsBtn" to="." method="onOpenJobApplication"]
-[connection signal="pressed" from="Desk/EmployeesBtn" to="." method="onOpenInventory"]
+[node name="Desk" parent="." instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="Desk"]
+stream = ExtResource( 17 )
+volume_db = -15.0
+pitch_scale = 0.5
+
+[node name="StatisticsBtn" type="Button" parent="Desk"]
+margin_left = 173.0
+margin_top = 5.0
+margin_right = 193.0
+margin_bottom = 20.0
+theme = ExtResource( 6 )
+icon = ExtResource( 14 )
+icon_align = 1
+
+[node name="ApplicantsBtn" type="Button" parent="Desk"]
+margin_left = 195.0
+margin_top = 5.0
+margin_right = 215.0
+margin_bottom = 20.0
+theme = ExtResource( 6 )
+icon = ExtResource( 11 )
+icon_align = 1
+
+[node name="EmployeesBtn" type="Button" parent="Desk"]
+margin_left = 217.0
+margin_top = 5.0
+margin_right = 237.0
+margin_bottom = 20.0
+theme = ExtResource( 6 )
+icon = ExtResource( 13 )
+icon_align = 1
+
 [connection signal="select" from="Areas/Inventory" to="." method="onOpenMascotDetails"]
 [connection signal="close" from="Areas/MascotDetails" to="." method="onMascotFire"]
 [connection signal="pressed" from="Areas/MascotDetails/Train" to="Areas/MascotDetails" method="onTraining"]
 [connection signal="pressed" from="Areas/MascotDetails/Fire" to="Areas/MascotDetails" method="onFire"]
+[connection signal="pressed" from="Desk/StatisticsBtn" to="." method="onOpenStatistics"]
+[connection signal="pressed" from="Desk/ApplicantsBtn" to="." method="onOpenJobApplication"]
+[connection signal="pressed" from="Desk/EmployeesBtn" to="." method="onOpenInventory"]

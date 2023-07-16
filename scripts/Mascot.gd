@@ -6,11 +6,29 @@ signal eventDone(event)
 var RandomNames = load("res://scripts/random_names.gd").new()
 var sprites = [
 	"res://gfx/mascots/ape1.png",
+	"res://gfx/mascots/ape2.png",
+	"res://gfx/mascots/ape3.png",
+	"res://gfx/mascots/ape4.png",
+	"res://gfx/mascots/ape5.png",
+	"res://gfx/mascots/ape6.png",
+	"res://gfx/mascots/ape7.png",
 	"res://gfx/mascots/dog1.png",
-	"res://gfx/mascots/chick1.png"	
+	"res://gfx/mascots/dog2.png",
+	"res://gfx/mascots/dog3.png",
+	"res://gfx/mascots/dog4.png",
+	"res://gfx/mascots/dog5.png",
+	"res://gfx/mascots/dog6.png",
+	"res://gfx/mascots/dog7.png",
+	"res://gfx/mascots/chick1.png",
+	"res://gfx/mascots/chick2.png",
+	"res://gfx/mascots/chick3.png",
+	"res://gfx/mascots/chick4.png",
+	"res://gfx/mascots/chick5.png",
+	"res://gfx/mascots/chick6.png",
+	"res://gfx/mascots/chick7.png"
 ]
 
-var bg_colors = ["#7be1f6", "#ffe3ae", "#cdbbab", "#b0d07e", "#ffbae1"]
+var bg_colors = ["#635d96"]#["#b0d07e", "#7be1f6", "#ffe3ae", "#cdbbab", , "#ffbae1"]
 
 export var nickname:String = RandomNames.get_first_name()
 

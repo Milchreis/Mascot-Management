@@ -7,6 +7,7 @@ var model:GameModel = GameModel.new()
 func _ready():
 	add_child(model)
 	model.connect("day_passed", $Desk, "onDayPassed")
+	model.connect("day_passed", self, "onDayPassed")
 	
 	$Desk.model = model
 	$Areas/Stats.model = model
@@ -16,7 +17,10 @@ func _ready():
 	
 	$Areas/JobApplication.createPool(4)
 	onOpenJobApplication()
-	
+
+func onDayPassed():
+	$Areas/JobApplication.createPool(2)
+
 func _process(_delta):
 	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
 	$Desk/Appbar/Day/Background/Progess.value = model.getDayProgress()
