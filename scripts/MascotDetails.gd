@@ -45,6 +45,7 @@ func onTraining():
 
 func onFire():
 	model.fire(employee)
+	$FirePlayer.play()
 	emit_signal("close")
 
 func addEventScene(event:Event):
@@ -55,11 +56,10 @@ func addEventScene(event:Event):
 	return eventScene
 
 func reloadEvents():
-	print("reloadEvents")
 	for node in $Events/Wrapper.get_children():
 		$Events/Wrapper.remove_child(node)
 	
-	if employee.isInEvent():
+	if employee.isInEvent() or employee.in_training:
 		var eventScene = addEventScene(employee.currentEvent)
 		eventScene.find_node("AcceptBtn").visible = false
 	else:

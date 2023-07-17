@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -18,6 +18,12 @@
 [ext_resource path="res://gfx/Scroll_theme.tres" type="Theme" id=16]
 [ext_resource path="res://sfx/click.wav" type="AudioStream" id=17]
 [ext_resource path="res://sfx/hire.wav" type="AudioStream" id=18]
+[ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://sfx/fire.wav" type="AudioStream" id=20]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 19 )
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 3 )
@@ -41,11 +47,63 @@ margin_top = 20.0
 margin_bottom = 160.0
 script = ExtResource( 15 )
 
+[node name="LeftSideBackground" type="ColorRect" parent="Areas/Stats"]
+margin_right = 78.0
+margin_bottom = 140.0
+color = Color( 0.603922, 0.560784, 0.878431, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Areas/Stats/LeftSideBackground"]
+margin_left = 3.0
+margin_top = 7.0
+margin_right = 76.0
+margin_bottom = 52.0
+
+[node name="DaysLabel" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+margin_right = 73.0
+margin_bottom = 6.0
+theme = ExtResource( 2 )
+text = "Days"
+autowrap = true
+
+[node name="DaysValue" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+margin_top = 10.0
+margin_right = 73.0
+margin_bottom = 16.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+text = "0"
+autowrap = true
+
+[node name="Spacer1" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+margin_top = 20.0
+margin_right = 73.0
+margin_bottom = 26.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+autowrap = true
+
+[node name="MaxSatisLabel" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+margin_top = 30.0
+margin_right = 73.0
+margin_bottom = 45.0
+theme = ExtResource( 2 )
+text = "Happiness (max)"
+autowrap = true
+
+[node name="MaxSatisValue" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+margin_top = 49.0
+margin_right = 73.0
+margin_bottom = 55.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+text = "0"
+autowrap = true
+
 [node name="Header" type="ColorRect" parent="Areas/Stats"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -49.0
-margin_right = 49.0
+margin_left = -48.0
+margin_right = 48.0
 margin_bottom = 16.0
 color = Color( 0.388235, 0.364706, 0.588235, 1 )
 
@@ -62,34 +120,56 @@ theme = ExtResource( 2 )
 text = "Statistics"
 align = 1
 
-[node name="noStats" type="Label" parent="Areas/Stats"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -94.5
-margin_top = -25.5
-margin_right = 87.5
-margin_bottom = -14.5
-theme = ExtResource( 2 )
-text = "Stats not implemented yet"
-align = 1
-
 [node name="JobApplication" type="Control" parent="Areas"]
 margin_top = 20.0
 margin_right = 240.0
 margin_bottom = 160.0
 script = ExtResource( 5 )
 
-[node name="Header" type="ColorRect" parent="Areas/JobApplication"]
+[node name="HirePlayer" type="AudioStreamPlayer" parent="Areas/JobApplication"]
+stream = ExtResource( 18 )
+volume_db = -7.828
+
+[node name="noApplicants" type="Label" parent="Areas/JobApplication"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -111.5
+margin_top = -25.5
+margin_right = 111.5
+margin_bottom = -14.5
+theme = ExtResource( 2 )
+text = "There are not applicants, today."
+align = 1
+
+[node name="PolaroidSelector" type="ScrollContainer" parent="Areas/JobApplication"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -49.0
-margin_right = 49.0
-margin_bottom = 16.0
+margin_left = -104.0
+margin_top = 19.0
+margin_right = 116.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 220, 120 )
+theme = ExtResource( 16 )
+
+[node name="GridContainer" type="GridContainer" parent="Areas/JobApplication/PolaroidSelector"]
+margin_right = 220.0
+margin_bottom = 125.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="Header" type="ColorRect" parent="Areas"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 71.0
+margin_top = 20.0
+margin_right = 169.0
+margin_bottom = 36.0
 color = Color( 0.388235, 0.364706, 0.588235, 1 )
 
-[node name="Label" type="Label" parent="Areas/JobApplication/Header"]
+[node name="Label" type="Label" parent="Areas/Header"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -101,27 +181,6 @@ margin_bottom = 5.5
 theme = ExtResource( 2 )
 text = "Applicants"
 align = 1
-
-[node name="HirePlayer" type="AudioStreamPlayer" parent="Areas/JobApplication"]
-stream = ExtResource( 18 )
-volume_db = -7.828
-
-[node name="PolaroidSelector" type="ScrollContainer" parent="Areas/JobApplication"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -104.0
-margin_top = 24.0
-margin_right = 116.0
-margin_bottom = 144.0
-rect_min_size = Vector2( 220, 120 )
-theme = ExtResource( 16 )
-
-[node name="GridContainer" type="GridContainer" parent="Areas/JobApplication/PolaroidSelector"]
-margin_right = 220.0
-margin_bottom = 120.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 3
 
 [node name="Inventory" type="Control" parent="Areas"]
 margin_left = 240.0
@@ -167,16 +226,17 @@ align = 1
 
 [node name="PolaroidList" type="ScrollContainer" parent="Areas/Inventory"]
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -110.0
-margin_top = 21.0
-margin_right = 110.0
-margin_bottom = 141.0
-rect_min_size = Vector2( 220, 120 )
+anchor_bottom = 1.0
+margin_left = -106.5
+margin_top = -120.0
+margin_right = 106.5
+rect_min_size = Vector2( 120, 120 )
 theme = ExtResource( 16 )
 
 [node name="GridContainer" type="GridContainer" parent="Areas/Inventory/PolaroidList"]
-margin_right = 220.0
+margin_right = 213.0
 margin_bottom = 120.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -203,6 +263,7 @@ margin_bottom = 16.0
 color = Color( 1, 1, 1, 0 )
 
 [node name="AtWorkLabel" type="Label" parent="Areas/MascotDetails"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -216,6 +277,7 @@ custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
 text = "Is at work..."
 
 [node name="AtTrainingLabel" type="Label" parent="Areas/MascotDetails"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -244,6 +306,9 @@ margin_bottom = 17.0
 theme = ExtResource( 8 )
 text = "Fire!"
 align = 0
+
+[node name="FirePlayer" type="AudioStreamPlayer" parent="Areas/MascotDetails"]
+stream = ExtResource( 20 )
 
 [node name="ClientSatisfaction" type="Control" parent="Areas/MascotDetails"]
 anchor_left = 0.5
