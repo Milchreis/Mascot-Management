@@ -28,17 +28,14 @@ var sprites = [
 	"res://gfx/mascots/chick7.png"
 ]
 
-var bg_colors = ["#635d96"]#["#b0d07e", "#7be1f6", "#ffe3ae", "#cdbbab", , "#ffbae1"]
-
 export var nickname:String = RandomNames.get_first_name()
 
-export var improvisation:float = rand_range(0.0, 5.0)
-export var reliable:float = rand_range(0.0, 5.0)
-export var charisma:float = rand_range(0.0, 5.0)
+export var improvisation:float = rand_range(0.0, 3.0)
+export var reliable:float = rand_range(0.0, 3.0)
+export var charisma:float = rand_range(0.0, 3.0)
 
-export var salaryPerDay:int = rand_range(10, 50)
+export var salaryPerDay:int = _calcSalary()
 export var spriteImage:String = sprites[randi() % sprites.size()]
-export var bgColor:String = bg_colors[randi() % bg_colors.size()]
 
 var client_satisfaction := 0.0
 var jobs := 0
@@ -51,8 +48,10 @@ var in_training_days := 0
 var training_price := 50
 var training_duration := 1
 
-# TODO: 
-#  - salary depending on properties
+func _calcSalary() -> int:
+	var skill = (improvisation + reliable + charisma) / 3
+	var baseSalary = 15.0
+	return int(baseSalary*skill)
 
 func isInEvent() -> bool:
 	return currentEvent != null
@@ -63,24 +62,28 @@ func start(event:Event) -> void:
 func updateAfterDayPassed() -> void:
 	if in_training: _updateTraining()
 	if isInEvent(): _updateWork()
+	else: client_satisfaction = max(0.0, client_satisfaction - 0.01)
 
 func _updateWork() -> void:
 	if daysAtCurrentEvent == currentEvent.duration:
-		print("Work ended for ", nickname, " after ", daysAtCurrentEvent)
+		print("Work ended for ", nickname, " after ", daysAtCurrentEvent, " days")
 		
 		if "Charisma" in currentEvent.property:
-			client_satisfaction += rand_range(0.05, 0.1)
-		
+			var charismaIncrease = rand_range(0.01, 0.05) * (1+charisma/5.0)
+			client_satisfaction += charismaIncrease 
+			print("Satisfaction increased by Charisma: ", charismaIncrease)
+	
 		if "Improvisation" in currentEvent.property:
-			client_satisfaction += rand_range(0.05, 0.1)
+			var improIncrease = rand_range(0.01, 0.05) * (1+improvisation/5.0)
+			client_satisfaction += improIncrease
+			print("Satisfaction increased by Improvisation: ", improIncrease)
 		
 		jobs += 1
 		var e = currentEvent
 		currentEvent = null
 		daysAtCurrentEvent = 0
 		emit_signal("eventDone", e)
-	
-	else:	
+	else:
 		daysAtCurrentEvent += 1
 
 func startTraining() -> void:
