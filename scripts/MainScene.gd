@@ -15,11 +15,12 @@ func _ready():
 	$Areas/Inventory.model = model
 	$Areas/MascotDetails.model = model
 	
-	$Areas/JobApplication.createPool(4)
+	$Areas/JobApplication.createPool(3)
 	onOpenJobApplication()
 
 func onDayPassed():
-	$Areas/JobApplication.createPool(2)
+	if withChanceOf(0.1) and $Areas/JobApplication.applicants.size() < 20:
+		$Areas/JobApplication.createPool(2)
 
 func _process(_delta):
 	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
@@ -61,7 +62,10 @@ func onMascotFire():
 	onOpenInventory()
 
 func slideTo(x):
-	var tween := create_tween() \
+	create_tween() \
 		.set_trans(Tween.TRANS_CUBIC) \
 		.set_ease(Tween.EASE_OUT) \
 		.tween_property($Areas, "position", Vector2(x, 0), 0.4)
+
+func withChanceOf(fraction:float) -> bool: 
+	 return rand_range(0.0, 1.0) <= fraction
