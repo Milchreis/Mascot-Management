@@ -24,19 +24,19 @@ Button/styles/normal = SubResource( 7 )
 Button/styles/pressed = SubResource( 8 )
 
 [sub_resource type="Animation" id=11]
-resource_name = "idle"
-length = 2.0
+resource_name = "hover"
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 2.21914, 0.63728, 0.15932 ),
 "update": 0,
-"values": [ Rect2( 0, 0, 0, 0 ), Rect2( 0, 0, 0, 10 ), Rect2( 0, 0, 0, 0 ) ]
+"values": [ Vector2( 49, 49 ), Vector2( 49, 44 ), Vector2( 49, 49 ) ]
 }
 
 [sub_resource type="DynamicFont" id=3]
@@ -87,19 +87,18 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 56.0
 margin_bottom = 56.0
-color = Color( 0.690196, 0.815686, 0.494118, 1 )
+color = Color( 0.388235, 0.364706, 0.588235, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="pic"]
-root_node = NodePath("../Sprite")
-anims/idle = SubResource( 11 )
-
 [node name="Sprite" type="Sprite" parent="pic"]
 position = Vector2( 49, 49 )
 offset = Vector2( -22, -22 )
-region_rect = Rect2( 0, 0, 0, 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="pic"]
+playback_speed = 2.05
+anims/hover = SubResource( 11 )
 
 [node name="Busy" type="Sprite" parent="."]
 visible = false
