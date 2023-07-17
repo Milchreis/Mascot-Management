@@ -4,13 +4,16 @@ class_name JobApplication
 var Polaroid = preload("res://scenes/Polaroid.tscn")
 
 var model:GameModel
-var applications:Array = []
+var applicants:Array = []
 
 var lastHired = null
 
+func _process(_delta):
+	$noApplicants.visible = applicants.size() == 0
+
 func onOpen():
 	onClose()
-	for polaroid in applications:
+	for polaroid in applicants:
 		polaroid.connect("select", self, "onHire")
 		$PolaroidSelector/GridContainer.add_child(polaroid)
 	
@@ -19,22 +22,22 @@ func onClose():
 		polaroid.disconnect("select", self, "onHire")
 
 func createPool(size=3) -> void:
-	for i in range(0, size):
+	for _i in range(0, size):
 		var polaroid = Polaroid.instance()
 		polaroid.mascot = createMascot()
 		polaroid.connect("select", self, "onHire")
 		$PolaroidSelector/GridContainer.add_child(polaroid)
-		applications.append(polaroid)
+		applicants.append(polaroid)
 
 func onHire(mascot:Mascot):
 	print("hire ", mascot._to_string())
 	$HirePlayer.play()
 	
 	model.employees.append(mascot)
-	for application in applications:
+	for application in applicants:
 		if application.mascot == mascot:
 			lastHired = application
-			var tween := create_tween() \
+			create_tween() \
 				.set_trans(Tween.TRANS_CUBIC) \
 				.set_ease(Tween.EASE_OUT) \
 				.tween_property(application, "rect_position", Vector2(240, 0), 0.4) \
@@ -43,7 +46,7 @@ func onHire(mascot:Mascot):
 func clearLastHired():
 	if lastHired == null: return
 	
-	applications.erase(lastHired)
+	applicants.erase(lastHired)
 	$PolaroidSelector/GridContainer.remove_child(lastHired)
 	lastHired = null
 
