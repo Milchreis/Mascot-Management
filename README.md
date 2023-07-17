@@ -1,7 +1,7 @@
-# Mascot Management
+![grafik](https://github.com/Milchreis/Mascot-Management/assets/544436/7c573e17-20dd-4b2d-97ed-90b61bbcda72)# Mascot Management
 A management sim game created for the [A-Game-By-Its-Cover-Jam 2023](https://itch.io/jam/a-game-by-its-cover-2023)
 
-![grafik](https://github.com/Milchreis/Mascot-Management/assets/544436/6587fb1f-bf0a-4393-b8d3-45114ebf89ab)
+![grafik](https://github.com/Milchreis/Mascot-Management/assets/544436/39e7380d-333a-4e57-9b53-0a06e136e9ec)
 
 **Mascot Management**
 
