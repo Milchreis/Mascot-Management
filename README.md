@@ -13,6 +13,12 @@ From the [Famicase exhibition 2023](https://famicase.com/23/index.html)
 
 Thank you Rory for the permission 😊
 
+## Gameplay
+
+You will get the chance to manage and grow a company with many employees. hire employees and place them with the right customers. Lead your company to success and achieve 100% customer satisfaction over time.
+
+But be warned, employees without orders cost money and satisfaction. You have limited resources and when they are brewed up, your dream of a big company is over.
+
 ## Self-chosen limitations
  - GameBoy Advance resolution (240x160)
  - limited color palette (https://lospec.com/palette-list/axulart-32-color-palette)
