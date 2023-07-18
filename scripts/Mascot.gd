@@ -1,32 +1,10 @@
-extends Node
 class_name Mascot
+extends Node
 
 signal eventDone(event)
 
 var RandomNames = load("res://scripts/random_names.gd").new()
-var sprites = [
-	"res://gfx/mascots/ape1.png",
-	"res://gfx/mascots/ape2.png",
-	"res://gfx/mascots/ape3.png",
-	"res://gfx/mascots/ape4.png",
-	"res://gfx/mascots/ape5.png",
-	"res://gfx/mascots/ape6.png",
-	"res://gfx/mascots/ape7.png",
-	"res://gfx/mascots/dog1.png",
-	"res://gfx/mascots/dog2.png",
-	"res://gfx/mascots/dog3.png",
-	"res://gfx/mascots/dog4.png",
-	"res://gfx/mascots/dog5.png",
-	"res://gfx/mascots/dog6.png",
-	"res://gfx/mascots/dog7.png",
-	"res://gfx/mascots/chick1.png",
-	"res://gfx/mascots/chick2.png",
-	"res://gfx/mascots/chick3.png",
-	"res://gfx/mascots/chick4.png",
-	"res://gfx/mascots/chick5.png",
-	"res://gfx/mascots/chick6.png",
-	"res://gfx/mascots/chick7.png"
-]
+var sprites = _getAllSprites()
 
 export var nickname:String = RandomNames.get_first_name()
 
@@ -35,7 +13,7 @@ export var reliable:float = rand_range(0.0, 3.0)
 export var charisma:float = rand_range(0.0, 3.0)
 
 export var salaryPerDay:int = _calcSalary()
-export var spriteImage:String = sprites[randi() % sprites.size()]
+export var spriteImage:String = RandomUtil.getRandom(sprites)
 
 var client_satisfaction := 0.0
 var jobs := 0
@@ -47,6 +25,17 @@ var in_training := false
 var in_training_days := 0
 var training_price := 50
 var training_duration := 1
+
+var is_ill := false
+var ill_days_remaining := 3
+
+func isOuccupied() -> bool:
+	return isInEvent() or in_training or is_ill
+
+func _calcIllnessRisk() -> float:
+	var unreliable = 1 - (reliable/5)
+	var baseIllness = 0.05
+	return baseIllness * unreliable
 
 func _calcSalary() -> int:
 	var skill = (improvisation + reliable + charisma) / 3
@@ -62,19 +51,35 @@ func start(event:Event) -> void:
 func updateAfterDayPassed() -> void:
 	if in_training: _updateTraining()
 	if isInEvent(): _updateWork()
-	else: client_satisfaction = max(0.0, client_satisfaction - 0.01)
+	else: client_satisfaction = max(0.0, client_satisfaction - 0.001)
+	
+	_updateIllness()
+
+func _updateIllness():
+	if is_ill:
+		ill_days_remaining -= 1
+		is_ill = ill_days_remaining > 0
+		return
+	
+	if RandomUtil.withChanceOf(_calcIllnessRisk()):
+		is_ill = true
+		ill_days_remaining = 3
+		if isInEvent():
+			print(nickname, " gets ill and is away for ", ill_days_remaining, " days")
+			currentEvent = null
+			client_satisfaction = max(0.0, client_satisfaction - 0.01)
 
 func _updateWork() -> void:
 	if daysAtCurrentEvent == currentEvent.duration:
 		print("Work ended for ", nickname, " after ", daysAtCurrentEvent, " days")
 		
 		if "Charisma" in currentEvent.property:
-			var charismaIncrease = rand_range(0.01, 0.05) * (1+charisma/5.0)
+			var charismaIncrease = _calcIncrease(charisma)
 			client_satisfaction += charismaIncrease 
 			print("Satisfaction increased by Charisma: ", charismaIncrease)
 	
 		if "Improvisation" in currentEvent.property:
-			var improIncrease = rand_range(0.01, 0.05) * (1+improvisation/5.0)
+			var improIncrease = _calcIncrease(improvisation)
 			client_satisfaction += improIncrease
 			print("Satisfaction increased by Improvisation: ", improIncrease)
 		
@@ -103,11 +108,17 @@ func _updateTraining() -> void:
 		improvisation = min(improvisation + rand_range(0.0, 1.0), 5)
 		charisma = min(charisma + rand_range(0.0, 1.0), 5)
 
+func _calcIncrease(property) -> float:
+	var normalizedProperty = property/5.0
+	return rand_range(0.01, 0.05) * (1+normalizedProperty)
+
 func getRemainingDays():
 	if in_training:
 		return training_duration - in_training_days
 	if isInEvent():
 		return currentEvent.duration - daysAtCurrentEvent
+	if is_ill:
+		return ill_days_remaining
 
 func _to_string() -> String:
 	return (
@@ -116,3 +127,16 @@ func _to_string() -> String:
 		", raliable="+str(reliable) + 
 		", charisma="+str(charisma)+
 		", salaryPerDay="+str(salaryPerDay))
+
+func _getAllSprites() -> Array:
+	var sprites = []
+	var dir = Directory.new()
+	if dir.open("res://gfx/mascots") == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir() and file_name.ends_with(".png"): 
+				sprites.append(dir.get_current_dir() + "/" + file_name)
+			file_name = dir.get_next()
+	
+	return sprites

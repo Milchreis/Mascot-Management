@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Mascot.gd"
 }, {
+"base": "Node",
+"class": "RandomUtil",
+"language": "GDScript",
+"path": "res://scripts/RandomUtil.gd"
+}, {
 "base": "Control",
 "class": "Stats",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "GameModel": "",
 "JobApplication": "",
 "Mascot": "",
+"RandomUtil": "",
 "Stats": ""
 }
 

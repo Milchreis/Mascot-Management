@@ -32,7 +32,6 @@ func onClose():
 func onAccept(event:Event):
 	employee.start(event)
 	model.openEvents.erase(event)
-	print(model.openEvents.size())
 	updateUI()
 	
 	for node in $Events/Wrapper.get_children():
@@ -59,19 +58,22 @@ func reloadEvents():
 	for node in $Events/Wrapper.get_children():
 		$Events/Wrapper.remove_child(node)
 	
-	if employee.isInEvent() or employee.in_training:
+	if employee.isOuccupied():
 		var eventScene = addEventScene(employee.currentEvent)
 		eventScene.find_node("AcceptBtn").visible = false
 	else:
-		for event in model.openEvents:
-			addEventScene(event)
+		if !employee.is_ill:
+			for event in model.openEvents:
+				addEventScene(event)
 
 func updateUI():
-	$Train.visible = !employee.isInEvent() and !employee.in_training
-	$Fire.visible = !employee.isInEvent() and !employee.in_training
+	$Train.visible = !employee.isOuccupied()
+	$Fire.visible = !employee.isOuccupied()
 	$AtWorkLabel.visible = employee.isInEvent()
 	$AtTrainingLabel.visible = employee.in_training
+	$Ill.visible = employee.is_ill
 	$ClientSatisfaction/Background/Progess.value = employee.client_satisfaction
-	
+	$Events.visible = !employee.is_ill
+		
 	for node in $Events/Wrapper.get_children():
 		node.find_node("AcceptBtn").visible = node.event != employee.currentEvent

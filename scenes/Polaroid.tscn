@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Polaroid.gd" type="Script" id=1]
 [ext_resource path="res://gfx/stats.png" type="Texture" id=2]
@@ -37,6 +37,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 2.21914, 0.63728, 0.15932 ),
 "update": 0,
 "values": [ Vector2( 49, 49 ), Vector2( 49, 44 ), Vector2( 49, 49 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "still"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 49, 49 ) ]
 }
 
 [sub_resource type="DynamicFont" id=3]
@@ -99,6 +114,7 @@ offset = Vector2( -22, -22 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="pic"]
 playback_speed = 2.05
 anims/hover = SubResource( 11 )
+anims/still = SubResource( 12 )
 
 [node name="Busy" type="Sprite" parent="."]
 visible = false

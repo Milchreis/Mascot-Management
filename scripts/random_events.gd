@@ -4,7 +4,7 @@ var events = []
 
 func get_random_event():
 	if events.size() == 0: _load()
-	return events[randi() % events.size()]
+	return RandomUtil.getRandom(events)
 
 func _load():
 	var f = File.new()
@@ -21,4 +21,4 @@ func _load():
 		
 		if currentLine == 1 || parts.size() == 0: continue
 		
-		events.append(Event.new(parts))
+		events.append(Event.new(currentLine, parts))

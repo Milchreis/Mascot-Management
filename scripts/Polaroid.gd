@@ -33,12 +33,13 @@ func _process(_delta):
 	$StatsPanel.visible = showStats
 	$name.visible = showName
 	$Busy.visible = mascot.in_training or mascot.isInEvent()
-	$DaysRemaining.visible = mascot.in_training or mascot.isInEvent()
-	$DaysRemaining.text = str(mascot.getRemainingDays())
-	$pic/Sprite.flip_h = get_global_mouse_position().x > $pic/Sprite.global_position.x - $pic/Sprite.texture.get_width()/2
-	# todo
-	$Ill.visible = false
+	$Ill.visible = mascot.is_ill
 	
+	$DaysRemaining.visible = mascot.isOuccupied()
+	$DaysRemaining.text = str(mascot.getRemainingDays())
+	
+	$pic/Sprite.flip_h = get_global_mouse_position().x > $pic/Sprite.global_position.x - $pic/Sprite.texture.get_width()/2
+		
 	if showHover: 
 		$hoverBg.visible = isMouseOver(get_global_mouse_position())
 	
@@ -48,18 +49,21 @@ func _process(_delta):
 		setStats($StatsPanel/charismaPosition, mascot.charisma)
 		
 	selectCoolDown = min(selectCoolDown + 1, COOLDOWN_MAX)
+	
+	if isMouseOver(get_global_mouse_position()):
+		$pic/AnimationPlayer.get_animation("hover").loop = true
+		$pic/AnimationPlayer.play("hover")
+	else: 
+		$pic/AnimationPlayer.get_animation("hover").loop = false
+		$pic/AnimationPlayer.queue("still")
+		
 
 func _input(event):
-	
-	if event is InputEventMouseButton and isMouseOver(event.position):
-		$pic/AnimationPlayer.play("hover")
-		
+	if event is InputEventMouseButton and isMouseOver(event.position):	
 		if event.button_index == BUTTON_LEFT and selectCoolDown == COOLDOWN_MAX:
 			selectCoolDown = 0
 			emit_signal("select", mascot)
 	
-	else: $pic/AnimationPlayer.stop()
-
 func isMouseOver(_position):
 	# it's a little hacky, but the InputEventMouseButton doesn't work with scroll together
 	# and the Polroid-scene as Button doesn't fire the signal on click.

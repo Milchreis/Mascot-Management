@@ -19,7 +19,7 @@ func _ready():
 	onOpenJobApplication()
 
 func onDayPassed():
-	if withChanceOf(0.1) and $Areas/JobApplication.applicants.size() < 20:
+	if RandomUtil.withChanceOf(0.1) and $Areas/JobApplication.applicants.size() < 20:
 		$Areas/JobApplication.createPool(2)
 
 func _process(_delta):
@@ -66,6 +66,3 @@ func slideTo(x):
 		.set_trans(Tween.TRANS_CUBIC) \
 		.set_ease(Tween.EASE_OUT) \
 		.tween_property($Areas, "position", Vector2(x, 0), 0.4)
-
-func withChanceOf(fraction:float) -> bool: 
-	 return rand_range(0.0, 1.0) <= fraction
