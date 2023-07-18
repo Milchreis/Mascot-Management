@@ -295,6 +295,7 @@ custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
 text = "in a further training"
 
 [node name="Ill" type="Control" parent="Areas/MascotDetails"]
+visible = false
 margin_left = 78.0
 margin_right = 264.0
 margin_bottom = 140.0
@@ -310,7 +311,7 @@ margin_right = 53.0
 margin_bottom = -54.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
-text = "is ill at the moment."
+text = "is sick at the moment."
 
 [node name="IllDescription" type="Label" parent="Areas/MascotDetails/Ill"]
 anchor_left = 0.5
