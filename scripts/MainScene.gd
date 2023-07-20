@@ -19,9 +19,10 @@ func _ready():
 	
 	$Areas/JobApplication.createPool(3)
 	onOpenJobApplication()
+	SlideUtil.slideControl(self, $Desk, Vector2(240,0), Vector2.ZERO, 0.5)
 
-func onTryAgain():
-	$Gameover.visible = false
+func onTryAgain():	
+	SlideUtil.slideOutToBottom(self, $Gameover, 0.5)
 	model._reset()
 	$Areas/JobApplication.createPool(3)
 	onOpenJobApplication()
@@ -33,14 +34,14 @@ func onDayPassed():
 	if model.balance < 0:
 		model.dayTimer.stop()
 		$Gameover.visible = true
-		
+		SlideUtil.slideInFromBottom(self, $Gameover, 0.5)
 
 func _process(_delta):
 	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
 	$Desk/Appbar/Day/Background/Progess.value = model.getDayProgress()
 
 func onOpenStatistics():
-	slideTo(240)
+	SlideUtil.slideToX(self, $Areas, 240)
 	$Desk/ClickPlayer.play()
 	$Areas/JobApplication.onClose()
 	$Areas/MascotDetails.onClose()
@@ -48,7 +49,7 @@ func onOpenStatistics():
 	$Areas/Stats.onOpen()
 
 func onOpenInventory():
-	slideTo(-240)
+	SlideUtil.slideToX(self, $Areas, -240)
 	$Desk/ClickPlayer.play()
 	$Areas/JobApplication.onClose()
 	$Areas/MascotDetails.onClose()
@@ -56,7 +57,7 @@ func onOpenInventory():
 	$Areas/Inventory.onOpen()
 
 func onOpenJobApplication():
-	slideTo(0)
+	SlideUtil.slideToX(self, $Areas, 0)
 	$Desk/ClickPlayer.play()
 	$Areas/Inventory.onClose()
 	$Areas/MascotDetails.onClose()
@@ -64,7 +65,7 @@ func onOpenJobApplication():
 	$Areas/JobApplication.onOpen()
 
 func onOpenMascotDetails(mascot:Mascot):
-	slideTo(-480)
+	SlideUtil.slideToX(self, $Areas, -480)
 	$Desk/ClickPlayer.play()
 	$Areas/Inventory.onClose()
 	$Areas/JobApplication.onClose()
@@ -73,9 +74,3 @@ func onOpenMascotDetails(mascot:Mascot):
 
 func onMascotFire():
 	onOpenInventory()
-
-func slideTo(x):
-	create_tween() \
-		.set_trans(Tween.TRANS_CUBIC) \
-		.set_ease(Tween.EASE_OUT) \
-		.tween_property($Areas, "position", Vector2(x, 0), 0.4)
