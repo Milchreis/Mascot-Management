@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/RandomUtil.gd"
 }, {
+"base": "Node",
+"class": "SlideUtil",
+"language": "GDScript",
+"path": "res://scripts/SlideUtil.gd"
+}, {
 "base": "Control",
 "class": "Stats",
 "language": "GDScript",
@@ -45,6 +50,7 @@ _global_script_class_icons={
 "JobApplication": "",
 "Mascot": "",
 "RandomUtil": "",
+"SlideUtil": "",
 "Stats": ""
 }
 

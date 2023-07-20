@@ -43,6 +43,14 @@ margin_right = 1.0
 rect_min_size = Vector2( 240, 160 )
 color = Color( 0.768627, 0.780392, 0.933333, 1 )
 
+[node name="Appbar" type="ColorRect" parent="."]
+margin_right = 240.0
+margin_bottom = 20.0
+color = Color( 0.388235, 0.364706, 0.588235, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Areas" type="Node2D" parent="."]
 position = Vector2( -240, 0 )
 

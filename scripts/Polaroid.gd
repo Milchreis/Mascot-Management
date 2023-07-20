@@ -6,11 +6,10 @@ export(bool) var showStats = true
 export(bool) var showName = true
 export(bool) var showHover = true
 export(int) var salaryPerDay = 10
+export(bool) var clickable = true
 
 var mascot:Mascot
 
-var COOLDOWN_MAX := 20
-var selectCoolDown := COOLDOWN_MAX
 var dotEmpty = load("res://gfx/dot_empty.png")
 var dotFilled = load("res://gfx/dot_filled.png")
 
@@ -47,8 +46,6 @@ func _process(_delta):
 		setStats($StatsPanel/improPosition, mascot.improvisation)
 		setStats($StatsPanel/reliabPosition, mascot.reliable)
 		setStats($StatsPanel/charismaPosition, mascot.charisma)
-		
-	selectCoolDown = min(selectCoolDown + 1, COOLDOWN_MAX)
 	
 	if isMouseOver(get_global_mouse_position()):
 		$pic/AnimationPlayer.get_animation("hover").loop = true
@@ -60,10 +57,10 @@ func _process(_delta):
 
 func _input(event):
 	if event is InputEventMouseButton and isMouseOver(event.position):	
-		if event.button_index == BUTTON_LEFT and selectCoolDown == COOLDOWN_MAX:
-			selectCoolDown = 0
+		if event.button_index == BUTTON_LEFT and clickable:
+			print(mascot.nickname)
 			emit_signal("select", mascot)
-	
+
 func isMouseOver(_position):
 	# it's a little hacky, but the InputEventMouseButton doesn't work with scroll together
 	# and the Polroid-scene as Button doesn't fire the signal on click.
@@ -71,7 +68,6 @@ func isMouseOver(_position):
 	return (get_global_rect().has_point(_position) 
 		and _position.y > scrollAreaBeginY)
 		
-
 func createStats(positionNode, propertyValue):
 	for n in range(0, 5):
 		var stat = Sprite.new()
