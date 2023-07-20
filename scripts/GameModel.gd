@@ -14,6 +14,13 @@ export(Array) var employees = []
 var openEvents = []
 var dayTimer := Timer.new()
 
+func _reset():
+	balance = 500
+	passedDays = 0
+	employees = []
+	openEvents = []
+	dayTimer.start()
+
 func _ready() -> void:
 	dayTimer.connect("timeout", self, "onDayIsOver")
 	dayTimer.autostart = true

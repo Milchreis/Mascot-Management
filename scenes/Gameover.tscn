@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/Gameover.gd" type="Script" id=1]
+[ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
+[ext_resource path="res://sfx/click.wav" type="AudioStream" id=3]
+[ext_resource path="res://gfx/chick-sad.png" type="Texture" id=4]
+[ext_resource path="res://gfx/header_buttons_theme.tres" type="Theme" id=5]
+[ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "sad"
+length = 1.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 0, 2, 3, 4, 5, 6 ]
+}
+
+[node name="Gameover" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 20.0 ]
+}
+
+[node name="Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+pitch_scale = 0.5
+
+[node name="Bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
+margin_right = 240.0
+rect_min_size = Vector2( 240, 140 )
+color = Color( 0.768627, 0.780392, 0.933333, 1 )
+
+[node name="Controls" type="Control" parent="."]
+margin_right = 240.0
+margin_bottom = 160.0
+
+[node name="IllLabel" type="Label" parent="Controls"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -109.0
+margin_top = -51.0
+margin_right = 60.0
+margin_bottom = -40.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "Your company is broke ..."
+
+[node name="IllDescription" type="Label" parent="Controls"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -109.0
+margin_top = -37.0
+margin_right = 61.0
+margin_bottom = 39.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Unfortunately, you have spent more money than you have earned. This way it will be nothing more of the great career. Try to watch your expenses better and start the next big business."
+autowrap = true
+
+[node name="TryAgain" type="Button" parent="Controls"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -38.0
+margin_top = -34.0
+margin_right = 43.0
+margin_bottom = -16.0
+theme = ExtResource( 5 )
+text = "Try again"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 208, 66 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+hframes = 8
+frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+playback_speed = 2.0
+method_call_mode = 1
+anims/sad = SubResource( 2 )
+
+[connection signal="pressed" from="Controls/TryAgain" to="." method="_onTryAgainPressed"]
