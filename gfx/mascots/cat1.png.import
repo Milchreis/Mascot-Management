@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chick6.png-0fbe4661a0b4a97529800739c635d7a2.stex"
+path="res://.import/cat1.png-dd2e2d86789686b6a7da18a869671dac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/mascots/chick6.png"
-dest_files=[ "res://.import/chick6.png-0fbe4661a0b4a97529800739c635d7a2.stex" ]
+source_file="res://gfx/mascots/cat1.png"
+dest_files=[ "res://.import/cat1.png-dd2e2d86789686b6a7da18a869671dac.stex" ]
 
 [params]
 

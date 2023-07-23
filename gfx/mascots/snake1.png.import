@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chick5.png-6cd36a25af4dabcac0beebf43ab95610.stex"
+path="res://.import/snake1.png-6391d2d6a44a850f4d63700f804cde2b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/mascots/chick5.png"
-dest_files=[ "res://.import/chick5.png-6cd36a25af4dabcac0beebf43ab95610.stex" ]
+source_file="res://gfx/mascots/snake1.png"
+dest_files=[ "res://.import/snake1.png-6391d2d6a44a850f4d63700f804cde2b.stex" ]
 
 [params]
 

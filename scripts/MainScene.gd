@@ -31,6 +31,9 @@ func onDayPassed():
 	if RandomUtil.withChanceOf(0.1) and $Areas/JobApplication.applicants.size() < 20:
 		$Areas/JobApplication.createPool(2)
 		
+	if RandomUtil.withChanceOf(0.5) and model.openEvents.size() < 3:
+		model.createRandomEvents(3)
+		
 	if model.balance < 0:
 		model.dayTimer.stop()
 		$Gameover.visible = true

@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Polaroid.gd" type="Script" id=1]
 [ext_resource path="res://gfx/stats.png" type="Texture" id=2]
 [ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://gfx/clock.png" type="Texture" id=4]
 [ext_resource path="res://gfx/ill.png" type="Texture" id=5]
+[ext_resource path="res://gfx/mascots/ape1.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -36,7 +37,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 2.21914, 0.63728, 0.15932 ),
 "update": 0,
-"values": [ Vector2( 49, 49 ), Vector2( 49, 44 ), Vector2( 49, 49 ) ]
+"values": [ Vector2( 5, 5 ), Vector2( 5, 0 ), Vector2( 5, 5 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -51,7 +52,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 49, 49 ) ]
+"values": [ Vector2( 5, 5 ) ]
 }
 
 [sub_resource type="DynamicFont" id=3]
@@ -102,6 +103,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 56.0
 margin_bottom = 56.0
+rect_min_size = Vector2( 49, 49 )
 color = Color( 0.388235, 0.364706, 0.588235, 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -109,7 +111,9 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="pic"]
 position = Vector2( 49, 49 )
-offset = Vector2( -22, -22 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="pic"]
 playback_speed = 2.05
@@ -117,7 +121,6 @@ anims/hover = SubResource( 11 )
 anims/still = SubResource( 12 )
 
 [node name="Busy" type="Sprite" parent="."]
-visible = false
 modulate = Color( 0.4, 0.666667, 0.364706, 1 )
 position = Vector2( 10, 62 )
 texture = ExtResource( 4 )
@@ -127,6 +130,16 @@ visible = false
 modulate = Color( 0.811765, 0.364706, 0.545098, 1 )
 position = Vector2( 10, 61 )
 texture = ExtResource( 5 )
+
+[node name="waitlist" type="Label" parent="."]
+margin_left = 7.0
+margin_top = 62.0
+margin_right = 24.0
+margin_bottom = 70.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.4, 0.666667, 0.364706, 1 )
+text = "..."
+clip_text = true
 
 [node name="DaysRemaining" type="Label" parent="."]
 visible = false

@@ -36,6 +36,7 @@ func _process(_delta):
 	
 	$DaysRemaining.visible = mascot.isOuccupied()
 	$DaysRemaining.text = str(mascot.getRemainingDays())
+	$waitlist.text = ".".repeat(mascot.eventWaitlist.size())
 	
 	$pic/Sprite.flip_h = get_global_mouse_position().x > $pic/Sprite.global_position.x - $pic/Sprite.texture.get_width()/2
 		

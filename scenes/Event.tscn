@@ -70,6 +70,18 @@ rect_min_size = Vector2( 130, 0 )
 [node name="spacer_top" type="Control" parent="VBoxContainer"]
 margin_right = 148.0
 
+[node name="state_label" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 4.0
+margin_right = 148.0
+margin_bottom = 11.0
+rect_min_size = Vector2( 40, 0 )
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.811765, 0.364706, 0.545098, 1 )
+text = "ACTIVE"
+align = 1
+clip_text = true
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 4.0
 margin_right = 148.0
@@ -80,7 +92,7 @@ margin_bottom = 10.0
 
 [node name="title" type="Label" parent="VBoxContainer/HBoxContainer3"]
 margin_left = 4.0
-margin_right = 148.0
+margin_right = 144.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
@@ -89,6 +101,11 @@ custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
 custom_fonts/font = SubResource( 3 )
 text = "Title"
 autowrap = true
+
+[node name="spacer_bot3" type="Control" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 148.0
+margin_right = 148.0
+margin_bottom = 10.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 18.0

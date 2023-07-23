@@ -20,6 +20,7 @@ var jobs := 0
 
 var currentEvent:Event = null
 var daysAtCurrentEvent := 0
+var eventWaitlist = []
 
 var in_training := false
 var in_training_days := 0
@@ -45,23 +46,25 @@ func _calcSalary() -> int:
 func isInEvent() -> bool:
 	return currentEvent != null
 
-func start(event:Event) -> void:
-	currentEvent = event
+func addEvent(event:Event) -> void:
+	if currentEvent == null: currentEvent = event
+	else: eventWaitlist.append(event)
 
 func updateAfterDayPassed() -> void:
+	_updateIllness()
+	
 	if in_training: _updateTraining()
 	if isInEvent(): _updateWork()
-	else: client_satisfaction = max(0.0, client_satisfaction - 0.001)
+	else: _loadEventFromWaitlist()
 	
-	_updateIllness()
+	client_satisfaction = max(0.0, client_satisfaction - 0.005)
 
 func _updateIllness():
 	if is_ill:
 		ill_days_remaining -= 1
-		is_ill = ill_days_remaining > 0
-		return
+		is_ill = ill_days_remaining >= 0
 	
-	if RandomUtil.withChanceOf(_calcIllnessRisk()):
+	elif RandomUtil.withChanceOf(_calcIllnessRisk()):
 		is_ill = true
 		ill_days_remaining = 3
 		if isInEvent():
@@ -88,6 +91,7 @@ func _updateWork() -> void:
 		currentEvent = null
 		daysAtCurrentEvent = 0
 		emit_signal("eventDone", e)
+		_loadEventFromWaitlist()
 	else:
 		daysAtCurrentEvent += 1
 
@@ -107,6 +111,12 @@ func _updateTraining() -> void:
 		reliable = min(reliable + rand_range(0.0, 1.0), 5)
 		improvisation = min(improvisation + rand_range(0.0, 1.0), 5)
 		charisma = min(charisma + rand_range(0.0, 1.0), 5)
+		_loadEventFromWaitlist()
+
+func _loadEventFromWaitlist():
+	if !in_training and !is_ill and !eventWaitlist.empty():
+		daysAtCurrentEvent = 0
+		currentEvent = eventWaitlist.pop_front()
 
 func _calcIncrease(property) -> float:
 	var normalizedProperty = property/5.0
@@ -119,6 +129,9 @@ func getRemainingDays():
 		return currentEvent.duration - daysAtCurrentEvent
 	if is_ill:
 		return ill_days_remaining
+
+func hasEvent(event:Event) -> bool:
+	return currentEvent == event or eventWaitlist.find(event) != -1
 
 func _to_string() -> String:
 	return (

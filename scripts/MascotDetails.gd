@@ -30,14 +30,14 @@ func onClose():
 	model.disconnect("day_passed", self, "reloadEvents")
 
 func onAccept(event:Event):
-	employee.start(event)
+	if employee.currentEvent == null:
+		$Events.scroll_vertical = 0
+			
+	employee.addEvent(event)
 	model.openEvents.erase(event)
+	reloadEvents()
 	updateUI()
 	
-	for node in $Events/Wrapper.get_children():
-		if node.event != event:
-			$Events/Wrapper.remove_child(node)
-
 func onTraining():
 	model.startTraining(employee)
 	updateUI()
@@ -58,13 +58,23 @@ func reloadEvents():
 	for node in $Events/Wrapper.get_children():
 		$Events/Wrapper.remove_child(node)
 	
-	if employee.isOuccupied():
-		var eventScene = addEventScene(employee.currentEvent)
-		eventScene.find_node("AcceptBtn").visible = false
-	else:
-		if !employee.is_ill:
-			for event in model.openEvents:
-				addEventScene(event)
+	if !employee.is_ill:
+		if employee.isInEvent():
+			var eventScene = addEventScene(employee.currentEvent)
+			eventScene.find_node("AcceptBtn").visible = false
+			eventScene.find_node("state_label").visible = true
+			eventScene.find_node("state_label").text = "ACTIVE"
+		
+		var c=1
+		for event in employee.eventWaitlist:
+			var eventScene = addEventScene(event)
+			eventScene.find_node("AcceptBtn").visible = false
+			eventScene.find_node("state_label").visible = true
+			eventScene.find_node("state_label").text = "TODO #" + str(c)
+			c+=1
+		
+		for event in model.openEvents:
+			addEventScene(event)
 
 func updateUI():
 	$Train.visible = !employee.isOuccupied()
@@ -76,4 +86,4 @@ func updateUI():
 	$Events.visible = !employee.is_ill
 		
 	for node in $Events/Wrapper.get_children():
-		node.find_node("AcceptBtn").visible = node.event != employee.currentEvent
+		node.find_node("AcceptBtn").visible = !employee.hasEvent(node.event)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dog3.png-84953a31c03147d00aa0dd69965bb305.stex"
+path="res://.import/duck1.png-20258bf35a0401d962c799be43abada9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/mascots/dog3.png"
-dest_files=[ "res://.import/dog3.png-84953a31c03147d00aa0dd69965bb305.stex" ]
+source_file="res://gfx/mascots/duck1.png"
+dest_files=[ "res://.import/duck1.png-20258bf35a0401d962c799be43abada9.stex" ]
 
 [params]
 

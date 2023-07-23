@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ape7.png-ffd8fc2cc0152507734dc358cd1f8d12.stex"
+path="res://.import/dragon1.png-8b49520284e018f88c9e07660568c31b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/mascots/ape7.png"
-dest_files=[ "res://.import/ape7.png-ffd8fc2cc0152507734dc358cd1f8d12.stex" ]
+source_file="res://gfx/mascots/dragon1.png"
+dest_files=[ "res://.import/dragon1.png-8b49520284e018f88c9e07660568c31b.stex" ]
 
 [params]
 

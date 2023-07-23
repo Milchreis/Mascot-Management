@@ -26,8 +26,10 @@ func _ready() -> void:
 	dayTimer.autostart = true
 	dayTimer.wait_time = dayDurationInSeconds
 	add_child(dayTimer)
-	
-	for n in range(0, 5):
+	createRandomEvents(5)
+
+func createRandomEvents(amount=1):
+	for n in range(0, amount):
 		openEvents.append(RandomEvents.get_random_event())
 
 func onDayIsOver() -> void:
