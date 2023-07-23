@@ -30,6 +30,9 @@ func onClose():
 	model.disconnect("day_passed", self, "reloadEvents")
 
 func onAccept(event:Event):
+	if employee.isInEvent(): $TodoPlayer.play()
+	else: $ClickPlayer.play()
+	
 	if employee.currentEvent == null:
 		$Events.scroll_vertical = 0
 			
@@ -39,6 +42,7 @@ func onAccept(event:Event):
 	updateUI()
 	
 func onTraining():
+	$ClickPlayer.play()
 	model.startTraining(employee)
 	updateUI()
 

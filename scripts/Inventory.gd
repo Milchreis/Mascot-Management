@@ -28,5 +28,6 @@ func onClose():
 		child.queue_free()
 
 func onSelect(mascot:Mascot):
+	$ClickPlayer.play()
 	print("open details for ", mascot._to_string())
 	emit_signal("select", mascot)

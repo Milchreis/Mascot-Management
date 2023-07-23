@@ -28,6 +28,8 @@ func onTryAgain():
 	onOpenJobApplication()
 
 func onDayPassed():
+	$DayoverPlayer.play()
+	
 	if RandomUtil.withChanceOf(0.1) and $Areas/JobApplication.applicants.size() < 20:
 		$Areas/JobApplication.createPool(2)
 		

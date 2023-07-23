@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=19]
 [ext_resource path="res://sfx/fire.wav" type="AudioStream" id=20]
 [ext_resource path="res://scenes/Gameover.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sfx/click2.wav" type="AudioStream" id=22]
+[ext_resource path="res://sfx/dayover.wav" type="AudioStream" id=23]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -35,6 +37,10 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 20.0 ]
 }
+
+[node name="DayoverPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+volume_db = -18.021
 
 [node name="Bg" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -202,6 +208,10 @@ margin_right = 480.0
 margin_bottom = 160.0
 script = ExtResource( 7 )
 
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="Areas/Inventory"]
+stream = ExtResource( 22 )
+volume_db = -6.3
+
 [node name="Header" type="ColorRect" parent="Areas/Inventory"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -261,6 +271,19 @@ margin_top = 20.0
 margin_right = 720.0
 margin_bottom = 160.0
 script = ExtResource( 9 )
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="Areas/MascotDetails"]
+stream = ExtResource( 22 )
+volume_db = 5.932
+pitch_scale = 0.5
+
+[node name="TodoPlayer" type="AudioStreamPlayer" parent="Areas/MascotDetails"]
+stream = ExtResource( 22 )
+volume_db = 4.35
+pitch_scale = 1.11
+
+[node name="FirePlayer" type="AudioStreamPlayer" parent="Areas/MascotDetails"]
+stream = ExtResource( 20 )
 
 [node name="LeftSideBackground" type="ColorRect" parent="Areas/MascotDetails"]
 margin_right = 78.0
@@ -353,9 +376,6 @@ margin_bottom = 17.0
 theme = ExtResource( 8 )
 text = "Fire!"
 align = 0
-
-[node name="FirePlayer" type="AudioStreamPlayer" parent="Areas/MascotDetails"]
-stream = ExtResource( 20 )
 
 [node name="ClientSatisfaction" type="Control" parent="Areas/MascotDetails"]
 anchor_left = 0.5
