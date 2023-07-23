@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/EventScene.gd" type="Script" id=2]
 [ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/dogicapixelbold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://gfx/button_small_font.tres" type="Theme" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 6
@@ -19,29 +20,6 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=4]
 size = 8
 font_data = ExtResource( 3 )
-
-[sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.160784, 0.184314, 0.396078, 1 )
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.490196, 0.717647, 0.462745, 1 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.160784, 0.184314, 0.396078, 1 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 8
-font_data = ExtResource( 4 )
-
-[sub_resource type="Theme" id=10]
-default_font = SubResource( 9 )
-Button/colors/font_color = Color( 1, 1, 1, 1 )
-Button/styles/focus = SubResource( 6 )
-Button/styles/hover = SubResource( 7 )
-Button/styles/normal = SubResource( 8 )
-Button/styles/pressed = SubResource( 5 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 7
@@ -166,7 +144,7 @@ margin_left = 92.0
 margin_right = 132.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 40, 10 )
-theme = SubResource( 10 )
+theme = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "ACCEPT"

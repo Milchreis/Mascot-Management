@@ -1,4 +1,5 @@
 class_name Event
+extends Resource
 
 var id:int
 var title:String

@@ -1,9 +1,7 @@
-extends Node
 class_name GameModel
+extends Node
 
 signal day_passed
-
-var RandomEvents = load("res://scripts/random_events.gd").new()
 
 export(int) var balance = 500
 export(int) var passedDays = 0
@@ -12,6 +10,7 @@ export(float) var dayDurationInSeconds = 10.0
 export(Array) var employees = []
 
 var openEvents = []
+var applicants = []
 var dayTimer := Timer.new()
 
 func _reset():
@@ -19,7 +18,16 @@ func _reset():
 	passedDays = 0
 	employees = []
 	openEvents = []
+	createRandomEvents(3)
 	dayTimer.start()
+
+func loadSavegame(resource:SaveGame):
+	balance = resource.balance
+	passedDays = resource.passedDays
+	dayDurationInSeconds = resource.dayDurationInSeconds
+	employees = resource.employees
+	openEvents = resource.openEvents
+	applicants = resource.applicants
 
 func _ready() -> void:
 	dayTimer.connect("timeout", self, "onDayIsOver")
@@ -27,6 +35,10 @@ func _ready() -> void:
 	dayTimer.wait_time = dayDurationInSeconds
 	add_child(dayTimer)
 	createRandomEvents(5)
+
+func increaseApplicantsPool(size=3) -> void:
+	for _i in range(0, size):
+		applicants.append(createMascot())
 
 func createRandomEvents(amount=1):
 	for n in range(0, amount):
@@ -68,3 +80,7 @@ func fire(mascot:Mascot) -> void:
 func startTraining(mascot:Mascot) -> void:
 	mascot.startTraining()
 	balance -= mascot.training_price
+
+func createMascot() -> Mascot:
+	randomize()
+	return Mascot.new()

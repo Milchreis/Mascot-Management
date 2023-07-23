@@ -1,5 +1,5 @@
 class_name Mascot
-extends Node
+extends Resource
 
 signal eventDone(event)
 
@@ -47,7 +47,8 @@ func isInEvent() -> bool:
 	return currentEvent != null
 
 func addEvent(event:Event) -> void:
-	if currentEvent == null: currentEvent = event
+	if in_training: eventWaitlist.append(event)
+	elif currentEvent == null: currentEvent = event
 	else: eventWaitlist.append(event)
 
 func updateAfterDayPassed() -> void:
@@ -107,6 +108,8 @@ func _updateTraining() -> void:
 		print("Training ended for ", nickname)
 		in_training = false
 		in_training_days = 0
+		training_duration += 1
+		training_price *= 1.25
 		
 		reliable = min(reliable + rand_range(0.0, 1.0), 5)
 		improvisation = min(improvisation + rand_range(0.0, 1.0), 5)

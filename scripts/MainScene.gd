@@ -3,8 +3,15 @@ extends Node2D
 var GameModel = load("res://scripts/GameModel.gd")
 
 var model:GameModel = GameModel.new()
+var savegame:SaveGame = SaveGame.new()
 
 func _ready():
+	
+	var save = SaveGame.load_savegame()
+	if save: 
+		savegame = save
+		model.loadSavegame(savegame)
+	
 	add_child(model)
 	model.connect("day_passed", $Desk, "onDayPassed")
 	model.connect("day_passed", self, "onDayPassed")
@@ -17,17 +24,21 @@ func _ready():
 	$Areas/Inventory.model = model
 	$Areas/MascotDetails.model = model
 	
-	$Areas/JobApplication.createPool(3)
+	model.increaseApplicantsPool(3)
 	onOpenJobApplication()
 	SlideUtil.slideControl(self, $Desk, Vector2(240,0), Vector2.ZERO, 0.5)
 
 func onTryAgain():	
 	SlideUtil.slideOutToBottom(self, $Gameover, 0.5)
 	model._reset()
+	$Areas/JobApplication.reset()
 	$Areas/JobApplication.createPool(3)
+	
 	onOpenJobApplication()
 
 func onDayPassed():
+	savegame.write_savegame(model)
+	
 	$DayoverPlayer.play()
 	
 	if RandomUtil.withChanceOf(0.1) and $Areas/JobApplication.applicants.size() < 20:

@@ -30,7 +30,7 @@ func onClose():
 	model.disconnect("day_passed", self, "reloadEvents")
 
 func onAccept(event:Event):
-	if employee.isInEvent(): $TodoPlayer.play()
+	if employee.isOuccupied(): $TodoPlayer.play()
 	else: $ClickPlayer.play()
 	
 	if employee.currentEvent == null:
@@ -82,6 +82,8 @@ func reloadEvents():
 
 func updateUI():
 	$Train.visible = !employee.isOuccupied()
+	$Train.text = "TRAINING (" + str(employee.training_duration) + "d" + " - " + str(employee.training_price) + "$)"
+	
 	$Fire.visible = !employee.isOuccupied()
 	$AtWorkLabel.visible = employee.isInEvent()
 	$AtTrainingLabel.visible = employee.in_training

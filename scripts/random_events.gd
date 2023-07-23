@@ -1,12 +1,14 @@
+class_name RandomEvents
+extends Node
 
-var FILE = "res://data/events.csv"
-var events = []
+const FILE = "res://data/events.csv"
+const EVENTS = []
 
-func get_random_event():
-	if events.size() == 0: _load()
-	return RandomUtil.getRandom(events)
+static func get_random_event():
+	if EVENTS.size() == 0: _load()
+	return RandomUtil.getRandom(EVENTS)
 
-func _load():
+static func _load():
 	var f = File.new()
 	if not f.file_exists(FILE):
 		print("File not found: %s" % FILE)
@@ -21,4 +23,4 @@ func _load():
 		
 		if currentLine == 1 || parts.size() == 0: continue
 		
-		events.append(Event.new(currentLine, parts))
+		EVENTS.append(Event.new(currentLine, parts))
