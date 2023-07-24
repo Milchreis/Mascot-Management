@@ -2,11 +2,11 @@ extends Control
 
 signal select(mascot)
 
-export(bool) var showStats = true
-export(bool) var showName = true
-export(bool) var showHover = true
-export(int) var salaryPerDay = 10
-export(bool) var clickable = true
+var showStats = true
+var showName = true
+var showHover = true
+var salaryPerDay = 10
+var clickable = true
 
 var mascot:Mascot
 
@@ -36,8 +36,10 @@ func _process(_delta):
 	
 	$DaysRemaining.visible = mascot.isOuccupied()
 	$DaysRemaining.text = str(mascot.getRemainingDays())
-	$waitlist.text = ".".repeat(mascot.eventWaitlist.size())
 	
+	$waitlist.visible = !mascot.eventWaitlist.empty()
+	$waitlist.text = ".".repeat(mascot.eventWaitlist.size())
+
 	$pic/Sprite.flip_h = get_global_mouse_position().x > $pic/Sprite.global_position.x + $pic/Sprite.texture.get_width()
 		
 	if showHover: 

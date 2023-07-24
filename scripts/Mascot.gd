@@ -12,11 +12,14 @@ export var improvisation:float = rand_range(0.0, 3.0)
 export var reliable:float = rand_range(0.0, 3.0)
 export var charisma:float = rand_range(0.0, 3.0)
 
+export var leaveProbability:float = rand_range(0.05, 0.1)
+export var sabaticalProbability:float = rand_range(0.0, 0.1)
+
 export var salaryPerDay:int = _calcSalary()
 export var spriteImage:String = RandomUtil.getRandom(sprites)
 
-var client_satisfaction := 0.0
-var jobs := 0
+export var client_satisfaction := 0.0
+export var jobs := 0
 
 var currentEvent:Event = null
 var daysAtCurrentEvent := 0
@@ -111,9 +114,10 @@ func _updateTraining() -> void:
 		training_duration += 1
 		training_price *= 1.25
 		
-		reliable = min(reliable + rand_range(0.0, 1.0), 5)
-		improvisation = min(improvisation + rand_range(0.0, 1.0), 5)
-		charisma = min(charisma + rand_range(0.0, 1.0), 5)
+		leaveProbability = min(leaveProbability - 0.01, 0)
+		reliable = min(reliable + rand_range(0.5, 1.0), 5)
+		improvisation = min(improvisation + rand_range(0.5, 1.0), 5)
+		charisma = min(charisma + rand_range(0.5, 1.0), 5)
 		_loadEventFromWaitlist()
 
 func _loadEventFromWaitlist():

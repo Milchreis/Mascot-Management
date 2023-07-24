@@ -3,7 +3,7 @@ extends Control
 var model:GameModel
 var lastBalance := 500
 
-func _process(_delta):	
+func _process(_delta):
 	updateSatisfactionView()
 	updateBalanceView()
 

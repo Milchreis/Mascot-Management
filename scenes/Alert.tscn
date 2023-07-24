@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/Alert.gd" type="Script" id=1]
+[ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 7
+font_data = ExtResource( 2 )
+
+[node name="Alert" type="MarginContainer"]
+margin_right = 240.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 147, 0 )
+rect_clip_content = true
+script = ExtResource( 1 )
+
+[node name="bg" type="ColorRect" parent="."]
+margin_right = 240.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 20, 0 )
+size_flags_vertical = 3
+color = Color( 0.811765, 0.364706, 0.545098, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 240.0
+margin_bottom = 10.0
+
+[node name="icon" type="Label" parent="HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 10.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+text = " (!) "
+valign = 1
+
+[node name="message" type="Label" parent="HBoxContainer"]
+margin_left = 16.0
+margin_right = 240.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+text = "5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ 5000$ "
+valign = 1
+clip_text = true

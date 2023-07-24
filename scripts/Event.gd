@@ -1,12 +1,12 @@
 class_name Event
 extends Resource
 
-var id:int
-var title:String
-var description:String
-var property:String
-var duration:int
-var costs:int
+export var id:int
+export var title:String
+export var description:String
+export var property:String
+export var duration:int
+export var costs:int
 
 func _init(_id, parts):
 	id = _id

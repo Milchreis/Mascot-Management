@@ -1,25 +1,22 @@
 class_name GameModel
-extends Node
 
-signal day_passed
+signal employee_gone(mascot)
+signal employee_sabat(mascot)
 
 export(int) var balance = 500
 export(int) var passedDays = 0
 export(float) var dayDurationInSeconds = 10.0
 
-export(Array) var employees = []
-
+var employees = []
 var openEvents = []
 var applicants = []
-var dayTimer := Timer.new()
 
-func _reset():
-	balance = 500
-	passedDays = 0
-	employees = []
-	openEvents = []
-	createRandomEvents(3)
-	dayTimer.start()
+var dayTimer:Timer
+
+func _init(dayTimer:Timer):
+	self.dayTimer = dayTimer
+	createRandomEvents(5)
+	increaseApplicantsPool(3)
 
 func loadSavegame(resource:SaveGame):
 	balance = resource.balance
@@ -29,11 +26,11 @@ func loadSavegame(resource:SaveGame):
 	openEvents = resource.openEvents
 	applicants = resource.applicants
 
-func _ready() -> void:
-	dayTimer.connect("timeout", self, "onDayIsOver")
-	dayTimer.autostart = true
-	dayTimer.wait_time = dayDurationInSeconds
-	add_child(dayTimer)
+func _reset():
+	balance = 500
+	passedDays = 0
+	employees = []
+	openEvents = []
 	createRandomEvents(5)
 
 func increaseApplicantsPool(size=3) -> void:
@@ -48,7 +45,12 @@ func onDayIsOver() -> void:
 	passedDays+=1
 	print("Days over ", passedDays)
 	updateEmployees()
-	emit_signal("day_passed")
+		
+	if RandomUtil.withChanceOf(0.1) and applicants.size() < 20:
+		increaseApplicantsPool(2)
+		
+	if RandomUtil.withChanceOf(0.5) and openEvents.size() < 3:
+		createRandomEvents(3)
 	
 func getDayProgress() -> float:
 	return 1 - (dayTimer.time_left / dayTimer.wait_time)
@@ -67,8 +69,18 @@ func getClientSatisfaction() -> float:
 
 func updateEmployees() -> void:
 	for employee in employees:
+		employee = employee as Mascot
+		
 		if employee.isInEvent():
 			balance += employee.currentEvent.costs
+		else:
+			if RandomUtil.withChanceOf(employee.leaveProbability):
+				employees.erase(employee)
+				emit_signal("employee_gone", employee)
+
+			if RandomUtil.withChanceOf(employee.sabaticalProbability):
+				employee.currentEvent = Event.new(-1, ["Sabat", "need some space", "", 10, employee.salaryPerDay])
+				emit_signal("employee_sabat", employee)
 		
 		balance -= employee.salaryPerDay
 		employee.updateAfterDayPassed()

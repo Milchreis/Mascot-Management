@@ -8,10 +8,7 @@ var model:GameModel
 var employee:Mascot
 var polaroid:Node
 
-func onOpen(mascot:Mascot):
-	model.connect("day_passed", self, "updateUI")
-	model.connect("day_passed", self, "reloadEvents")
-	
+func onOpen(mascot:Mascot):	
 	employee = mascot
 	polaroid = Polaroid.instance()
 	polaroid.mascot = mascot
@@ -25,9 +22,6 @@ func onOpen(mascot:Mascot):
 func onClose():
 	if polaroid:
 		remove_child(polaroid)
-	
-	model.disconnect("day_passed", self, "updateUI")
-	model.disconnect("day_passed", self, "reloadEvents")
 
 func onAccept(event:Event):
 	if employee.isOuccupied(): $TodoPlayer.play()
@@ -81,6 +75,8 @@ func reloadEvents():
 			addEventScene(event)
 
 func updateUI():
+	if !employee: return
+	
 	$Train.visible = !employee.isOuccupied()
 	$Train.text = "TRAINING (" + str(employee.training_duration) + "d" + " - " + str(employee.training_price) + "$)"
 	

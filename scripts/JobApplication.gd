@@ -20,6 +20,7 @@ func onOpen():
 func onClose():
 	for polaroid in $PolaroidSelector/GridContainer.get_children():
 		polaroid.disconnect("select", self, "onHire")
+		$PolaroidSelector/GridContainer.remove_child(polaroid)
 
 func reset():
 	lastHired = []

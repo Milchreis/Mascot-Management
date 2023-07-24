@@ -7,6 +7,8 @@ export(int) var balance = 500
 export(int) var passedDays = 0
 export(float) var dayDurationInSeconds = 10.0
 
+# This is not possible to godot 3.5 so save in different arrays
+# all objects are saved alltogehter in each array.
 export(Array) var employees = []
 export(Array) var openEvents = []
 export(Array) var applicants:Array = []

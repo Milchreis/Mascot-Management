@@ -6,7 +6,16 @@ var Polaroid = preload("res://scenes/Polaroid.tscn")
 var model:GameModel
 
 func onOpen():
-	onClose()
+	updateUI()
+	
+func onClose():
+	updateUI()
+
+func updateUI():
+	for child in $PolaroidList/GridContainer.get_children():
+		child.disconnect("select", self, "onSelect")
+		child.queue_free()
+	
 	for i in range(0, model.employees.size()):
 		var employee = model.employees[i]
 		var x = i % 4
@@ -21,11 +30,6 @@ func onOpen():
 		$PolaroidList/GridContainer.add_child(polaroid)
 		
 	$noEmployees.visible = model.employees.size() == 0
-	
-func onClose():
-	for child in $PolaroidList/GridContainer.get_children():
-		child.disconnect("select", self, "onSelect")
-		child.queue_free()
 
 func onSelect(mascot:Mascot):
 	$ClickPlayer.play()

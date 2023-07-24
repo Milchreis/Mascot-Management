@@ -2,21 +2,22 @@ extends Node2D
 
 var GameModel = load("res://scripts/GameModel.gd")
 
-var model:GameModel = GameModel.new()
+var dayTimer := Timer.new()
+var model:GameModel = GameModel.new(dayTimer)
 var savegame:SaveGame = SaveGame.new()
 
 func _ready():
 	
-	var save = SaveGame.load_savegame()
-	if save: 
-		savegame = save
-		model.loadSavegame(savegame)
-	
-	add_child(model)
-	model.connect("day_passed", $Desk, "onDayPassed")
-	model.connect("day_passed", self, "onDayPassed")
-	
+	dayTimer.start()
+	dayTimer.connect("timeout", self, "onDayPassed")
+	dayTimer.autostart = true
+	dayTimer.wait_time = model.dayDurationInSeconds
+	add_child(dayTimer)
+
 	$Gameover.connect("try_again", self, "onTryAgain")
+
+	model.connect("employee_gone", self, "onEmployeeIsGone")
+	model.connect("employee_sabat", self, "onEmployeeIsInSabat")
 	
 	$Desk.model = model
 	$Areas/Stats.model = model
@@ -24,9 +25,9 @@ func _ready():
 	$Areas/Inventory.model = model
 	$Areas/MascotDetails.model = model
 	
-	model.increaseApplicantsPool(3)
 	onOpenJobApplication()
 	SlideUtil.slideControl(self, $Desk, Vector2(240,0), Vector2.ZERO, 0.5)
+	
 
 func onTryAgain():	
 	SlideUtil.slideOutToBottom(self, $Gameover, 0.5)
@@ -36,25 +37,27 @@ func onTryAgain():
 	
 	onOpenJobApplication()
 
-func onDayPassed():
-	savegame.write_savegame(model)
-	
+func onDayPassed():	
 	$DayoverPlayer.play()
+	model.onDayIsOver()
+	$Desk.onDayPassed()
+	$Areas/MascotDetails.updateUI()
 	
-	if RandomUtil.withChanceOf(0.1) and $Areas/JobApplication.applicants.size() < 20:
-		$Areas/JobApplication.createPool(2)
-		
-	if RandomUtil.withChanceOf(0.5) and model.openEvents.size() < 3:
-		model.createRandomEvents(3)
-		
 	if model.balance < 0:
-		model.dayTimer.stop()
+		dayTimer.stop()
 		$Gameover.visible = true
 		SlideUtil.slideInFromBottom(self, $Gameover, 0.5)
 
 func _process(_delta):
 	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
 	$Desk/Appbar/Day/Background/Progess.value = model.getDayProgress()
+
+func onEmployeeIsGone(mascot:Mascot):
+	$Alert.showMessage(mascot.nickname + " has left the company.")
+	$Areas/Inventory.updateUI()
+	
+func onEmployeeIsInSabat(mascot:Mascot):
+	$Alert.showMessage(mascot.nickname + " is without salary in sabat for " + str(mascot.currentEvent.duration) + " days.")
 
 func onOpenStatistics():
 	SlideUtil.slideToX(self, $Areas, 240)
