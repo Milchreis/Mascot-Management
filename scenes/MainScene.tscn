@@ -71,9 +71,6 @@ color = Color( 0.768627, 0.780392, 0.933333, 1 )
 margin_right = 240.0
 margin_bottom = 20.0
 color = Color( 0.388235, 0.364706, 0.588235, 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Areas" type="Node2D" parent="."]
 position = Vector2( -240, 0 )
@@ -163,6 +160,27 @@ margin_right = 240.0
 margin_bottom = 160.0
 script = ExtResource( 5 )
 
+[node name="Header" type="ColorRect" parent="Areas/JobApplication"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -49.0
+margin_right = 49.0
+margin_bottom = 16.0
+color = Color( 0.388235, 0.364706, 0.588235, 1 )
+
+[node name="Label" type="Label" parent="Areas/JobApplication/Header"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -5.5
+margin_right = 53.5
+margin_bottom = 5.5
+theme = ExtResource( 2 )
+text = "Applicants"
+align = 1
+
 [node name="HirePlayer" type="AudioStreamPlayer" parent="Areas/JobApplication"]
 stream = ExtResource( 18 )
 volume_db = -7.828
@@ -196,28 +214,6 @@ margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
-
-[node name="Header" type="ColorRect" parent="Areas"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 71.0
-margin_top = 20.0
-margin_right = 169.0
-margin_bottom = 36.0
-color = Color( 0.388235, 0.364706, 0.588235, 1 )
-
-[node name="Label" type="Label" parent="Areas/Header"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -5.5
-margin_right = 53.5
-margin_bottom = 5.5
-theme = ExtResource( 2 )
-text = "Applicants"
-align = 1
 
 [node name="Inventory" type="Control" parent="Areas"]
 margin_left = 240.0
@@ -307,14 +303,6 @@ stream = ExtResource( 20 )
 margin_right = 78.0
 margin_bottom = 140.0
 color = Color( 0.603922, 0.560784, 0.878431, 1 )
-
-[node name="Header" type="ColorRect" parent="Areas/MascotDetails"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -38.0
-margin_right = 38.0
-margin_bottom = 16.0
-color = Color( 1, 1, 1, 0 )
 
 [node name="AtWorkLabel" type="Label" parent="Areas/MascotDetails"]
 visible = false
