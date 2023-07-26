@@ -19,7 +19,7 @@ You will get the chance to manage and grow a company with many employees. hire e
 
 But be warned, employees without orders cost money and satisfaction. You have limited resources and when they are brewed up, your dream of a big company is over.
 
-## Hidden mechanics
+### 🕵️‍♀️ Hidden mechanics
 
  - jobs have prefered skill and the client satisfaction raises with a higher value for that on your mascot
  - the global client satisfaction is a weighted average of mascot earned client-satisfaction weighted by the number of done jobs
