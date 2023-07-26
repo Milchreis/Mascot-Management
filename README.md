@@ -19,6 +19,16 @@ You will get the chance to manage and grow a company with many employees. hire e
 
 But be warned, employees without orders cost money and satisfaction. You have limited resources and when they are brewed up, your dream of a big company is over.
 
+### 🕵️‍♀️ Hidden mechanics
+
+ - jobs have prefered skill and the client satisfaction raises with a higher value for that on your mascot
+ - the global client satisfaction is a weighted average of mascot earned client-satisfaction weighted by the number of done jobs
+ - training raises the skills and lowers the mascots leave risk
+ - training allows 6 days without the mascot is leaving work
+ - mascots have different leave and sabatical risks
+ - mascots illness depends on the reliability
+ - mascots inital salary deplends on the skillpoints
+
 ## 🚩 Self-chosen limitations
  - GameBoy Advance resolution (240x160)
  - limited color palette (https://lospec.com/palette-list/axulart-32-color-palette)
