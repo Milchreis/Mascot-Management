@@ -13,7 +13,7 @@ func onOpen(mascot:Mascot):
 	polaroid = Polaroid.instance()
 	polaroid.mascot = mascot
 	polaroid.showHover = false
-	polaroid.rect_position = Vector2(10, 3)
+	polaroid.rect_position = Vector2(7, 3)
 	add_child(polaroid)
 	
 	reloadEvents()
