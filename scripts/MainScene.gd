@@ -33,7 +33,6 @@ func onTryAgain():
 	SlideUtil.slideOutToBottom(self, $Gameover, 0.5)
 	model._reset()
 	$Areas/JobApplication.reset()
-	$Areas/JobApplication.createPool(3)
 	
 	onOpenJobApplication()
 
@@ -41,6 +40,7 @@ func onDayPassed():
 	$DayoverPlayer.play()
 	model.onDayIsOver()
 	$Desk.onDayPassed()
+	$Areas/MascotDetails.reloadEvents()
 	$Areas/MascotDetails.updateUI()
 	
 	if model.balance < 0:
@@ -55,9 +55,11 @@ func _process(_delta):
 func onEmployeeIsGone(mascot:Mascot):
 	$Alert.showMessage(mascot.nickname + " has left the company.")
 	$Areas/Inventory.updateUI()
+	$Areas/MascotDetails.updateUI()
 	
 func onEmployeeIsInSabat(mascot:Mascot):
 	$Alert.showMessage(mascot.nickname + " is without salary in sabat for " + str(mascot.currentEvent.duration) + " days.")
+	$Areas/MascotDetails.updateUI()
 
 func onOpenStatistics():
 	SlideUtil.slideToX(self, $Areas, 240)

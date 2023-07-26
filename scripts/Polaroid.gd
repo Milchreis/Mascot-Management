@@ -60,8 +60,9 @@ func _process(_delta):
 
 func _input(event):
 	if event is InputEventMouseButton and isMouseOver(event.position):	
-		if event.button_index == BUTTON_LEFT and clickable:
+		if event.button_index == BUTTON_LEFT and clickable and event.is_pressed():
 			print(mascot.nickname)
+			clickable = false
 			emit_signal("select", mascot)
 
 func isMouseOver(_position):

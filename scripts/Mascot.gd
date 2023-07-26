@@ -13,7 +13,7 @@ export var reliable:float = rand_range(0.0, 3.0)
 export var charisma:float = rand_range(0.0, 3.0)
 
 export var leaveProbability:float = rand_range(0.05, 0.1)
-export var sabaticalProbability:float = rand_range(0.0, 0.1)
+export var sabaticalProbability:float = rand_range(0.0, 0.06)
 
 export var salaryPerDay:int = _calcSalary()
 export var spriteImage:String = RandomUtil.getRandom(sprites)
@@ -33,6 +33,8 @@ var training_duration := 1
 var is_ill := false
 var ill_days_remaining := 3
 
+var leaveCooldownInDays := 6
+
 func isOuccupied() -> bool:
 	return isInEvent() or in_training or is_ill
 
@@ -43,7 +45,7 @@ func _calcIllnessRisk() -> float:
 
 func _calcSalary() -> int:
 	var skill = (improvisation + reliable + charisma) / 3
-	var baseSalary = 15.0
+	var baseSalary = 10.0
 	return int(baseSalary*skill)
 
 func isInEvent() -> bool:
@@ -55,6 +57,7 @@ func addEvent(event:Event) -> void:
 	else: eventWaitlist.append(event)
 
 func updateAfterDayPassed() -> void:
+	leaveCooldownInDays = max(leaveCooldownInDays - 1, 0)
 	_updateIllness()
 	
 	if in_training: _updateTraining()
@@ -68,13 +71,16 @@ func _updateIllness():
 		ill_days_remaining -= 1
 		is_ill = ill_days_remaining >= 0
 	
-	elif RandomUtil.withChanceOf(_calcIllnessRisk()):
+	elif !in_training and !inSabat() and RandomUtil.withChanceOf(_calcIllnessRisk()):
 		is_ill = true
 		ill_days_remaining = 3
 		if isInEvent():
 			print(nickname, " gets ill and is away for ", ill_days_remaining, " days")
 			currentEvent = null
 			client_satisfaction = max(0.0, client_satisfaction - 0.01)
+
+func inSabat() -> bool:
+	return currentEvent != null and currentEvent.isSabat()
 
 func _updateWork() -> void:
 	if daysAtCurrentEvent == currentEvent.duration:
@@ -113,8 +119,9 @@ func _updateTraining() -> void:
 		in_training_days = 0
 		training_duration += 1
 		training_price *= 1.25
+		leaveCooldownInDays = 6
 		
-		leaveProbability = min(leaveProbability - 0.01, 0)
+		leaveProbability = min(leaveProbability - 0.02, 0)
 		reliable = min(reliable + rand_range(0.5, 1.0), 5)
 		improvisation = min(improvisation + rand_range(0.5, 1.0), 5)
 		charisma = min(charisma + rand_range(0.5, 1.0), 5)
@@ -127,7 +134,7 @@ func _loadEventFromWaitlist():
 
 func _calcIncrease(property) -> float:
 	var normalizedProperty = property/5.0
-	return rand_range(0.01, 0.05) * (1+normalizedProperty)
+	return rand_range(0.04, 0.06) * (1+normalizedProperty)
 
 func getRemainingDays():
 	if in_training:
@@ -145,9 +152,17 @@ func _to_string() -> String:
 		"nickname="+nickname +
 		", improvisation="+str(improvisation) +
 		", raliable="+str(reliable) + 
-		", charisma="+str(charisma)+
-		", salaryPerDay="+str(salaryPerDay))
-
+		", charisma="+str(charisma) +
+		", salaryPerDay="+str(salaryPerDay) +
+		", leaveProbability="+str(leaveProbability) +
+		", sabaticalProbability="+str(sabaticalProbability) +
+		", client_satisfaction="+str(client_satisfaction) +
+		", in_training="+str(in_training) +
+		", in_training_days="+str(in_training_days) +
+		", training_duration="+str(training_duration) +
+		", is_ill="+str(is_ill) +
+		", ill_days_remaining="+str(ill_days_remaining))
+	
 func _getAllSprites() -> Array:
 	var sprites = []
 	var dir = Directory.new()
@@ -160,3 +175,5 @@ func _getAllSprites() -> Array:
 			file_name = dir.get_next()
 	
 	return sprites
+
+

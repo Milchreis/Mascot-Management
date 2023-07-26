@@ -56,6 +56,8 @@ func reloadEvents():
 	for node in $Events/Wrapper.get_children():
 		$Events/Wrapper.remove_child(node)
 	
+	if !employee: return
+	
 	if !employee.is_ill:
 		if employee.isInEvent():
 			var eventScene = addEventScene(employee.currentEvent)

@@ -32,6 +32,8 @@ func _reset():
 	employees = []
 	openEvents = []
 	createRandomEvents(5)
+	increaseApplicantsPool(3)
+	dayTimer.start()
 
 func increaseApplicantsPool(size=3) -> void:
 	for _i in range(0, size):
@@ -46,26 +48,27 @@ func onDayIsOver() -> void:
 	print("Days over ", passedDays)
 	updateEmployees()
 		
-	if RandomUtil.withChanceOf(0.1) and applicants.size() < 20:
+	if RandomUtil.withChanceOf(0.25) and applicants.size() < 20:
 		increaseApplicantsPool(2)
 		
-	if RandomUtil.withChanceOf(0.5) and openEvents.size() < 3:
-		createRandomEvents(3)
+	if RandomUtil.withChanceOf(0.5) and openEvents.size() <= 3:
+		createRandomEvents(5)
 	
 func getDayProgress() -> float:
 	return 1 - (dayTimer.time_left / dayTimer.wait_time)
 
 func getClientSatisfaction() -> float:
-	var count:int = 0
 	var sum:float = 0
+	var jobsSum:float = 0.0
 	
+	for employee in employees: jobsSum += employee.jobs
+
 	for employee in employees:
 		if employee.jobs > 0:
-			count += 1
-			sum += employee.client_satisfaction
+			var weight:float = employee.jobs / jobsSum
+			sum += employee.client_satisfaction * weight
 	
-	if count == 0: return 0.0
-	else: return sum / count
+	return sum
 
 func updateEmployees() -> void:
 	for employee in employees:
@@ -74,12 +77,12 @@ func updateEmployees() -> void:
 		if employee.isInEvent():
 			balance += employee.currentEvent.costs
 		else:
-			if RandomUtil.withChanceOf(employee.leaveProbability):
+			if employee.leaveCooldownInDays == 0 and RandomUtil.withChanceOf(employee.leaveProbability):
 				employees.erase(employee)
 				emit_signal("employee_gone", employee)
 
 			if RandomUtil.withChanceOf(employee.sabaticalProbability):
-				employee.currentEvent = Event.new(-1, ["Sabat", "need some space", "", 10, employee.salaryPerDay])
+				employee.currentEvent = Event.new(-1, ["Sabat", employee.nickname + " is on a journey to himself to recharge his batteries.", "", 10, employee.salaryPerDay])
 				emit_signal("employee_sabat", employee)
 		
 		balance -= employee.salaryPerDay
