@@ -13,6 +13,13 @@ From the [Famicase exhibition 2023](https://famicase.com/23/index.html)
 
 Thank you Rory for the permission 😊
 
+## Screenshots
+
+![grafik](https://github.com/Milchreis/Mascot-Management/blob/main/concept/screenshot1.png?raw=true)
+![grafik](https://github.com/Milchreis/Mascot-Management/blob/main/concept/screenshot2.png?raw=true)
+
+[Play here](https://milchreiz.itch.io/mascot-management)
+
 ## 🎯 Gameplay
 
 You will get the chance to manage and grow a company with many employees. hire employees and place them with the right customers. Lead your company to success and achieve 100% customer satisfaction over time.
