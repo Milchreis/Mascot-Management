@@ -64,6 +64,7 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT and clickable and event.is_pressed():
 			print(mascot.nickname)
 			clickable = false
+			SlideUtil.jumpControl(self, self)
 			emit_signal("select", mascot)
 
 func isMouseOver(_position):

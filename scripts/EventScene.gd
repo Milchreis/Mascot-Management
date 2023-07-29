@@ -1,6 +1,8 @@
+class_name EventScene
 extends Control
 
-signal accept(event)
+signal accept(eventScene)
+signal animationFinished
 
 var event:Event
 
@@ -13,4 +15,10 @@ func _ready():
 	find_node("duration").text = str(event.duration, " DAYS")
 
 func onAccept():
-	emit_signal("accept", event)
+	SlideUtil.jumpControl(self, $VBoxContainer/HBoxContainer/AcceptBtn)\
+	.connect("finished", self, "onAcceptAnimationFinished")
+	
+	emit_signal("accept", self)
+
+func onAcceptAnimationFinished():
+	emit_signal("animationFinished")

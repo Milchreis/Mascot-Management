@@ -1,6 +1,6 @@
 extends MarginContainer
 
-func showMessage(message:String, durationInSecs=3.0):
+func showMessage(message:String, durationInSecs=6.0):
 	self.visible = true
 	find_node("message").text = message.to_upper()
 	SlideUtil.slideControl(self, self, Vector2(0, 160), Vector2(0, 150), 0.5)

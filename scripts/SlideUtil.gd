@@ -1,6 +1,17 @@
 class_name SlideUtil
 extends Node
 
+static func jumpControl(main:Node, node:Node, heigth:int=5, duration:float=0.25) -> Tween:
+	var x = node.rect_position.x
+	var y = node.rect_position.y
+	var tween = main.create_tween() \
+		.set_trans(Tween.TRANS_CUBIC) \
+		.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(node, "rect_position", Vector2(x, y-heigth), duration*0.25)
+	tween.tween_property(node, "rect_position", Vector2(x, y), duration*0.75)
+	return tween
+		
 static func slideToX(main:Node, node:Node, x, duration:float=0.4):
 	main.create_tween() \
 		.set_trans(Tween.TRANS_CUBIC) \

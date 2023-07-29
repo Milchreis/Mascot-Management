@@ -23,26 +23,30 @@ func onClose():
 	if polaroid:
 		remove_child(polaroid)
 
-func onAccept(event:Event):
+func onAccept(eventScene:EventScene):
+	eventScene.connect("animationFinished", self, "reloadEvents")
+	eventScene.connect("animationFinished", self, "updateUI")
+
 	if employee.isOuccupied(): $TodoPlayer.play()
 	else: $ClickPlayer.play()
 	
 	if employee.currentEvent == null:
 		$Events.scroll_vertical = 0
 			
-	employee.addEvent(event)
-	model.openEvents.erase(event)
-	reloadEvents()
-	updateUI()
-	
+	employee.addEvent(eventScene.event)
+	model.openEvents.erase(eventScene.event)
+
 func onTraining():
 	$ClickPlayer.play()
+	SlideUtil.jumpControl(self, $Train).connect("finished", self, "updateUI")
 	model.startTraining(employee)
-	updateUI()
 
 func onFire():
 	model.fire(employee)
+	SlideUtil.jumpControl(self, $Fire).connect("finished", self, "sendCloseSignal")
 	$FirePlayer.play()
+
+func sendCloseSignal():
 	emit_signal("close")
 
 func addEventScene(event:Event):

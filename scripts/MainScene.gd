@@ -74,6 +74,7 @@ func onEmployeeIsInSabat(mascot:Mascot):
 
 func onOpenStatistics():
 	activeButton = $Desk/BenefitsBtn
+	SlideUtil.jumpControl(self, activeButton)
 	SlideUtil.slideToX(self, $Areas, 240)
 	$Desk/ClickPlayer.play()
 	$Areas/JobApplication.onClose()
@@ -83,6 +84,7 @@ func onOpenStatistics():
 
 func onOpenInventory():
 	activeButton = $Desk/EmployeesBtn
+	SlideUtil.jumpControl(self, activeButton)
 	SlideUtil.slideToX(self, $Areas, -240)
 	$Desk/ClickPlayer.play()
 	$Areas/JobApplication.onClose()
@@ -92,6 +94,7 @@ func onOpenInventory():
 
 func onOpenJobApplication():
 	activeButton = $Desk/ApplicantsBtn
+	SlideUtil.jumpControl(self, activeButton)
 	SlideUtil.slideToX(self, $Areas, 0)
 	$Desk/ClickPlayer.play()
 	$Areas/Inventory.onClose()

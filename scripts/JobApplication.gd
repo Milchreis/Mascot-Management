@@ -50,11 +50,17 @@ func onHire(mascot:Mascot):
 			polaroid.clickable = false
 			lastHired.append(polaroid)
 		
-			create_tween() \
+			var x = polaroid.rect_position.x
+			var y = polaroid.rect_position.y
+		
+			var tween = create_tween() \
 				.set_trans(Tween.TRANS_CUBIC) \
 				.set_ease(Tween.EASE_OUT) \
-				.tween_property(polaroid, "rect_position", Vector2(240, 0), 0.4) \
-				.connect("finished", self, "clearLastHired")
+				
+			tween.connect("finished", self, "clearLastHired")
+			tween.tween_property(polaroid, "rect_position", Vector2(x, y-10), 0.2)
+			tween.tween_property(polaroid, "rect_position", Vector2(x, y), 0.2)
+			tween.parallel().tween_property(polaroid, "rect_position", Vector2(240, 0), 0.4)
 
 func clearLastHired():
 	if lastHired.empty(): return
