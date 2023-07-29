@@ -6,6 +6,10 @@ var dayTimer := Timer.new()
 var model:GameModel = GameModel.new(dayTimer)
 var savegame:SaveGame = SaveGame.new()
 
+var activeButton:Node
+var activ_theme = load("res://gfx/header_buttons_active_theme.tres") 
+var inactiv_theme = load("res://gfx/header_buttons_theme.tres") 
+
 func _ready():
 	
 	dayTimer.start()
@@ -20,7 +24,7 @@ func _ready():
 	model.connect("employee_sabat", self, "onEmployeeIsInSabat")
 	
 	$Desk.model = model
-	$Areas/Stats.model = model
+	$Areas/Benefits.model = model
 	$Areas/JobApplication.model = model
 	$Areas/Inventory.model = model
 	$Areas/MascotDetails.model = model
@@ -40,6 +44,7 @@ func onDayPassed():
 	$DayoverPlayer.play()
 	model.onDayIsOver()
 	$Desk.onDayPassed()
+	$Areas/JobApplication.updateUI()
 	$Areas/MascotDetails.reloadEvents()
 	$Areas/MascotDetails.updateUI()
 	
@@ -51,6 +56,12 @@ func onDayPassed():
 func _process(_delta):
 	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
 	$Desk/Appbar/Day/Background/Progess.value = model.getDayProgress()
+	
+	$Desk/BenefitsBtn.theme = inactiv_theme
+	$Desk/ApplicantsBtn.theme = inactiv_theme
+	$Desk/EmployeesBtn.theme = inactiv_theme
+	
+	if activeButton: activeButton.theme = activ_theme
 
 func onEmployeeIsGone(mascot:Mascot):
 	$Alert.showMessage(mascot.nickname + " has left the company.")
@@ -62,35 +73,39 @@ func onEmployeeIsInSabat(mascot:Mascot):
 	$Areas/MascotDetails.updateUI()
 
 func onOpenStatistics():
+	activeButton = $Desk/BenefitsBtn
 	SlideUtil.slideToX(self, $Areas, 240)
 	$Desk/ClickPlayer.play()
 	$Areas/JobApplication.onClose()
 	$Areas/MascotDetails.onClose()
 	$Areas/Inventory.onClose()
-	$Areas/Stats.onOpen()
+	$Areas/Benefits.onOpen()
 
 func onOpenInventory():
+	activeButton = $Desk/EmployeesBtn
 	SlideUtil.slideToX(self, $Areas, -240)
 	$Desk/ClickPlayer.play()
 	$Areas/JobApplication.onClose()
 	$Areas/MascotDetails.onClose()
-	$Areas/Stats.onClose()
+	$Areas/Benefits.onClose()
 	$Areas/Inventory.onOpen()
 
 func onOpenJobApplication():
+	activeButton = $Desk/ApplicantsBtn
 	SlideUtil.slideToX(self, $Areas, 0)
 	$Desk/ClickPlayer.play()
 	$Areas/Inventory.onClose()
 	$Areas/MascotDetails.onClose()
-	$Areas/Stats.onClose()
+	$Areas/Benefits.onClose()
 	$Areas/JobApplication.onOpen()
 
 func onOpenMascotDetails(mascot:Mascot):
+	activeButton = null
 	SlideUtil.slideToX(self, $Areas, -480)
 	$Desk/ClickPlayer.play()
 	$Areas/Inventory.onClose()
 	$Areas/JobApplication.onClose()
-	$Areas/Stats.onClose()
+	$Areas/Benefits.onClose()
 	$Areas/MascotDetails.onOpen(mascot)
 
 func onMascotFire():

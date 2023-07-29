@@ -1,5 +1,5 @@
 extends Control
-class_name Stats
+class_name Benefits
 
 var model:GameModel
 
@@ -34,7 +34,5 @@ func updateUI():
 func onClose():
 	model.disconnect("day_passed", self, "updateUI")
 
-
 func _onCelebration():
 	model.balance -= 100
-	$Appbar/BalanceAnimationPlayer.play("BalanceUpdate")

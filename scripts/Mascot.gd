@@ -1,10 +1,9 @@
 class_name Mascot
-extends Resource
 
 signal eventDone(event)
 
 var RandomNames = load("res://scripts/random_names.gd").new()
-var sprites = _getAllSprites()
+var spriteIndex = randi() % 40
 
 export var nickname:String = RandomNames.get_first_name()
 
@@ -16,8 +15,6 @@ export var leaveProbability:float = rand_range(0.05, 0.1)
 export var sabaticalProbability:float = rand_range(0.0, 0.06)
 
 export var salaryPerDay:int = _calcSalary()
-export var spriteImage:String = RandomUtil.getRandom(sprites)
-
 export var client_satisfaction := 0.0
 export var jobs := 0
 
@@ -121,7 +118,7 @@ func _updateTraining() -> void:
 		training_price *= 1.25
 		leaveCooldownInDays = 6
 		
-		leaveProbability = min(leaveProbability - 0.02, 0)
+		leaveProbability = min(leaveProbability - 0.02, 0.001)
 		reliable = min(reliable + rand_range(0.5, 1.0), 5)
 		improvisation = min(improvisation + rand_range(0.5, 1.0), 5)
 		charisma = min(charisma + rand_range(0.5, 1.0), 5)
@@ -163,17 +160,3 @@ func _to_string() -> String:
 		", is_ill="+str(is_ill) +
 		", ill_days_remaining="+str(ill_days_remaining))
 	
-func _getAllSprites() -> Array:
-	var sprites = []
-	var dir = Directory.new()
-	if dir.open("res://gfx/mascots") == OK:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if !dir.current_is_dir() and file_name.ends_with(".png"): 
-				sprites.append(dir.get_current_dir() + "/" + file_name)
-			file_name = dir.get_next()
-	
-	return sprites
-
-

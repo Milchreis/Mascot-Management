@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pig2.png-fd0379d2860b2fd904501f96a91f3470.stex"
+path="res://.import/mascots.png-b90833676ea5039f50cd4e982783597b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/mascots/pig2.png"
-dest_files=[ "res://.import/pig2.png-fd0379d2860b2fd904501f96a91f3470.stex" ]
+source_file="res://gfx/mascots.png"
+dest_files=[ "res://.import/mascots.png-b90833676ea5039f50cd4e982783597b.stex" ]
 
 [params]
 

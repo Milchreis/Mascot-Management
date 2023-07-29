@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -13,8 +13,8 @@
 [ext_resource path="res://gfx/applicants_btn.png" type="Texture" id=11]
 [ext_resource path="res://gfx/client-satisfaction.png" type="Texture" id=12]
 [ext_resource path="res://gfx/employees_btn.png" type="Texture" id=13]
-[ext_resource path="res://gfx/graphs_btn.png" type="Texture" id=14]
-[ext_resource path="res://scripts/Stats.gd" type="Script" id=15]
+[ext_resource path="res://gfx/benefits_btn.png" type="Texture" id=14]
+[ext_resource path="res://scripts/Benefits.gd" type="Script" id=15]
 [ext_resource path="res://gfx/Scroll_theme.tres" type="Theme" id=16]
 [ext_resource path="res://sfx/click.wav" type="AudioStream" id=17]
 [ext_resource path="res://sfx/hire.wav" type="AudioStream" id=18]
@@ -26,12 +26,9 @@
 [ext_resource path="res://gfx/fire_icon.png" type="Texture" id=24]
 [ext_resource path="res://gfx/button_small_font.tres" type="Theme" id=25]
 [ext_resource path="res://scenes/Alert.tscn" type="PackedScene" id=26]
+[ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=27]
 
 [sub_resource type="DynamicFont" id=1]
-size = 8
-font_data = ExtResource( 19 )
-
-[sub_resource type="DynamicFont" id=2]
 size = 8
 font_data = ExtResource( 19 )
 
@@ -40,6 +37,14 @@ bg_color = Color( 0.603922, 0.560784, 0.878431, 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 7
+font_data = ExtResource( 27 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 19 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.588235, 0.286275, 0.407843, 1 )
@@ -75,31 +80,32 @@ color = Color( 0.388235, 0.364706, 0.588235, 1 )
 [node name="Areas" type="Node2D" parent="."]
 position = Vector2( -240, 0 )
 
-[node name="Stats" type="Control" parent="Areas"]
+[node name="Benefits" type="Control" parent="Areas"]
 margin_left = -240.0
 margin_top = 20.0
 margin_bottom = 160.0
 script = ExtResource( 15 )
 
-[node name="LeftSideBackground" type="ColorRect" parent="Areas/Stats"]
+[node name="LeftSideBackground" type="ColorRect" parent="Areas/Benefits"]
+visible = false
 margin_right = 78.0
 margin_bottom = 140.0
 color = Color( 0.603922, 0.560784, 0.878431, 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Areas/Stats/LeftSideBackground"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Areas/Benefits/LeftSideBackground"]
 margin_left = 3.0
 margin_top = 7.0
 margin_right = 76.0
 margin_bottom = 52.0
 
-[node name="DaysLabel" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+[node name="DaysLabel" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
 margin_right = 73.0
 margin_bottom = 6.0
 theme = ExtResource( 2 )
 text = "Days"
 autowrap = true
 
-[node name="DaysValue" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+[node name="DaysValue" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
 margin_top = 10.0
 margin_right = 73.0
 margin_bottom = 16.0
@@ -108,7 +114,7 @@ custom_fonts/font = SubResource( 1 )
 text = "0"
 autowrap = true
 
-[node name="Spacer1" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+[node name="Spacer1" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
 margin_top = 20.0
 margin_right = 73.0
 margin_bottom = 26.0
@@ -116,7 +122,7 @@ theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
 autowrap = true
 
-[node name="MaxSatisLabel" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+[node name="MaxSatisLabel" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
 margin_top = 30.0
 margin_right = 73.0
 margin_bottom = 45.0
@@ -124,7 +130,7 @@ theme = ExtResource( 2 )
 text = "Happiness (max)"
 autowrap = true
 
-[node name="MaxSatisValue" type="Label" parent="Areas/Stats/LeftSideBackground/VBoxContainer"]
+[node name="MaxSatisValue" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
 margin_top = 49.0
 margin_right = 73.0
 margin_bottom = 55.0
@@ -133,7 +139,7 @@ custom_fonts/font = SubResource( 1 )
 text = "0"
 autowrap = true
 
-[node name="Header" type="ColorRect" parent="Areas/Stats"]
+[node name="Header" type="ColorRect" parent="Areas/Benefits"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -48.0
@@ -141,7 +147,7 @@ margin_right = 48.0
 margin_bottom = 16.0
 color = Color( 0.388235, 0.364706, 0.588235, 1 )
 
-[node name="Label" type="Label" parent="Areas/Stats/Header"]
+[node name="Label" type="Label" parent="Areas/Benefits/Header"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -151,8 +157,95 @@ margin_top = -5.5
 margin_right = 53.5
 margin_bottom = 5.5
 theme = ExtResource( 2 )
-text = "Statistics"
+text = "Benefits"
 align = 1
+
+[node name="Celebration" type="Button" parent="Areas/Benefits"]
+margin_left = 10.0
+margin_top = 28.0
+margin_right = 152.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 142, 14 )
+theme = ExtResource( 25 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = " COMPANY CELEBRATION               100$"
+icon = ExtResource( 14 )
+align = 0
+
+[node name="FreshFruits" type="Button" parent="Areas/Benefits"]
+margin_left = 10.0
+margin_top = 68.0
+margin_right = 152.0
+margin_bottom = 82.0
+theme = ExtResource( 25 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = " FRESH FRUITS                   10$/d - 5d"
+icon = ExtResource( 14 )
+align = 0
+
+[node name="SportCourses" type="Button" parent="Areas/Benefits"]
+margin_left = 10.0
+margin_top = 85.0
+margin_right = 152.0
+margin_bottom = 99.0
+theme = ExtResource( 25 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = " GYM COURSE                     20$/d - 10d"
+icon = ExtResource( 14 )
+align = 0
+
+[node name="TeamBuilding" type="Button" parent="Areas/Benefits"]
+margin_left = 10.0
+margin_top = 45.0
+margin_right = 152.0
+margin_bottom = 59.0
+theme = ExtResource( 25 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = " TEAMBUILDING                             200$"
+icon = ExtResource( 14 )
+align = 0
+
+[node name="InfoPanel" type="MarginContainer" parent="Areas/Benefits"]
+margin_left = 159.0
+margin_top = 28.0
+margin_right = 230.0
+margin_bottom = 69.0
+
+[node name="bg" type="ColorRect" parent="Areas/Benefits/InfoPanel"]
+margin_right = 71.0
+margin_bottom = 41.0
+color = Color( 0.988235, 0.988235, 0.988235, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Areas/Benefits/InfoPanel"]
+margin_right = 71.0
+margin_bottom = 41.0
+
+[node name="spacer" type="Control" parent="Areas/Benefits/InfoPanel/HBoxContainer"]
+margin_bottom = 41.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Areas/Benefits/InfoPanel/HBoxContainer"]
+margin_left = 4.0
+margin_right = 71.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+
+[node name="spacer" type="Control" parent="Areas/Benefits/InfoPanel/HBoxContainer/VBoxContainer"]
+margin_right = 67.0
+
+[node name="hint" type="Label" parent="Areas/Benefits/InfoPanel/HBoxContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 67.0
+margin_bottom = 41.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "START A PARTY FOR YOUR MASCOTS. IT WILL INCREASE THE RELIABILTY."
+autowrap = true
+uppercase = true
 
 [node name="JobApplication" type="Control" parent="Areas"]
 margin_top = 20.0
@@ -451,7 +544,7 @@ stream = ExtResource( 17 )
 volume_db = -15.0
 pitch_scale = 0.5
 
-[node name="StatisticsBtn" type="Button" parent="Desk"]
+[node name="BenefitsBtn" type="Button" parent="Desk"]
 margin_left = 173.0
 margin_top = 5.0
 margin_right = 193.0
@@ -492,10 +585,11 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[connection signal="pressed" from="Areas/Benefits/Celebration" to="Areas/Benefits" method="_onCelebration"]
 [connection signal="select" from="Areas/Inventory" to="." method="onOpenMascotDetails"]
 [connection signal="close" from="Areas/MascotDetails" to="." method="onMascotFire"]
 [connection signal="pressed" from="Areas/MascotDetails/Train" to="Areas/MascotDetails" method="onTraining"]
 [connection signal="pressed" from="Areas/MascotDetails/Fire" to="Areas/MascotDetails" method="onFire"]
-[connection signal="pressed" from="Desk/StatisticsBtn" to="." method="onOpenStatistics"]
+[connection signal="pressed" from="Desk/BenefitsBtn" to="." method="onOpenStatistics"]
 [connection signal="pressed" from="Desk/ApplicantsBtn" to="." method="onOpenJobApplication"]
 [connection signal="pressed" from="Desk/EmployeesBtn" to="." method="onOpenInventory"]

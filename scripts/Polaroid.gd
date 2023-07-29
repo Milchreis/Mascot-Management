@@ -12,9 +12,10 @@ var mascot:Mascot
 
 var dotEmpty = load("res://gfx/dot_empty.png")
 var dotFilled = load("res://gfx/dot_filled.png")
+var sprites:Texture = load("res://gfx/mascots.png")
 
 func _ready():
-	$pic/Sprite.texture = load(mascot.spriteImage)
+	$pic/Sprite.frame = mascot.spriteIndex
 	$salary.text = str(mascot.salaryPerDay) + "$/d"
 	$name.text = mascot.nickname.to_upper()
 		
@@ -40,7 +41,7 @@ func _process(_delta):
 	$waitlist.visible = !mascot.eventWaitlist.empty()
 	$waitlist.text = ".".repeat(mascot.eventWaitlist.size())
 
-	$pic/Sprite.flip_h = get_global_mouse_position().x > $pic/Sprite.global_position.x + $pic/Sprite.texture.get_width()
+	$pic/Sprite.flip_h = get_global_mouse_position().x > $pic/Sprite.global_position.x + 20
 		
 	if showHover: 
 		$hoverBg.visible = isMouseOver(get_global_mouse_position())

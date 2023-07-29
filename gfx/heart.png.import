@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cow1.png-e366019a8c4be0aa836b81af7da1d736.stex"
+path="res://.import/heart.png-cbd93a7a1a6cfacc7acb83013dd91bce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/mascots/cow1.png"
-dest_files=[ "res://.import/cow1.png-e366019a8c4be0aa836b81af7da1d736.stex" ]
+source_file="res://gfx/heart.png"
+dest_files=[ "res://.import/heart.png-cbd93a7a1a6cfacc7acb83013dd91bce.stex" ]
 
 [params]
 

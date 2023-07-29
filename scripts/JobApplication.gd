@@ -25,6 +25,20 @@ func onClose():
 func reset():
 	lastHired = []
 
+func updateUI():
+	var polaroidNodes = $PolaroidSelector/GridContainer.get_children()
+	
+	var availableMascots = []
+	for polaroid in polaroidNodes:
+		availableMascots.append(polaroid.mascot)
+	
+	for mascot in model.applicants:
+		if !availableMascots.has(mascot):
+			var polaroid = Polaroid.instance()
+			polaroid.mascot = mascot
+			polaroid.connect("select", self, "onHire")
+			$PolaroidSelector/GridContainer.add_child(polaroid)
+
 func onHire(mascot:Mascot):
 	print("hire ", mascot._to_string())
 	$HirePlayer.play()

@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Polaroid.gd" type="Script" id=1]
-[ext_resource path="res://gfx/stats.png" type="Texture" id=2]
+[ext_resource path="res://gfx/mascots.png" type="Texture" id=2]
 [ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://gfx/clock.png" type="Texture" id=4]
 [ext_resource path="res://gfx/ill.png" type="Texture" id=5]
-[ext_resource path="res://gfx/mascots/ape1.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -112,8 +111,11 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="pic"]
 position = Vector2( 49, 49 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 6 )
+texture = ExtResource( 2 )
 centered = false
+hframes = 8
+vframes = 5
+frame = 39
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="pic"]
 playback_speed = 2.05
@@ -182,14 +184,6 @@ margin_left = 3.0
 margin_top = 75.0
 margin_right = 4.0
 margin_bottom = 29.0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Stats" type="Sprite" parent="StatsPanel"]
-visible = false
-position = Vector2( 12, 12 )
-texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
