@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/8-bit-arcade.mp3-ede392ebbbd0285bf7ebc1e4d0f43f44.mp3str"
+
+[deps]
+
+source_file="res://sfx/8-bit-arcade.mp3"
+dest_files=[ "res://.import/8-bit-arcade.mp3-ede392ebbbd0285bf7ebc1e4d0f43f44.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

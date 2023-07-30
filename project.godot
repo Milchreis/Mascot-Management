@@ -88,6 +88,10 @@ boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 
+[autoload]
+
+Music="*res://scenes/Menu.tscn"
+
 [display]
 
 window/size/width=240

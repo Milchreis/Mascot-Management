@@ -47,3 +47,5 @@ But be warned, employees without orders cost money and satisfaction. You have li
  - [JSFXR](https://sfxr.me/)
  - [VS Code](https://code.visualstudio.com/) for code liniting and git
  - [ChatGTP](https://chat.openai.com) for generating events
+ - [TTS-Free](https://ttsfree.com/)
+ - [Music from Pixabay](https://pixabay.com/de/music/videospiele-8-bit-arcade-138828/)

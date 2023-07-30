@@ -11,6 +11,7 @@ var activ_theme = load("res://gfx/header_buttons_active_theme.tres")
 var inactiv_theme = load("res://gfx/header_buttons_theme.tres") 
 
 func _ready():
+	$"/root/Music".dimmMusicTo(-25)
 	
 	dayTimer.start()
 	dayTimer.connect("timeout", self, "onDayPassed")
@@ -32,15 +33,20 @@ func _ready():
 	onOpenJobApplication()
 	SlideUtil.slideControl(self, $Desk, Vector2(240,0), Vector2.ZERO, 0.5)
 	
+	$IntroPlayer.connect("finished", self, "introFinished")
+	$IntroPlayer.play()
 
-func onTryAgain():	
+func introFinished():
+	$"/root/Music".dimmMusicTo(-10.0)
+	
+func onTryAgain():
 	SlideUtil.slideOutToBottom(self, $Gameover, 0.5)
 	model._reset()
 	$Areas/JobApplication.reset()
 	
 	onOpenJobApplication()
 
-func onDayPassed():	
+func onDayPassed():
 	$DayoverPlayer.play()
 	model.onDayIsOver()
 	$Desk.onDayPassed()
