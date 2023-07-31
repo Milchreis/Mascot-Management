@@ -2,6 +2,7 @@ class_name GameModel
 
 signal employee_gone(mascot)
 signal employee_sabat(mascot)
+signal day_passed
 
 export(int) var balance = 500
 export(int) var passedDays = 0
@@ -46,6 +47,7 @@ func createRandomEvents(amount=1):
 func onDayIsOver() -> void:
 	passedDays+=1
 	print("Days over ", passedDays)
+	emit_signal("day_passed")
 	updateEmployees()
 		
 	if RandomUtil.withChanceOf(0.25) and applicants.size() < 20:
