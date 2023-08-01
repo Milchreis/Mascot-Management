@@ -83,7 +83,7 @@ func updateEmployees() -> void:
 				employees.erase(employee)
 				emit_signal("employee_gone", employee)
 
-			if RandomUtil.withChanceOf(employee.sabaticalProbability):
+			if !employee.is_ill and RandomUtil.withChanceOf(employee.sabaticalProbability):
 				employee.currentEvent = Event.new(-1, ["Sabat", employee.nickname + " is on a journey to himself to recharge his batteries.", "", 10, employee.salaryPerDay])
 				emit_signal("employee_sabat", employee)
 		
