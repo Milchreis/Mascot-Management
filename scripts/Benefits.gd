@@ -49,10 +49,10 @@ func onBenefitClicked(type:String):
 		var employee:Mascot = e
 		
 		if type == $Buttons/Celebration.type:
-			employee.leaveCooldownInDays = max(3, employee.leaveCooldownInDays)
+			employee.leaveCooldownInDays = max(5, employee.leaveCooldownInDays)
 
 		if type == $Buttons/TeamBuilding.type:
-			employee.leaveCooldownInDays = max(6, employee.leaveCooldownInDays)
+			employee.leaveCooldownInDays = max(10, employee.leaveCooldownInDays)
 			employee.leaveProbability = max(0, employee.leaveProbability - 0.02)
 			
 		if type == $Buttons/FreshFruits.type:
