@@ -22,7 +22,7 @@ Thank you Rory for the permission 😊
 
 ## 🎯 Gameplay
 
-You will get the chance to manage and grow a company with many employees. hire employees and place them with the right customers. Lead your company to success and achieve 100% customer satisfaction over time.
+You will get the chance to manage and grow a company with many employees. Hire employees and place them with the right customers. Lead your company to success and achieve 100% customer satisfaction over time and keep for 10 days.
 
 But be warned, employees without orders cost money and satisfaction. You have limited resources and when they are brewed up, your dream of a big company is over.
 
@@ -47,5 +47,5 @@ But be warned, employees without orders cost money and satisfaction. You have li
  - [JSFXR](https://sfxr.me/)
  - [VS Code](https://code.visualstudio.com/) for code liniting and git
  - [ChatGTP](https://chat.openai.com) for generating events
- - [TTS-Free](https://ttsfree.com/)
- - [Music from Pixabay](https://pixabay.com/de/music/videospiele-8-bit-arcade-138828/)
+ - [ElevenLabs](https://elevenlabs.io/)
+ - [Music and sound effects from Pixabay](https://pixabay.com/de/music/)
