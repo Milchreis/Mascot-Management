@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/freshfruits.mp3-6ddaba7be982670cebeb6d3307ab8d17.mp3str"
+
+[deps]
+
+source_file="res://sfx/freshfruits.mp3"
+dest_files=[ "res://.import/freshfruits.mp3-6ddaba7be982670cebeb6d3307ab8d17.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

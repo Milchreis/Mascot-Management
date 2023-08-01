@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gym.mp3-e84f720979d9ae3f81b956814e316bc3.mp3str"
+
+[deps]
+
+source_file="res://sfx/gym.mp3"
+dest_files=[ "res://.import/gym.mp3-e84f720979d9ae3f81b956814e316bc3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

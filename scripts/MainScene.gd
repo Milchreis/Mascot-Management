@@ -57,6 +57,7 @@ func onDayPassed():
 	if model.balance < 0:
 		dayTimer.stop()
 		$Gameover.visible = true
+		$Gameover/Player.play()
 		SlideUtil.slideInFromBottom(self, $Gameover, 0.5)
 
 func _process(_delta):

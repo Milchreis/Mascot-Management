@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -30,6 +30,9 @@
 [ext_resource path="res://sfx/intro.mp3" type="AudioStream" id=28]
 [ext_resource path="res://scripts/BenefitButton.gd" type="Script" id=29]
 [ext_resource path="res://sfx/party.mp3" type="AudioStream" id=30]
+[ext_resource path="res://sfx/teambuilding.mp3" type="AudioStream" id=31]
+[ext_resource path="res://sfx/freshfruits.mp3" type="AudioStream" id=32]
+[ext_resource path="res://sfx/gym.mp3" type="AudioStream" id=33]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -204,6 +207,7 @@ script = ExtResource( 29 )
 price = 200
 tooltip = "Shape your team into a strong unit. It will increase the reliabilty and keeps your mascots in company."
 days = 1
+audio = ExtResource( 31 )
 
 [node name="FreshFruits" type="Button" parent="Areas/Benefits/Buttons"]
 margin_left = 9.0
@@ -220,6 +224,7 @@ script = ExtResource( 29 )
 price = 10
 tooltip = "Offer your mascots fresh fruit to be fit and healthy. It will decrease the risk for illness by 50 percent."
 days = 5
+audio = ExtResource( 32 )
 
 [node name="SportCourses" type="Button" parent="Areas/Benefits/Buttons"]
 margin_left = 9.0
@@ -236,6 +241,7 @@ script = ExtResource( 29 )
 price = 20
 tooltip = "Let your mascots do some free workouts. It will decrease the risk for illness by 80 percent."
 days = 10
+audio = ExtResource( 33 )
 
 [node name="InfoPanel" type="MarginContainer" parent="Areas/Benefits"]
 margin_left = 159.0

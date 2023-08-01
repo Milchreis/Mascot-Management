@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/teambuilding.mp3-a7a5b05a48d2710448a559938ce20ed8.mp3str"
+
+[deps]
+
+source_file="res://sfx/teambuilding.mp3"
+dest_files=[ "res://.import/teambuilding.mp3-a7a5b05a48d2710448a559938ce20ed8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

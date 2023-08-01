@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/Gameover.gd" type="Script" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
-[ext_resource path="res://sfx/click.wav" type="AudioStream" id=3]
+[ext_resource path="res://sfx/gameover.mp3" type="AudioStream" id=3]
 [ext_resource path="res://gfx/chick-sad.png" type="Texture" id=4]
 [ext_resource path="res://gfx/header_buttons_theme.tres" type="Theme" id=5]
 [ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=7]
@@ -36,8 +36,6 @@ __meta__ = {
 
 [node name="Player" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -15.0
-pitch_scale = 0.5
 
 [node name="Bg" type="ColorRect" parent="."]
 anchor_right = 1.0
