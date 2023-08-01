@@ -94,6 +94,11 @@ func _updateWork() -> void:
 			client_satisfaction += improIncrease
 			print("Satisfaction increased by Improvisation: ", improIncrease)
 		
+		if "Reliability" in currentEvent.property:
+			var reliableIncrease = _calcIncrease(reliable)
+			client_satisfaction += reliableIncrease
+			print("Satisfaction increased by Reliability: ", reliableIncrease)
+		
 		jobs += 1
 		var e = currentEvent
 		currentEvent = null
@@ -132,7 +137,7 @@ func _loadEventFromWaitlist():
 
 func _calcIncrease(property) -> float:
 	var normalizedProperty = property/5.0
-	return rand_range(0.04, 0.06) * (1+normalizedProperty)
+	return 0.1 * (1+normalizedProperty)
 
 func getRemainingDays():
 	if in_training:
