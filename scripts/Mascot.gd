@@ -31,13 +31,14 @@ var is_ill := false
 var ill_days_remaining := 3
 
 var leaveCooldownInDays := 6
+var illness_decrease_factor := 0.0
 
 func isOuccupied() -> bool:
 	return isInEvent() or in_training or is_ill
 
 func _calcIllnessRisk() -> float:
 	var unreliable = 1 - (reliable/5)
-	var baseIllness = 0.05
+	var baseIllness = max(0.05 * (1.0 - illness_decrease_factor), 0)
 	return baseIllness * unreliable
 
 func _calcSalary() -> int:

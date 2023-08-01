@@ -333,6 +333,7 @@ position = Vector2( 121, 62 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 16 )
 animation = "walk"
+frame = 1
 speed_scale = 1.25
 playing = true
 

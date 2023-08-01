@@ -190,6 +190,7 @@ script = ExtResource( 29 )
 price = 100
 tooltip = "Start a party for your mascots. It will keep your mascots for more days."
 days = 1
+type = "celebration"
 audio = ExtResource( 30 )
 
 [node name="TeamBuilding" type="Button" parent="Areas/Benefits/Buttons"]
@@ -207,6 +208,7 @@ script = ExtResource( 29 )
 price = 200
 tooltip = "Shape your team into a strong unit. It will increase the reliabilty and keeps your mascots in company."
 days = 1
+type = "teambuilding"
 audio = ExtResource( 31 )
 
 [node name="FreshFruits" type="Button" parent="Areas/Benefits/Buttons"]
@@ -217,13 +219,14 @@ margin_bottom = 82.0
 theme = ExtResource( 25 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
-text = " FRESH FRUITS                   10$/d - 5d"
+text = " FRESH FRUITS                      5$/d - 5d"
 icon = ExtResource( 14 )
 align = 0
 script = ExtResource( 29 )
-price = 10
-tooltip = "Offer your mascots fresh fruit to be fit and healthy. It will decrease the risk for illness by 50 percent."
+price = 5
+tooltip = "Offer your mascots fresh fruit to be fit and healthy. It will decrease the risk for illness."
 days = 5
+type = "fruits"
 audio = ExtResource( 32 )
 
 [node name="SportCourses" type="Button" parent="Areas/Benefits/Buttons"]
@@ -241,6 +244,7 @@ script = ExtResource( 29 )
 price = 20
 tooltip = "Let your mascots do some free workouts. It will decrease the risk for illness by 80 percent."
 days = 10
+type = "gym"
 audio = ExtResource( 33 )
 
 [node name="InfoPanel" type="MarginContainer" parent="Areas/Benefits"]
