@@ -12,6 +12,7 @@ var mascot:Mascot
 
 var dotEmpty = load("res://gfx/dot_empty.png")
 var dotFilled = load("res://gfx/dot_filled.png")
+var dotHalfFilled = load("res://gfx/dot_half-filled.png")
 var sprites:Texture = load("res://gfx/mascots.png")
 
 func _ready():
@@ -70,21 +71,26 @@ func _input(event):
 func isMouseOver(_position):
 	# it's a little hacky, but the InputEventMouseButton doesn't work with scroll together
 	# and the Polroid-scene as Button doesn't fire the signal on click.
-	var scrollAreaBeginY = 40	
+	var scrollAreaBeginY = 40
 	return (get_global_rect().has_point(_position) 
 		and _position.y > scrollAreaBeginY)
 		
-func createStats(positionNode, propertyValue):
+func createStats(positionNode:Node2D, propertyValue:float):
 	for n in range(0, 5):
 		var stat = Sprite.new()
-		if n < int(propertyValue):stat.texture = dotFilled
-		else: stat.texture = dotEmpty
+		stat.texture = dotEmpty
+		
+		if propertyValue > float(n) + 0.49: stat.texture = dotHalfFilled
+		if int(propertyValue) > n: stat.texture = dotFilled
+		
 		stat.position = positionNode.position
-		stat.position.x += n * (stat.texture.get_width()+1)		
+		stat.position.x += n * (stat.texture.get_width()+1)
 		positionNode.add_child(stat)
 		
 func setStats(positionNode, propertyValue):
 	for n in range(0, 5):
 		var stat:Sprite = positionNode.get_children()[n]
-		if n < int(propertyValue):stat.texture = dotFilled
-		else: stat.texture = dotEmpty
+		stat.texture = dotEmpty
+		
+		if propertyValue > float(n) + 0.49: stat.texture = dotHalfFilled
+		if int(propertyValue) > n: stat.texture = dotFilled
