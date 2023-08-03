@@ -139,7 +139,7 @@ func _loadEventFromWaitlist():
 
 func _calcIncrease(property) -> float:
 	var normalizedProperty = property/5.0
-	return 0.9 * (1+normalizedProperty)
+	return 0.15 * (1+normalizedProperty)
 
 func getRemainingDays():
 	if in_training:
