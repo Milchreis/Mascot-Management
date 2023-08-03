@@ -62,7 +62,7 @@ func onDayIsOver() -> void:
 		
 	if getClientSatisfaction() >= 0.99:
 		daysInFullSatisfaction += 1
-		daysInFullSatisfactionBest = daysInFullSatisfactionBest
+		daysInFullSatisfactionBest = daysInFullSatisfaction
 	else:
 		daysInFullSatisfaction = 0
 	
