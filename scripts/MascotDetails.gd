@@ -84,6 +84,7 @@ func updateUI():
 	if !employee: return
 	
 	$Train.visible = !employee.isOuccupied()
+	$Train.disabled = employee.training_price > model.balance
 	$Train.text = "TRAINING (" + str(employee.training_duration) + "d" + " - " + str(employee.training_price) + "$)"
 	
 	$Fire.visible = !employee.isOuccupied()
