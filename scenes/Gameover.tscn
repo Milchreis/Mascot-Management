@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Gameover.gd" type="Script" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
 [ext_resource path="res://sfx/gameover.mp3" type="AudioStream" id=3]
 [ext_resource path="res://gfx/chick-sad.png" type="Texture" id=4]
 [ext_resource path="res://gfx/header_buttons_theme.tres" type="Theme" id=5]
+[ext_resource path="res://gfx/client-satisfaction.png" type="Texture" id=6]
 [ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="DynamicFont" id=1]
@@ -31,7 +32,7 @@ tracks/0/keys = {
 [node name="Gameover" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 20.0 ]
+"_edit_horizontal_guides_": [ 20.0, 127.0 ]
 }
 
 [node name="Player" type="AudioStreamPlayer" parent="."]
@@ -70,11 +71,80 @@ anchor_bottom = 0.5
 margin_left = -109.0
 margin_top = -37.0
 margin_right = 61.0
-margin_bottom = 39.0
+margin_bottom = 35.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Unfortunately, you have spent more money than you have earned. This way it will be nothing more of the great career. Try to watch your expenses better and start the next big business."
+autowrap = true
+
+[node name="DaysTotalLabel" type="Label" parent="Controls"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -109.0
+margin_top = 41.0
+margin_right = -26.0
+margin_bottom = 49.0
+rect_pivot_offset = Vector2( 28, 10 )
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Days total:"
+autowrap = true
+
+[node name="DaysTotal" type="Label" parent="Controls"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -42.0
+margin_top = 41.0
+margin_right = 2.0
+margin_bottom = 49.0
+rect_pivot_offset = Vector2( 28, 10 )
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "1"
+autowrap = true
+
+[node name="DaysBestLabel" type="Label" parent="Controls"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 7.0
+margin_top = 41.0
+margin_right = 51.0
+margin_bottom = 49.0
+rect_pivot_offset = Vector2( 15, -43 )
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Days   :"
+autowrap = true
+
+[node name="Thumb" type="Sprite" parent="Controls/DaysBestLabel"]
+modulate = Color( 0.4, 0.666667, 0.364706, 1 )
+position = Vector2( 34, 3 )
+texture = ExtResource( 6 )
+
+[node name="DaysBest" type="Label" parent="Controls"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 52.0
+margin_top = 41.0
+margin_right = 96.0
+margin_bottom = 49.0
+rect_pivot_offset = Vector2( 28, 10 )
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "1"
 autowrap = true
 
 [node name="TryAgain" type="Button" parent="Controls"]
@@ -83,9 +153,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -38.0
-margin_top = -34.0
+margin_top = -24.0
 margin_right = 43.0
-margin_bottom = -16.0
+margin_bottom = -6.0
 theme = ExtResource( 5 )
 text = "Try again"
 

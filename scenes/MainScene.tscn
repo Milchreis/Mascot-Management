@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://sfx/teambuilding.mp3" type="AudioStream" id=31]
 [ext_resource path="res://sfx/freshfruits.mp3" type="AudioStream" id=32]
 [ext_resource path="res://sfx/gym.mp3" type="AudioStream" id=33]
+[ext_resource path="res://gfx/sound_btn.png" type="Texture" id=34]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -623,6 +624,16 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="SoundToggle" type="Button" parent="."]
+margin_left = 224.0
+margin_top = 144.0
+margin_right = 239.0
+margin_bottom = 159.0
+theme = ExtResource( 6 )
+icon = ExtResource( 34 )
+flat = true
+icon_align = 1
+
 [connection signal="pressed" from="Areas/Benefits/Buttons/Celebration" to="Areas/Benefits/Buttons/Celebration" method="onClicked"]
 [connection signal="pressed" from="Areas/Benefits/Buttons/TeamBuilding" to="Areas/Benefits/Buttons/TeamBuilding" method="onClicked"]
 [connection signal="pressed" from="Areas/Benefits/Buttons/FreshFruits" to="Areas/Benefits/Buttons/FreshFruits" method="onClicked"]
@@ -634,3 +645,4 @@ __meta__ = {
 [connection signal="pressed" from="Desk/BenefitsBtn" to="." method="onOpenStatistics"]
 [connection signal="pressed" from="Desk/ApplicantsBtn" to="." method="onOpenJobApplication"]
 [connection signal="pressed" from="Desk/EmployeesBtn" to="." method="onOpenInventory"]
+[connection signal="pressed" from="SoundToggle" to="." method="onToggleMusic"]

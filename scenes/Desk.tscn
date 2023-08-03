@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=1]
 [ext_resource path="res://gfx/progressbar_bg.png" type="Texture" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://gfx/client-satisfaction.png" type="Texture" id=5]
 [ext_resource path="res://gfx/clock.png" type="Texture" id=6]
 [ext_resource path="res://sfx/positiveBalance.wav" type="AudioStream" id=7]
+[ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=3]
+size = 7
+font_data = ExtResource( 8 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "BalanceUpdate"
@@ -141,10 +146,24 @@ margin_top = 1.0
 margin_right = 27.0
 margin_bottom = 9.0
 max_value = 1.0
-step = 0.1
+step = 0.01
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 3 )
 nine_patch_stretch = true
+
+[node name="days" type="Label" parent="Appbar/ClientSatisfaction/Background"]
+visible = false
+margin_top = 2.0
+margin_right = 55.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 0, 10 )
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.4, 0.666667, 0.364706, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "1 DAY(s)"
+align = 1
+valign = 1
+clip_text = true
 
 [node name="Balance" type="Control" parent="Appbar"]
 margin_top = -1.0
