@@ -40,7 +40,6 @@ func introFinished():
 	$"/root/Music".dimmMusicTo(-10.0)
 	
 func onTryAgain():
-	SlideUtil.slideOutToBottom(self, $Gameover, 0.5)
 	model._reset()
 	$Areas/JobApplication.reset()
 	
@@ -56,9 +55,10 @@ func onDayPassed():
 	
 	if model.balance < 0:
 		dayTimer.stop()
-		$Gameover.visible = true
-		$Gameover/Player.play()
-		SlideUtil.slideInFromBottom(self, $Gameover, 0.5)
+		$Gameover.showScreen(model)
+
+	if model.daysInFullSatisfaction == 1:
+		$Alert.showMessage("All clients love you. Keep your business as long as possible")
 
 func _process(_delta):
 	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
@@ -71,15 +71,17 @@ func _process(_delta):
 	if activeButton: activeButton.theme = activ_theme
 
 func onEmployeeIsGone(mascot:Mascot):
-	$Alert.showMessage(mascot.nickname + " has left the company.")
+	$Alert.showError(mascot.nickname + " has left the company.")
 	$Areas/Inventory.updateUI()
 	$Areas/MascotDetails.updateUI()
 	
 func onEmployeeIsInSabat(mascot:Mascot):
-	$Alert.showMessage(mascot.nickname + " is without salary in sabat for " + str(mascot.currentEvent.duration) + " days.")
+	$Alert.showError(mascot.nickname + " is without salary in sabat for " + str(mascot.currentEvent.duration) + " days.")
 	$Areas/MascotDetails.updateUI()
 
 func onOpenStatistics():
+	if activeButton == $Desk/BenefitsBtn: return
+	
 	activeButton = $Desk/BenefitsBtn
 	SlideUtil.jumpControl(self, activeButton)
 	SlideUtil.slideToX(self, $Areas, 240)
@@ -90,6 +92,8 @@ func onOpenStatistics():
 	$Areas/Benefits.onOpen()
 
 func onOpenInventory():
+	if activeButton == $Desk/EmployeesBtn: return
+	
 	activeButton = $Desk/EmployeesBtn
 	SlideUtil.jumpControl(self, activeButton)
 	SlideUtil.slideToX(self, $Areas, -240)
@@ -100,6 +104,8 @@ func onOpenInventory():
 	$Areas/Inventory.onOpen()
 
 func onOpenJobApplication():
+	if activeButton == $Desk/ApplicantsBtn: return
+	
 	activeButton = $Desk/ApplicantsBtn
 	SlideUtil.jumpControl(self, activeButton)
 	SlideUtil.slideToX(self, $Areas, 0)
@@ -120,3 +126,6 @@ func onOpenMascotDetails(mascot:Mascot):
 
 func onMascotFire():
 	onOpenInventory()
+
+func onToggleMusic():
+	$"/root/Music".toggleMusic()

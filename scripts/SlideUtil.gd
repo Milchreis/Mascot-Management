@@ -33,7 +33,9 @@ static func slideInFromBottom(main:Node, node:Node, duration:float):
 		.tween_property(node, "position", Vector2(0, 0), duration)
 
 static func slideOutToBottom(main:Node, node:Node, duration:float):
-	main.create_tween() \
+	var tween = main.create_tween() \
 		.set_trans(Tween.TRANS_CUBIC) \
-		.set_ease(Tween.EASE_OUT) \
-		.tween_property(node, "position", Vector2(0, 160), duration)
+		.set_ease(Tween.EASE_OUT)
+		
+	tween.tween_property(node, "position", Vector2(0, 160), duration)
+	return tween
