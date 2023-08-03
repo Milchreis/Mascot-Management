@@ -1,7 +1,7 @@
 extends Control
 
 var model:GameModel
-var lastBalance := 500
+var lastBalance := 100
 var lastSatisfaction := 0.0
 
 func _process(_delta):
