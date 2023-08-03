@@ -16,9 +16,13 @@ func switchScene(animationName):
 func _process(_delta):
 	var node = $Music
 	if node.volume_db > target_volume:
-		node.volume_db = max($Music.volume_db-1, target_volume)
+		node.volume_db = max($Music.volume_db-2, target_volume)
 	else:
-		node.volume_db = min($Music.volume_db+1, target_volume)
+		node.volume_db = min($Music.volume_db+2, target_volume)
 
 func dimmMusicTo(volume_db:float):
 	target_volume = volume_db
+
+func toggleMusic():
+	if target_volume == -100: target_volume = -10.0
+	else: target_volume = -100
