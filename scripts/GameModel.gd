@@ -4,13 +4,16 @@ signal employee_gone(mascot)
 signal employee_sabat(mascot)
 signal day_passed
 
-export(int) var balance = 500
-export(int) var passedDays = 0
-export(float) var dayDurationInSeconds = 10.0
+var balance := 100
+var passedDays := 0
+var dayDurationInSeconds := 10.0
 
 var employees = []
 var openEvents = []
 var applicants = []
+
+var daysInFullSatisfaction := 0
+var daysInFullSatisfactionBest := 0
 
 var dayTimer:Timer
 
@@ -28,8 +31,10 @@ func loadSavegame(resource:SaveGame):
 	applicants = resource.applicants
 
 func _reset():
-	balance = 500
+	balance = 100
 	passedDays = 0
+	daysInFullSatisfactionBest = 0
+	daysInFullSatisfaction = 0
 	employees = []
 	openEvents = []
 	createRandomEvents(5)
@@ -47,7 +52,6 @@ func createRandomEvents(amount=1):
 func onDayIsOver() -> void:
 	passedDays+=1
 	print("Days over ", passedDays)
-	emit_signal("day_passed")
 	updateEmployees()
 		
 	if RandomUtil.withChanceOf(0.25) and applicants.size() < 20:
@@ -55,7 +59,15 @@ func onDayIsOver() -> void:
 		
 	if RandomUtil.withChanceOf(0.5) and openEvents.size() <= 3:
 		createRandomEvents(5)
+		
+	if getClientSatisfaction() >= 0.99:
+		daysInFullSatisfaction += 1
+		daysInFullSatisfactionBest = daysInFullSatisfactionBest
+	else:
+		daysInFullSatisfaction = 0
 	
+	emit_signal("day_passed")
+
 func getDayProgress() -> float:
 	return 1 - (dayTimer.time_left / dayTimer.wait_time)
 
