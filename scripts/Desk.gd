@@ -46,6 +46,12 @@ func onDayPassed():
 
 func updateSatisfactionView() -> void:
 	$Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
+	
+	$Appbar/ClientSatisfaction/Background/days.visible = model.daysInFullSatisfaction > 0
+	if model.daysInFullSatisfaction == 1:
+		 $Appbar/ClientSatisfaction/Background/days.text = str(model.daysInFullSatisfaction) + " DAY"
+	else: 
+		$Appbar/ClientSatisfaction/Background/days.text = str(model.daysInFullSatisfaction) + " DAYS"
 
 func updateBalanceView() -> void:
 	$Appbar/Balance/Amount.text = str(model.balance) + "$"
