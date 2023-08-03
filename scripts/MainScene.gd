@@ -59,6 +59,10 @@ func onDayPassed():
 
 	if model.daysInFullSatisfaction == 1:
 		$Alert.showMessage("All clients love you. Keep your business as long as possible")
+	
+	if model.daysInFullSatisfaction == 11:
+		$ApplausePlayer.play()
+		$Alert.showMessage("Your company is loved for 10 days. You won the game!")
 
 func _process(_delta):
 	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
