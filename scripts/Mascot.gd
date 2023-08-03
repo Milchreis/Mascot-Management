@@ -21,6 +21,7 @@ export var jobs := 0
 var currentEvent:Event = null
 var daysAtCurrentEvent := 0
 var eventWaitlist = []
+var daysEmployeed := 0
 
 var in_training := false
 var in_training_days := 0
@@ -55,14 +56,15 @@ func addEvent(event:Event) -> void:
 	else: eventWaitlist.append(event)
 
 func updateAfterDayPassed() -> void:
+	daysEmployeed += 1
 	leaveCooldownInDays = max(leaveCooldownInDays - 1, 0)
 	_updateIllness()
 	
 	if in_training: _updateTraining()
-	if isInEvent(): _updateWork()
-	else: _loadEventFromWaitlist()
-	
-	client_satisfaction = max(0.0, client_satisfaction - 0.005)
+	elif isInEvent(): _updateWork()
+	else: 
+		_loadEventFromWaitlist()
+		client_satisfaction = max(0.0, client_satisfaction - 0.005)
 
 func _updateIllness():
 	if is_ill:
@@ -86,17 +88,17 @@ func _updateWork() -> void:
 		
 		if "Charisma" in currentEvent.property:
 			var charismaIncrease = _calcIncrease(charisma)
-			client_satisfaction += charismaIncrease 
+			client_satisfaction = min(1.0, client_satisfaction + charismaIncrease)
 			print("Satisfaction increased by Charisma: ", charismaIncrease)
 	
 		if "Improvisation" in currentEvent.property:
 			var improIncrease = _calcIncrease(improvisation)
-			client_satisfaction += improIncrease
+			client_satisfaction = min(1.0, client_satisfaction + improIncrease)
 			print("Satisfaction increased by Improvisation: ", improIncrease)
 		
 		if "Reliability" in currentEvent.property:
 			var reliableIncrease = _calcIncrease(reliable)
-			client_satisfaction += reliableIncrease
+			client_satisfaction = min(1.0, client_satisfaction + reliableIncrease)
 			print("Satisfaction increased by Reliability: ", reliableIncrease)
 		
 		jobs += 1
@@ -137,7 +139,7 @@ func _loadEventFromWaitlist():
 
 func _calcIncrease(property) -> float:
 	var normalizedProperty = property/5.0
-	return 0.1 * (1+normalizedProperty)
+	return 0.9 * (1+normalizedProperty)
 
 func getRemainingDays():
 	if in_training:
