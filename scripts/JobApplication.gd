@@ -1,6 +1,8 @@
 extends Control
 class_name JobApplication
 
+signal hired(mascot)
+
 var Polaroid = preload("res://scenes/Polaroid.tscn")
 
 var model:GameModel
@@ -66,6 +68,7 @@ func clearLastHired():
 	if lastHired.empty(): return
 	
 	for polaroid in lastHired:
+		emit_signal("hired", polaroid.mascot)
 		model.applicants.erase(polaroid.mascot)
 		$PolaroidSelector/GridContainer.remove_child(polaroid)
 		lastHired.erase(polaroid)

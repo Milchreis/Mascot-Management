@@ -30,6 +30,8 @@ func _ready():
 	$Areas/Inventory.model = model
 	$Areas/MascotDetails.model = model
 	
+	$Areas/JobApplication.connect("hired", self, "onMascotHired")
+	
 	onOpenJobApplication()
 	SlideUtil.slideControl(self, $Desk, Vector2(240,0), Vector2.ZERO, 0.5)
 	
@@ -128,6 +130,9 @@ func onOpenMascotDetails(mascot:Mascot):
 	$Areas/Benefits.onClose()
 	$Areas/MascotDetails.onOpen(mascot)
 
+func onMascotHired(mascot:Mascot):
+	onOpenMascotDetails(mascot)
+	
 func onMascotFire():
 	onOpenInventory()
 
