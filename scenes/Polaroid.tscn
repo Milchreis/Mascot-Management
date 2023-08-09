@@ -188,12 +188,12 @@ margin_bottom = -6.0
 mouse_filter = 1
 
 [node name="Impro" parent="StatsPanel" instance=ExtResource( 6 )]
-position = Vector2( 0, 2 )
+position = Vector2( 0, 11 )
 shortLabel = "IMPROV"
 longLabel = "IMPROVISATION"
 
 [node name="Reliable" parent="StatsPanel" instance=ExtResource( 6 )]
-position = Vector2( 0, 11 )
+position = Vector2( 0, 2 )
 shortLabel = "RELIAB"
 longLabel = "RELIABILITY"
 
