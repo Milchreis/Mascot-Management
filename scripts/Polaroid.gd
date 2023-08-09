@@ -13,7 +13,7 @@ var sprites:Texture = load("res://gfx/mascots.png")
 
 func _ready():
 	$pic/Sprite.frame = mascot.spriteIndex
-	$salary.text = "-" + str(mascot.salaryPerDay) + "$/d"
+	$salary.text = str(mascot.getBalance()) + "$/d"
 	$name.text = mascot.nickname.to_upper()
 		
 	if showStats: 
@@ -32,8 +32,20 @@ func _process(_delta):
 	$Busy.visible = mascot.in_training or mascot.isInEvent()
 	$Ill.visible = mascot.is_ill
 	
+	$salary.text = str(mascot.getBalance()) + "$/d"
+	
+	if mascot.getBalance() >= 0:
+		$salary.set("custom_colors/font_color", Color("66aa5d"))
+	else:
+		$salary.set("custom_colors/font_color", Color("cf5d8b"))
+	
 	$DaysRemaining.visible = mascot.isOuccupied()
 	$DaysRemaining.text = str(mascot.getRemainingDays())
+	
+	if mascot.is_ill:
+		$DaysRemaining.set("custom_colors/font_color", Color("cf5d8b"))
+	else:
+		$DaysRemaining.set("custom_colors/font_color", Color("66aa5d"))
 	
 	$waitlist.visible = !mascot.eventWaitlist.empty()
 	$waitlist.text = ".".repeat(mascot.eventWaitlist.size())

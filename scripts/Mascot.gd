@@ -132,6 +132,10 @@ func _updateTraining() -> void:
 		charisma = min(charisma + rand_range(0.5, 1.0), 5)
 		_loadEventFromWaitlist()
 
+func getBalance() -> int:
+	if currentEvent == null: return -salaryPerDay
+	else: return -salaryPerDay + currentEvent.costs
+
 func _loadEventFromWaitlist():
 	if !in_training and !is_ill and !eventWaitlist.empty():
 		daysAtCurrentEvent = 0
