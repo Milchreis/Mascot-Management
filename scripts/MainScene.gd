@@ -13,9 +13,7 @@ var inactiv_theme = load("res://gfx/header_buttons_theme.tres")
 func _ready():
 	$"/root/Music".dimmMusicTo(-25)
 	
-	dayTimer.start()
 	dayTimer.connect("timeout", self, "onDayPassed")
-	dayTimer.autostart = true
 	dayTimer.wait_time = model.dayDurationInSeconds
 	add_child(dayTimer)
 
@@ -31,6 +29,7 @@ func _ready():
 	$Areas/MascotDetails.model = model
 	
 	$Areas/JobApplication.connect("hired", self, "onMascotHired")
+	$Areas/MascotDetails.connect("accept", self, "onAcceptEvent")
 	
 	onOpenJobApplication()
 	SlideUtil.slideControl(self, $Desk, Vector2(240,0), Vector2.ZERO, 0.5)
@@ -43,6 +42,7 @@ func introFinished():
 	
 func onTryAgain():
 	model._reset()
+	dayTimer.stop()
 	$Areas/JobApplication.reset()
 	
 	onOpenJobApplication()
@@ -82,7 +82,7 @@ func onEmployeeIsGone(mascot:Mascot):
 	$Areas/MascotDetails.updateUI()
 	
 func onEmployeeIsInSabat(mascot:Mascot):
-	$Alert.showError(mascot.nickname + " is without salary in sabat for " + str(mascot.currentEvent.duration) + " days.")
+	$Alert.showError(mascot.nickname + " is without salary in sabbat for " + str(mascot.currentEvent.duration) + " days.")
 	$Areas/MascotDetails.updateUI()
 
 func onOpenStatistics():
@@ -129,6 +129,9 @@ func onOpenMascotDetails(mascot:Mascot):
 	$Areas/JobApplication.onClose()
 	$Areas/Benefits.onClose()
 	$Areas/MascotDetails.onOpen(mascot)
+
+func onAcceptEvent(event:Event, mascot:Mascot):
+	if dayTimer.is_stopped(): dayTimer.start()
 
 func onMascotHired(mascot:Mascot):
 	onOpenMascotDetails(mascot)

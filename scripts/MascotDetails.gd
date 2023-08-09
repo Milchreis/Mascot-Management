@@ -1,5 +1,6 @@
 extends Control
 signal close
+signal accept(event, mascot)
 
 var Polaroid = preload("res://scenes/Polaroid.tscn")
 var EventScene = preload("res://scenes/Event.tscn")
@@ -16,10 +17,14 @@ func onOpen(mascot:Mascot):
 	polaroid.rect_position = Vector2(7, 3)
 	add_child(polaroid)
 	
+	model.connect("day_passed", self, "updateUI")
+	
 	reloadEvents()
 	updateUI()
 
 func onClose():
+	model.disconnect("day_passed", self, "updateUI")
+	
 	if polaroid:
 		remove_child(polaroid)
 
@@ -35,6 +40,8 @@ func onAccept(eventScene:EventScene):
 			
 	employee.addEvent(eventScene.event)
 	model.openEvents.erase(eventScene.event)
+	
+	emit_signal("accept", eventScene.event, employee)
 
 func onTraining():
 	$ClickPlayer.play()

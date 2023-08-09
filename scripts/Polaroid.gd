@@ -31,7 +31,6 @@ func _process(_delta):
 	$name.visible = showName
 	$Busy.visible = mascot.in_training or mascot.isInEvent()
 	$Ill.visible = mascot.is_ill
-	
 	$salary.text = str(mascot.getBalance()) + "$/d"
 	
 	if mascot.getBalance() >= 0:
