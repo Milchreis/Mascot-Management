@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/SkillProperty.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 6
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[node name="SkillProperty" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="position" type="Node2D" parent="."]
+position = Vector2( 14, 1 )
+
+[node name="label" type="Label" parent="."]
+margin_right = 58.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 58, 7 )
+mouse_filter = 0
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "IMPRO."
+clip_text = true
+
+[connection signal="mouse_entered" from="label" to="." method="onEntered"]
+[connection signal="mouse_exited" from="label" to="." method="onExited"]
