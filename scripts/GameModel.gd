@@ -97,7 +97,7 @@ func updateEmployees() -> void:
 				emit_signal("employee_gone", employee)
 
 			if !employee.is_ill and RandomUtil.withChanceOf(employee.sabaticalProbability):
-				employee.currentEvent = Event.new(-1, ["Sabat", employee.nickname + " is on a journey to himself to recharge his batteries.", "", 10, employee.salaryPerDay])
+				employee.currentEvent = Event.new(-1, ["Sabbatical", employee.nickname + " is on a journey to himself to recharge his batteries.", "", 10, employee.salaryPerDay])
 				emit_signal("employee_sabat", employee)
 		
 		balance -= employee.salaryPerDay
