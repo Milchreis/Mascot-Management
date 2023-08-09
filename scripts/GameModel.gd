@@ -37,6 +37,7 @@ func _reset():
 	daysInFullSatisfaction = 0
 	employees = []
 	openEvents = []
+	applicants = []
 	createRandomEvents(5)
 	increaseApplicantsPool(3)
 	dayTimer.start()
