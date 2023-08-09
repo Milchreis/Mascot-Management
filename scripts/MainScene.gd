@@ -22,7 +22,7 @@ func _ready():
 	$Gameover.connect("try_again", self, "onTryAgain")
 
 	model.connect("employee_gone", self, "onEmployeeIsGone")
-	model.connect("employee_sabat", self, "onEmployeeIsInSabat")
+	model.connect("employee_sabbat", self, "onEmployeeIsInSabat")
 	
 	$Desk.model = model
 	$Areas/Benefits.model = model

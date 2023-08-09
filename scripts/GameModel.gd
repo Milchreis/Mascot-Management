@@ -1,7 +1,7 @@
 class_name GameModel
 
 signal employee_gone(mascot)
-signal employee_sabat(mascot)
+signal employee_sabbat(mascot)
 signal day_passed
 
 var balance := 100
@@ -98,7 +98,7 @@ func updateEmployees() -> void:
 
 			if !employee.is_ill and RandomUtil.withChanceOf(employee.sabaticalProbability):
 				employee.currentEvent = Event.new(-1, ["Sabbatical", employee.nickname + " is on a journey to himself to recharge his batteries.", "", 10, employee.salaryPerDay])
-				emit_signal("employee_sabat", employee)
+				emit_signal("employee_sabbat", employee)
 		
 		balance -= employee.salaryPerDay
 		employee.updateAfterDayPassed()
