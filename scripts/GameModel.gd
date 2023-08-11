@@ -20,7 +20,7 @@ var dayTimer:Timer
 func _init(dayTimer:Timer):
 	self.dayTimer = dayTimer
 	createRandomEvents(5)
-	increaseApplicantsPool(10)
+	increaseApplicantsPool(3)
 
 func loadSavegame(resource:SaveGame):
 	balance = resource.balance
