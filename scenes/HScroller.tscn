@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/HScroller.gd" type="Script" id=1]
+[ext_resource path="res://gfx/arrow.png" type="Texture" id=2]
+[ext_resource path="res://gfx/arrow_hover.png" type="Texture" id=3]
+[ext_resource path="res://sfx/click.wav" type="AudioStream" id=4]
+[ext_resource path="res://gfx/no_scrollbar_theme.tres" type="Theme" id=5]
+
+[node name="HScroller" type="Control"]
+script = ExtResource( 1 )
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -5.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 22.0
+margin_top = 24.0
+margin_right = 218.0
+margin_bottom = 132.0
+theme = ExtResource( 5 )
+scroll_vertical_enabled = false
+
+[node name="Container" type="HBoxContainer" parent="ScrollContainer"]
+rect_clip_content = true
+custom_constants/separation = 0
+
+[node name="SlideRightBtn" type="TextureButton" parent="."]
+margin_left = 222.0
+margin_top = 58.0
+margin_right = 233.0
+margin_bottom = 80.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+
+[node name="SlideLeftBtn" type="TextureButton" parent="."]
+margin_left = 8.0
+margin_top = 58.0
+margin_right = 19.0
+margin_bottom = 80.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+flip_h = true
+
+[connection signal="pressed" from="SlideRightBtn" to="." method="onSlideRight"]
+[connection signal="pressed" from="SlideLeftBtn" to="." method="onSlideLeft"]
