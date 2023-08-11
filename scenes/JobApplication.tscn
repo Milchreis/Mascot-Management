@@ -57,4 +57,4 @@ align = 1
 
 [node name="HScroller" parent="." instance=ExtResource( 8 )]
 gap = 0
-maxCorrection = 3
+maxCorrection = 2
