@@ -1,4 +1,5 @@
 extends Control
+
 signal close
 signal accept(event, mascot)
 
@@ -9,12 +10,22 @@ var model:GameModel
 var employee:Mascot
 var polaroid:Node
 
-func onOpen(mascot:Mascot):	
+var slideOffset := 0
+var slideStep := 148
+
+func _process(delta):
+	if !employee: return
+	$SlideLeftBtn.visible = slideOffset > 0
+	$SlideRightBtn.visible = slideOffset < getMaxScroll() - slideStep-4
+
+func onOpen(mascot:Mascot):
+	slideOffset = 0
 	employee = mascot
 	polaroid = Polaroid.instance()
 	polaroid.mascot = mascot
 	polaroid.showHover = false
-	polaroid.rect_position = Vector2(7, 3)
+	polaroid.clickable = false
+	polaroid.rect_position = Vector2(4, 3)
 	add_child(polaroid)
 	
 	model.connect("day_passed", self, "updateUI")
@@ -36,8 +47,9 @@ func onAccept(eventScene:EventScene):
 	else: $ClickPlayer.play()
 	
 	if employee.currentEvent == null:
-		$Events.scroll_vertical = 0
-			
+		slideOffset = 0
+		onSlide()
+	
 	employee.addEvent(eventScene.event)
 	model.openEvents.erase(eventScene.event)
 	
@@ -47,11 +59,13 @@ func onTraining():
 	$ClickPlayer.play()
 	SlideUtil.jumpControl(self, $Train).connect("finished", self, "updateUI")
 	model.startTraining(employee)
+	emit_signal("accept", null, employee)
 
 func onFire():
 	model.fire(employee)
 	SlideUtil.jumpControl(self, $Fire).connect("finished", self, "sendCloseSignal")
 	$FirePlayer.play()
+	emit_signal("accept", null, employee)
 
 func sendCloseSignal():
 	emit_signal("close")
@@ -60,12 +74,12 @@ func addEventScene(event:Event):
 	var eventScene = EventScene.instance()
 	eventScene.event = event
 	eventScene.connect("accept", self, "onAccept")
-	$Events/Wrapper.add_child(eventScene)
+	$ScrollContainer/Container.add_child(eventScene)
 	return eventScene
 
 func reloadEvents():
-	for node in $Events/Wrapper.get_children():
-		$Events/Wrapper.remove_child(node)
+	for node in $ScrollContainer/Container.get_children():
+		$ScrollContainer/Container.remove_child(node)
 	
 	if !employee: return
 	
@@ -99,7 +113,48 @@ func updateUI():
 	$AtTrainingLabel.visible = employee.in_training
 	$Ill.visible = employee.is_ill
 	$ClientSatisfaction/Background/Progess.value = employee.client_satisfaction
-	$Events.visible = !employee.is_ill
+	
+	$ScrollContainer/Container.visible = !employee.is_ill
+	$SlideRightBtn.visible = !employee.is_ill
+	$SlideLeftBtn.visible = !employee.is_ill
+	$ColorRect.visible = !employee.is_ill
 		
-	for node in $Events/Wrapper.get_children():
+	for node in $ScrollContainer/Container.get_children():
 		node.find_node("AcceptBtn").visible = !employee.hasEvent(node.event)
+
+func onSlide():
+	SlideUtil.jumpControl(self, $SlideRightBtn)
+	SlideUtil.slideInScrollContainer(self, $ScrollContainer, 0, 0.4)
+	
+func onSlideRight():
+	if slideOffset == getMaxScroll(): return
+	
+	var totalEvents = model.openEvents.size() + employee.amountOfUpcomingEvents()
+	var gap = 4
+	var maxScroll = slideStep * totalEvents + gap
+	
+	slideOffset = min(maxScroll, slideOffset + slideStep + gap)
+	
+	print(slideOffset, " ", gap, " ", maxScroll)
+	$ClickPlayer.pitch_scale = 1.0
+	$ClickPlayer.play()
+	
+	SlideUtil.jumpControl(self, $SlideRightBtn)
+	SlideUtil.slideInScrollContainer(self, $ScrollContainer, slideOffset, 0.4)
+
+func onSlideLeft():
+	if slideOffset == 0: return
+	
+	var gap = 4
+	slideOffset = max(0, slideOffset - slideStep - gap)
+	
+	$ClickPlayer.pitch_scale = 2.0
+	$ClickPlayer.play()
+	
+	SlideUtil.jumpControl(self, $SlideLeftBtn)
+	SlideUtil.slideInScrollContainer(self, $ScrollContainer, slideOffset, 0.4)
+
+func getMaxScroll() -> int:
+	var totalEvents = model.openEvents.size() + employee.amountOfUpcomingEvents()
+	var gap = 4 * totalEvents
+	return slideStep * totalEvents + gap

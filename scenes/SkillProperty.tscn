@@ -10,7 +10,12 @@ font_data = ExtResource( 1 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[node name="SkillProperty" type="Node2D"]
+[node name="SkillProperty" type="Control"]
+margin_right = 58.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 58, 8 )
+mouse_filter = 1
+mouse_default_cursor_shape = 1
 script = ExtResource( 2 )
 
 [node name="position" type="Node2D" parent="."]

@@ -1,68 +1,24 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/Desk.tscn" type="PackedScene" id=1]
-[ext_resource path="res://gfx/theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/Benefits.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/MainScene.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Desk.gd" type="Script" id=4]
-[ext_resource path="res://scripts/JobApplication.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://gfx/header_buttons_theme.tres" type="Theme" id=6]
-[ext_resource path="res://scripts/Inventory.gd" type="Script" id=7]
-[ext_resource path="res://gfx/training_icon.png" type="Texture" id=8]
-[ext_resource path="res://scripts/MascotDetails.gd" type="Script" id=9]
-[ext_resource path="res://gfx/progressbar_fg.png" type="Texture" id=10]
+[ext_resource path="res://scenes/JobApplication.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/MascotDetails.tscn" type="PackedScene" id=8]
 [ext_resource path="res://gfx/applicants_btn.png" type="Texture" id=11]
-[ext_resource path="res://gfx/client-satisfaction.png" type="Texture" id=12]
 [ext_resource path="res://gfx/employees_btn.png" type="Texture" id=13]
 [ext_resource path="res://gfx/benefits_btn.png" type="Texture" id=14]
-[ext_resource path="res://scripts/Benefits.gd" type="Script" id=15]
-[ext_resource path="res://gfx/Scroll_theme.tres" type="Theme" id=16]
 [ext_resource path="res://sfx/click.wav" type="AudioStream" id=17]
-[ext_resource path="res://sfx/hire.wav" type="AudioStream" id=18]
-[ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=19]
-[ext_resource path="res://sfx/fire.wav" type="AudioStream" id=20]
 [ext_resource path="res://scenes/Gameover.tscn" type="PackedScene" id=21]
-[ext_resource path="res://sfx/click2.wav" type="AudioStream" id=22]
 [ext_resource path="res://sfx/dayover.wav" type="AudioStream" id=23]
-[ext_resource path="res://gfx/fire_icon.png" type="Texture" id=24]
-[ext_resource path="res://gfx/button_small_font.tres" type="Theme" id=25]
 [ext_resource path="res://scenes/Alert.tscn" type="PackedScene" id=26]
-[ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=27]
 [ext_resource path="res://sfx/intro.mp3" type="AudioStream" id=28]
-[ext_resource path="res://scripts/BenefitButton.gd" type="Script" id=29]
-[ext_resource path="res://sfx/party.mp3" type="AudioStream" id=30]
-[ext_resource path="res://sfx/teambuilding.mp3" type="AudioStream" id=31]
-[ext_resource path="res://sfx/freshfruits.mp3" type="AudioStream" id=32]
-[ext_resource path="res://sfx/gym.mp3" type="AudioStream" id=33]
 [ext_resource path="res://gfx/sound_btn.png" type="Texture" id=34]
 [ext_resource path="res://sfx/applause.mp3" type="AudioStream" id=35]
 [ext_resource path="res://gfx/sound_disabled_btn.png" type="Texture" id=36]
-
-[sub_resource type="DynamicFont" id=1]
-size = 8
-font_data = ExtResource( 19 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.603922, 0.560784, 0.878431, 1 )
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.388235, 0.364706, 0.588235, 1 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 7
-font_data = ExtResource( 27 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 8
-font_data = ExtResource( 19 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.588235, 0.286275, 0.407843, 1 )
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.588235, 0.286275, 0.407843, 1 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.811765, 0.364706, 0.545098, 1 )
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 3 )
@@ -97,489 +53,13 @@ color = Color( 0.388235, 0.364706, 0.588235, 1 )
 [node name="Areas" type="Node2D" parent="."]
 position = Vector2( -240, 0 )
 
-[node name="Benefits" type="Control" parent="Areas"]
-margin_left = -240.0
-margin_top = 20.0
-margin_bottom = 160.0
-script = ExtResource( 15 )
+[node name="Benefits" parent="Areas" instance=ExtResource( 2 )]
 
-[node name="LeftSideBackground" type="ColorRect" parent="Areas/Benefits"]
-visible = false
-margin_right = 78.0
-margin_bottom = 140.0
-color = Color( 0.603922, 0.560784, 0.878431, 1 )
+[node name="JobApplication" parent="Areas" instance=ExtResource( 7 )]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Areas/Benefits/LeftSideBackground"]
-margin_left = 3.0
-margin_top = 7.0
-margin_right = 76.0
-margin_bottom = 52.0
+[node name="MascotDetails" parent="Areas" instance=ExtResource( 8 )]
 
-[node name="DaysLabel" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
-margin_right = 73.0
-margin_bottom = 6.0
-theme = ExtResource( 2 )
-text = "Days"
-autowrap = true
-
-[node name="DaysValue" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
-margin_top = 10.0
-margin_right = 73.0
-margin_bottom = 16.0
-theme = ExtResource( 2 )
-custom_fonts/font = SubResource( 1 )
-text = "0"
-autowrap = true
-
-[node name="Spacer1" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
-margin_top = 20.0
-margin_right = 73.0
-margin_bottom = 26.0
-theme = ExtResource( 2 )
-custom_fonts/font = SubResource( 1 )
-autowrap = true
-
-[node name="MaxSatisLabel" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
-margin_top = 30.0
-margin_right = 73.0
-margin_bottom = 45.0
-theme = ExtResource( 2 )
-text = "Happiness (max)"
-autowrap = true
-
-[node name="MaxSatisValue" type="Label" parent="Areas/Benefits/LeftSideBackground/VBoxContainer"]
-margin_top = 49.0
-margin_right = 73.0
-margin_bottom = 55.0
-theme = ExtResource( 2 )
-custom_fonts/font = SubResource( 1 )
-text = "0"
-autowrap = true
-
-[node name="Header" type="ColorRect" parent="Areas/Benefits"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -48.0
-margin_right = 48.0
-margin_bottom = 16.0
-color = Color( 0.388235, 0.364706, 0.588235, 1 )
-
-[node name="Label" type="Label" parent="Areas/Benefits/Header"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -5.5
-margin_right = 53.5
-margin_bottom = 5.5
-theme = ExtResource( 2 )
-text = "Benefits"
-align = 1
-
-[node name="Buttons" type="Control" parent="Areas/Benefits"]
-margin_right = 152.0
-margin_bottom = 100.0
-
-[node name="Celebration" type="Button" parent="Areas/Benefits/Buttons"]
-margin_left = 9.0
-margin_top = 28.0
-margin_right = 151.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 142, 14 )
-theme = ExtResource( 25 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-text = " COMPANY CELEBRATION               100$"
-icon = ExtResource( 14 )
-align = 0
-script = ExtResource( 29 )
-price = 100
-tooltip = "Start a party for your mascots. It will keep your mascots for more days."
-days = 1
-type = "celebration"
-audio = ExtResource( 30 )
-
-[node name="TeamBuilding" type="Button" parent="Areas/Benefits/Buttons"]
-margin_left = 9.0
-margin_top = 45.0
-margin_right = 151.0
-margin_bottom = 59.0
-theme = ExtResource( 25 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-text = " TEAMBUILDING                             200$"
-icon = ExtResource( 14 )
-align = 0
-script = ExtResource( 29 )
-price = 200
-tooltip = "Shape your team into a strong unit. It will increase the reliabilty and keeps your mascots in company."
-days = 1
-type = "teambuilding"
-audio = ExtResource( 31 )
-
-[node name="FreshFruits" type="Button" parent="Areas/Benefits/Buttons"]
-margin_left = 9.0
-margin_top = 68.0
-margin_right = 151.0
-margin_bottom = 82.0
-theme = ExtResource( 25 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-text = " FRESH FRUITS                      5$/d - 5d"
-icon = ExtResource( 14 )
-align = 0
-script = ExtResource( 29 )
-price = 5
-tooltip = "Offer your mascots fresh fruit to be fit and healthy. It will decrease the risk for illness."
-days = 5
-type = "fruits"
-audio = ExtResource( 32 )
-
-[node name="SportCourses" type="Button" parent="Areas/Benefits/Buttons"]
-margin_left = 9.0
-margin_top = 85.0
-margin_right = 151.0
-margin_bottom = 99.0
-theme = ExtResource( 25 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-text = " GYM COURSE                     20$/d - 10d"
-icon = ExtResource( 14 )
-align = 0
-script = ExtResource( 29 )
-price = 20
-tooltip = "Let your mascots do some free workouts. It will decrease the risk for illness by 80 percent."
-days = 10
-type = "gym"
-audio = ExtResource( 33 )
-
-[node name="InfoPanel" type="MarginContainer" parent="Areas/Benefits"]
-margin_left = 159.0
-margin_top = 28.0
-margin_right = 230.0
-margin_bottom = 69.0
-
-[node name="bg" type="ColorRect" parent="Areas/Benefits/InfoPanel"]
-margin_right = 71.0
-margin_bottom = 41.0
-color = Color( 0.988235, 0.988235, 0.988235, 1 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Areas/Benefits/InfoPanel"]
-margin_right = 71.0
-margin_bottom = 41.0
-
-[node name="spacer" type="Control" parent="Areas/Benefits/InfoPanel/HBoxContainer"]
-margin_bottom = 41.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Areas/Benefits/InfoPanel/HBoxContainer"]
-margin_left = 4.0
-margin_right = 71.0
-margin_bottom = 41.0
-size_flags_horizontal = 3
-
-[node name="spacer" type="Control" parent="Areas/Benefits/InfoPanel/HBoxContainer/VBoxContainer"]
-margin_right = 67.0
-
-[node name="hint" type="Label" parent="Areas/Benefits/InfoPanel/HBoxContainer/VBoxContainer"]
-margin_top = 4.0
-margin_right = 67.0
-margin_bottom = 41.0
-theme = ExtResource( 2 )
-custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
-custom_fonts/font = SubResource( 8 )
-text = "START A PARTY FOR YOUR MASCOTS. IT WILL INCREASE THE RELIABILTY."
-autowrap = true
-uppercase = true
-
-[node name="JobApplication" type="Control" parent="Areas"]
-margin_top = 20.0
-margin_right = 240.0
-margin_bottom = 160.0
-script = ExtResource( 5 )
-
-[node name="Header" type="ColorRect" parent="Areas/JobApplication"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -49.0
-margin_right = 49.0
-margin_bottom = 16.0
-color = Color( 0.388235, 0.364706, 0.588235, 1 )
-
-[node name="Label" type="Label" parent="Areas/JobApplication/Header"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -5.5
-margin_right = 53.5
-margin_bottom = 5.5
-theme = ExtResource( 2 )
-text = "Applicants"
-align = 1
-
-[node name="HirePlayer" type="AudioStreamPlayer" parent="Areas/JobApplication"]
-stream = ExtResource( 18 )
-volume_db = -7.828
-
-[node name="noApplicants" type="Label" parent="Areas/JobApplication"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -111.5
-margin_top = -25.5
-margin_right = 111.5
-margin_bottom = -14.5
-theme = ExtResource( 2 )
-text = "There are not applicants, today."
-align = 1
-
-[node name="PolaroidSelector" type="ScrollContainer" parent="Areas/JobApplication"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -104.0
-margin_top = 19.0
-margin_right = 116.0
-margin_bottom = 144.0
-rect_min_size = Vector2( 220, 120 )
-theme = ExtResource( 16 )
-
-[node name="GridContainer" type="GridContainer" parent="Areas/JobApplication/PolaroidSelector"]
-margin_right = 220.0
-margin_bottom = 125.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 3
-
-[node name="Inventory" type="Control" parent="Areas"]
-margin_left = 240.0
-margin_top = 20.0
-margin_right = 480.0
-margin_bottom = 160.0
-script = ExtResource( 7 )
-
-[node name="ClickPlayer" type="AudioStreamPlayer" parent="Areas/Inventory"]
-stream = ExtResource( 22 )
-volume_db = -6.3
-
-[node name="Header" type="ColorRect" parent="Areas/Inventory"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -51.0
-margin_right = 51.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-color = Color( 0.388235, 0.364706, 0.588235, 1 )
-
-[node name="Label" type="Label" parent="Areas/Inventory/Header"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -45.5
-margin_top = -5.5
-margin_right = 45.5
-margin_bottom = 5.5
-theme = ExtResource( 2 )
-text = "Your Mascots"
-align = 1
-
-[node name="noEmployees" type="Label" parent="Areas/Inventory"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -77.5
-margin_top = -25.5
-margin_right = 77.5
-margin_bottom = -14.5
-theme = ExtResource( 2 )
-text = "You have no employees"
-align = 1
-
-[node name="PolaroidList" type="ScrollContainer" parent="Areas/Inventory"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -106.5
-margin_top = -120.0
-margin_right = 106.5
-rect_min_size = Vector2( 120, 120 )
-theme = ExtResource( 16 )
-
-[node name="GridContainer" type="GridContainer" parent="Areas/Inventory/PolaroidList"]
-margin_right = 213.0
-margin_bottom = 120.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 3
-
-[node name="MascotDetails" type="Control" parent="Areas"]
-margin_left = 480.0
-margin_top = 20.0
-margin_right = 720.0
-margin_bottom = 160.0
-script = ExtResource( 9 )
-
-[node name="ClickPlayer" type="AudioStreamPlayer" parent="Areas/MascotDetails"]
-stream = ExtResource( 22 )
-volume_db = 5.932
-pitch_scale = 0.5
-
-[node name="TodoPlayer" type="AudioStreamPlayer" parent="Areas/MascotDetails"]
-stream = ExtResource( 22 )
-volume_db = 4.35
-pitch_scale = 1.11
-
-[node name="FirePlayer" type="AudioStreamPlayer" parent="Areas/MascotDetails"]
-stream = ExtResource( 20 )
-
-[node name="LeftSideBackground" type="ColorRect" parent="Areas/MascotDetails"]
-margin_right = 78.0
-margin_bottom = 140.0
-color = Color( 0.603922, 0.560784, 0.878431, 1 )
-
-[node name="AtWorkLabel" type="Label" parent="Areas/MascotDetails"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -37.5
-margin_top = -63.5
-margin_right = 53.5
-margin_bottom = -52.5
-theme = ExtResource( 2 )
-custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
-text = "Is at work..."
-
-[node name="AtTrainingLabel" type="Label" parent="Areas/MascotDetails"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -37.5
-margin_top = -63.5
-margin_right = 53.5
-margin_bottom = -52.5
-theme = ExtResource( 2 )
-custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
-text = "in a further training"
-
-[node name="Ill" type="Control" parent="Areas/MascotDetails"]
-visible = false
-margin_left = 78.0
-margin_right = 264.0
-margin_bottom = 140.0
-
-[node name="IllLabel" type="Label" parent="Areas/MascotDetails/Ill"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -88.0
-margin_top = -65.0
-margin_right = 53.0
-margin_bottom = -54.0
-theme = ExtResource( 2 )
-custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
-text = "is sick at the moment."
-
-[node name="IllDescription" type="Label" parent="Areas/MascotDetails/Ill"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -88.0
-margin_top = -48.0
-margin_right = 70.0
-margin_bottom = 66.0
-theme = ExtResource( 2 )
-custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
-custom_fonts/font = SubResource( 2 )
-text = "Your mascot is not feeling well and unfortunately cannot work. It now needs a few days to get better. Cancelled orders will unfortunately lower customer satisfaction. Pay attention to the reliability of your employees to counteract illness."
-autowrap = true
-
-[node name="Train" type="Button" parent="Areas/MascotDetails"]
-margin_left = 82.0
-margin_top = 3.0
-margin_right = 180.0
-margin_bottom = 17.0
-theme = ExtResource( 25 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-text = "TRAINING"
-icon = ExtResource( 8 )
-align = 0
-
-[node name="Fire" type="Button" parent="Areas/MascotDetails"]
-margin_left = 183.0
-margin_top = 3.0
-margin_right = 231.0
-margin_bottom = 17.0
-theme = ExtResource( 25 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-text = "FIRE!"
-icon = ExtResource( 24 )
-align = 0
-
-[node name="ClientSatisfaction" type="Control" parent="Areas/MascotDetails"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -110.0
-margin_top = 103.0
-margin_right = -40.0
-margin_bottom = 125.0
-
-[node name="Background" type="ColorRect" parent="Areas/MascotDetails/ClientSatisfaction"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -22.0
-margin_top = 6.0
-margin_right = 24.0
-margin_bottom = 16.0
-color = Color( 0.388235, 0.364706, 0.588235, 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Areas/MascotDetails/ClientSatisfaction/Background"]
-modulate = Color( 0.388235, 0.364706, 0.588235, 1 )
-position = Vector2( -8, 4 )
-texture = ExtResource( 12 )
-
-[node name="Progess" type="TextureProgress" parent="Areas/MascotDetails/ClientSatisfaction/Background"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -22.0
-margin_top = 1.0
-margin_right = 22.0
-margin_bottom = 9.0
-max_value = 1.0
-step = 0.1
-texture_progress = ExtResource( 10 )
-nine_patch_stretch = true
-
-[node name="Events" type="ScrollContainer" parent="Areas/MascotDetails"]
-margin_left = 82.0
-margin_top = 21.0
-margin_right = 239.0
-margin_bottom = 141.0
-rect_min_size = Vector2( 130, 113 )
-theme = ExtResource( 16 )
-scroll_horizontal_enabled = false
-
-[node name="Wrapper" type="VBoxContainer" parent="Areas/MascotDetails/Events"]
-margin_right = 157.0
-margin_bottom = 120.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="Inventory" parent="Areas" instance=ExtResource( 5 )]
 
 [node name="Desk" parent="." instance=ExtResource( 1 )]
 script = ExtResource( 4 )
@@ -594,6 +74,7 @@ margin_left = 173.0
 margin_top = 5.0
 margin_right = 193.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 6 )
 icon = ExtResource( 14 )
 icon_align = 1
@@ -603,6 +84,7 @@ margin_left = 195.0
 margin_top = 5.0
 margin_right = 215.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 6 )
 icon = ExtResource( 11 )
 icon_align = 1
@@ -612,6 +94,7 @@ margin_left = 217.0
 margin_top = 5.0
 margin_right = 237.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 6 )
 icon = ExtResource( 13 )
 icon_align = 1
@@ -640,14 +123,6 @@ toggle_mode = true
 texture_normal = ExtResource( 34 )
 texture_pressed = ExtResource( 36 )
 
-[connection signal="pressed" from="Areas/Benefits/Buttons/Celebration" to="Areas/Benefits/Buttons/Celebration" method="onClicked"]
-[connection signal="pressed" from="Areas/Benefits/Buttons/TeamBuilding" to="Areas/Benefits/Buttons/TeamBuilding" method="onClicked"]
-[connection signal="pressed" from="Areas/Benefits/Buttons/FreshFruits" to="Areas/Benefits/Buttons/FreshFruits" method="onClicked"]
-[connection signal="pressed" from="Areas/Benefits/Buttons/SportCourses" to="Areas/Benefits/Buttons/SportCourses" method="onClicked"]
-[connection signal="select" from="Areas/Inventory" to="." method="onOpenMascotDetails"]
-[connection signal="close" from="Areas/MascotDetails" to="." method="onMascotFire"]
-[connection signal="pressed" from="Areas/MascotDetails/Train" to="Areas/MascotDetails" method="onTraining"]
-[connection signal="pressed" from="Areas/MascotDetails/Fire" to="Areas/MascotDetails" method="onFire"]
 [connection signal="pressed" from="Desk/BenefitsBtn" to="." method="onOpenStatistics"]
 [connection signal="pressed" from="Desk/ApplicantsBtn" to="." method="onOpenJobApplication"]
 [connection signal="pressed" from="Desk/EmployeesBtn" to="." method="onOpenInventory"]

@@ -1,0 +1,236 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://gfx/theme.tres" type="Theme" id=1]
+[ext_resource path="res://fonts/dogicapixel.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://gfx/button_small_font.tres" type="Theme" id=3]
+[ext_resource path="res://scripts/MascotDetails.gd" type="Script" id=4]
+[ext_resource path="res://gfx/no_scrollbar_theme.tres" type="Theme" id=5]
+[ext_resource path="res://gfx/training_icon.png" type="Texture" id=6]
+[ext_resource path="res://sfx/fire.wav" type="AudioStream" id=7]
+[ext_resource path="res://gfx/fire_icon.png" type="Texture" id=8]
+[ext_resource path="res://gfx/progressbar_fg.png" type="Texture" id=9]
+[ext_resource path="res://gfx/client-satisfaction.png" type="Texture" id=10]
+[ext_resource path="res://sfx/click2.wav" type="AudioStream" id=11]
+[ext_resource path="res://gfx/arrow.png" type="Texture" id=12]
+[ext_resource path="res://gfx/arrow_hover.png" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.603922, 0.560784, 0.878431, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.588235, 0.286275, 0.407843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.588235, 0.286275, 0.407843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.811765, 0.364706, 0.545098, 1 )
+
+[node name="MascotDetails" type="Control"]
+margin_left = 480.0
+margin_top = 20.0
+margin_right = 720.0
+margin_bottom = 160.0
+script = ExtResource( 4 )
+
+[node name="Bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+margin_right = 1.0
+rect_min_size = Vector2( 240, 160 )
+color = Color( 0.768627, 0.780392, 0.933333, 1 )
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = 5.932
+pitch_scale = 0.5
+
+[node name="TodoPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = 4.35
+pitch_scale = 1.11
+
+[node name="FirePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 77.0
+margin_top = 19.0
+margin_right = 225.0
+margin_bottom = 137.0
+theme = ExtResource( 5 )
+scroll_vertical_enabled = false
+
+[node name="Container" type="HBoxContainer" parent="ScrollContainer"]
+rect_clip_content = true
+custom_constants/separation = 4
+
+[node name="LeftSideBackground" type="ColorRect" parent="."]
+margin_right = 73.0
+margin_bottom = 140.0
+color = Color( 0.603922, 0.560784, 0.878431, 1 )
+
+[node name="AtWorkLabel" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -37.5
+margin_top = -63.5
+margin_right = 53.5
+margin_bottom = -52.5
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "Is at work..."
+
+[node name="AtTrainingLabel" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -37.5
+margin_top = -63.5
+margin_right = 53.5
+margin_bottom = -52.5
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "in a further training"
+
+[node name="Ill" type="Control" parent="."]
+visible = false
+margin_left = 78.0
+margin_right = 264.0
+margin_bottom = 140.0
+
+[node name="IllLabel" type="Label" parent="Ill"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -88.0
+margin_top = -65.0
+margin_right = 53.0
+margin_bottom = -54.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+text = "is sick at the moment."
+
+[node name="IllDescription" type="Label" parent="Ill"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -88.0
+margin_top = -48.0
+margin_right = 70.0
+margin_bottom = 66.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.388235, 0.364706, 0.588235, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Your mascot is not feeling well and unfortunately cannot work. It now needs a few days to get better. Cancelled orders will unfortunately lower customer satisfaction. Pay attention to the reliability of your employees to counteract illness."
+autowrap = true
+
+[node name="Train" type="Button" parent="."]
+margin_left = 77.0
+margin_top = 3.0
+margin_right = 175.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = "TRAINING"
+icon = ExtResource( 6 )
+align = 0
+
+[node name="Fire" type="Button" parent="."]
+margin_left = 178.0
+margin_top = 3.0
+margin_right = 224.0
+margin_bottom = 17.0
+mouse_default_cursor_shape = 2
+theme = ExtResource( 3 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+text = "FIRE!"
+icon = ExtResource( 8 )
+align = 0
+
+[node name="ClientSatisfaction" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -113.0
+margin_top = 103.0
+margin_right = -43.0
+margin_bottom = 125.0
+
+[node name="Background" type="ColorRect" parent="ClientSatisfaction"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -22.0
+margin_top = 6.0
+margin_right = 24.0
+margin_bottom = 16.0
+color = Color( 0.388235, 0.364706, 0.588235, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ClientSatisfaction/Background"]
+modulate = Color( 0.388235, 0.364706, 0.588235, 1 )
+position = Vector2( -8, 4 )
+texture = ExtResource( 10 )
+
+[node name="Progess" type="TextureProgress" parent="ClientSatisfaction/Background"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -22.0
+margin_top = 1.0
+margin_right = 22.0
+margin_bottom = 9.0
+max_value = 1.0
+step = 0.1
+texture_progress = ExtResource( 9 )
+nine_patch_stretch = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 224.0
+margin_top = 18.0
+margin_right = 240.0
+margin_bottom = 140.0
+color = Color( 0.768627, 0.780392, 0.933333, 1 )
+
+[node name="SlideRightBtn" type="TextureButton" parent="."]
+margin_left = 227.0
+margin_top = 48.0
+margin_right = 238.0
+margin_bottom = 69.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 12 )
+texture_hover = ExtResource( 13 )
+
+[node name="SlideLeftBtn" type="TextureButton" parent="."]
+margin_left = 226.0
+margin_top = 74.0
+margin_right = 237.0
+margin_bottom = 95.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 12 )
+texture_hover = ExtResource( 13 )
+flip_h = true
+
+[connection signal="pressed" from="Train" to="." method="onTraining"]
+[connection signal="pressed" from="Fire" to="." method="onFire"]
+[connection signal="pressed" from="SlideRightBtn" to="." method="onSlideRight"]
+[connection signal="pressed" from="SlideLeftBtn" to="." method="onSlideLeft"]

@@ -8,6 +8,7 @@ var showHover = true
 var salaryPerDay = 10
 var clickable = true
 
+var isOver = false
 var mascot:Mascot
 var sprites:Texture = load("res://gfx/mascots.png")
 
@@ -15,6 +16,7 @@ func _ready():
 	$pic/Sprite.frame = mascot.spriteIndex
 	$salary.text = str(mascot.getBalance()) + "$/d"
 	$name.text = mascot.nickname.to_upper()
+	$hoverBg.visible = false
 		
 	if showStats: 
 		$hoverBg.rect_size.y = 105
@@ -27,6 +29,9 @@ func _ready():
 	$StatsPanel/Reliable.value = mascot.reliable
 
 func _process(_delta):
+	if clickable and isOver: mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	else: mouse_default_cursor_shape = Control.CURSOR_ARROW
+	
 	$StatsPanel.visible = showStats
 	$name.visible = showName
 	$Busy.visible = mascot.in_training or mascot.isInEvent()
@@ -50,16 +55,13 @@ func _process(_delta):
 	$waitlist.text = ".".repeat(mascot.eventWaitlist.size())
 
 	$pic/Sprite.flip_h = get_global_mouse_position().x > $pic/Sprite.global_position.x + 20
-		
-	if showHover: 
-		$hoverBg.visible = isMouseOver(get_global_mouse_position())
 	
 	if showStats:
 		$StatsPanel/Impro.value = mascot.improvisation
 		$StatsPanel/Charisma.value = mascot.charisma
 		$StatsPanel/Reliable.value = mascot.reliable
 	
-	if isMouseOver(get_global_mouse_position()):
+	if isOver:
 		$pic/AnimationPlayer.get_animation("hover").loop = true
 		$pic/AnimationPlayer.play("hover")
 	else: 
@@ -67,16 +69,16 @@ func _process(_delta):
 		$pic/AnimationPlayer.queue("still")
 
 func _input(event):
-	if event is InputEventMouseButton and isMouseOver(event.position):	
+	if event is InputEventMouseButton and isOver:
 		if event.button_index == BUTTON_LEFT and clickable and event.is_pressed():
-			print(mascot.nickname)
 			clickable = false
 			SlideUtil.jumpControl(self, self)
 			emit_signal("select", mascot)
 
-func isMouseOver(_position):
-	# it's a little hacky, but the InputEventMouseButton doesn't work with scroll together
-	# and the Polroid-scene as Button doesn't fire the signal on click.
-	var scrollAreaBeginY = 40
-	return (get_global_rect().has_point(_position) 
-		and _position.y > scrollAreaBeginY)
+func onEntered():
+	$hoverBg.visible = true
+	isOver = true
+
+func onExited():
+	$hoverBg.visible = false
+	isOver = false

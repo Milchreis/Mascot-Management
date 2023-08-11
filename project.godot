@@ -59,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/SaveGame.gd"
 }, {
-"base": "Node2D",
+"base": "Control",
 "class": "SkillProperty",
 "language": "GDScript",
 "path": "res://scripts/SkillProperty.gd"

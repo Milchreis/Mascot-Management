@@ -1,5 +1,5 @@
 class_name SkillProperty
-extends Node2D
+extends Control
 
 export var shortLabel:String
 export var longLabel:String

@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=6 format=2]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[resource]
+HScrollBar/styles/grabber = SubResource( 8 )
+HScrollBar/styles/grabber_highlight = SubResource( 9 )
+HScrollBar/styles/grabber_pressed = SubResource( 10 )
+HScrollBar/styles/scroll = SubResource( 11 )
+HScrollBar/styles/scroll_focus = SubResource( 12 )

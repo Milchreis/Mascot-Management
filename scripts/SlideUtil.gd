@@ -32,6 +32,12 @@ static func slideInFromBottom(main:Node, node:Node, duration:float):
 		.set_ease(Tween.EASE_OUT) \
 		.tween_property(node, "position", Vector2(0, 0), duration)
 
+static func slideInScrollContainer(main, container:ScrollContainer, to:int, duration:float):
+	main.create_tween() \
+		.set_trans(Tween.TRANS_CUBIC) \
+		.set_ease(Tween.EASE_OUT) \
+		.tween_property(container, "scroll_horizontal", to, duration)
+
 static func slideOutToBottom(main:Node, node:Node, duration:float):
 	var tween = main.create_tween() \
 		.set_trans(Tween.TRANS_CUBIC) \

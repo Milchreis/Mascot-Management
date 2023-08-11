@@ -5,29 +5,31 @@ var Polaroid = preload("res://scenes/Polaroid.tscn")
 
 var model:GameModel
 
+var slideOffset := 0
+var slideStep := 65
+
 func onOpen():
+	onClose()
 	updateUI()
 	
 func onClose():
-	updateUI()
+	for polaroid in $ScrollContainer/Container.get_children():
+		polaroid.disconnect("select", self, "onSelect")
+		polaroid.queue_free()
+		$ScrollContainer/Container.remove_child(polaroid)
+
+func _process(delta):
+	$SlideLeftBtn.visible = slideOffset < 0
+	$SlideRightBtn.visible = slideStep*3 < slideStep * model.employees.size() \
+		and -slideOffset+(3*slideStep) < slideStep * model.employees.size()
 
 func updateUI():
-	for child in $PolaroidList/GridContainer.get_children():
-		child.disconnect("select", self, "onSelect")
-		child.queue_free()
-	
-	for i in range(0, model.employees.size()):
-		var employee = model.employees[i]
-		var x = i % 4
-		var y = i / 4 
-		var gap = 15
+	for employee in model.employees:
 		var polaroid = Polaroid.instance()
 		polaroid.mascot = employee
 		polaroid.showStats = false
-		polaroid.rect_position.x = x * (polaroid.rect_size.x + gap)
-		polaroid.rect_position.y = y * (polaroid.rect_size.y + gap)
 		polaroid.connect("select", self, "onSelect")
-		$PolaroidList/GridContainer.add_child(polaroid)
+		$ScrollContainer/Container.add_child(polaroid)
 		
 	$noEmployees.visible = model.employees.size() == 0
 
@@ -35,3 +37,25 @@ func onSelect(mascot:Mascot):
 	$ClickPlayer.play()
 	print("open details for ", mascot._to_string())
 	emit_signal("select", mascot)
+
+func onSlideRight():
+	var node := $ScrollContainer/Container
+	slideOffset -= slideStep
+	$ClickPlayer.pitch_scale = 1.0
+	$ClickPlayer.play()
+	SlideUtil.jumpControl(self, $SlideRightBtn)
+	SlideUtil.slideControl(self, node, \
+		node.rect_position, \
+		Vector2(slideOffset, node.rect_position.y), \
+		0.4)
+
+func onSlideLeft():
+	var node := $ScrollContainer/Container
+	slideOffset += slideStep
+	$ClickPlayer.pitch_scale = 2.0
+	$ClickPlayer.play()
+	SlideUtil.jumpControl(self, $SlideLeftBtn)
+	SlideUtil.slideControl(self, node, \
+		node.rect_position, \
+		Vector2(slideOffset, node.rect_position.y), \
+		0.4)

@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://gfx/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/Inventory.gd" type="Script" id=2]
+[ext_resource path="res://gfx/no_scrollbar_theme.tres" type="Theme" id=3]
+[ext_resource path="res://gfx/arrow.png" type="Texture" id=4]
+[ext_resource path="res://sfx/click2.wav" type="AudioStream" id=5]
+[ext_resource path="res://gfx/arrow_hover.png" type="Texture" id=6]
+
+[node name="Inventory" type="Control"]
+margin_left = 240.0
+margin_top = 20.0
+margin_right = 480.0
+margin_bottom = 160.0
+script = ExtResource( 2 )
+
+[node name="Bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+rect_min_size = Vector2( 240, 160 )
+color = Color( 0.768627, 0.780392, 0.933333, 1 )
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -6.3
+
+[node name="Header" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -51.0
+margin_right = 51.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+color = Color( 0.388235, 0.364706, 0.588235, 1 )
+
+[node name="Label" type="Label" parent="Header"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -45.5
+margin_top = -5.5
+margin_right = 45.5
+margin_bottom = 5.5
+theme = ExtResource( 1 )
+text = "Your Mascots"
+align = 1
+
+[node name="noEmployees" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -77.5
+margin_top = -25.5
+margin_right = 77.5
+margin_bottom = -14.5
+theme = ExtResource( 1 )
+text = "You have no employees"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 221.0
+margin_bottom = 117.0
+theme = ExtResource( 3 )
+
+[node name="Container" type="HBoxContainer" parent="ScrollContainer"]
+rect_clip_content = true
+custom_constants/separation = 0
+
+[node name="SlideRightBtn" type="TextureButton" parent="."]
+margin_left = 225.0
+margin_top = 58.0
+margin_right = 236.0
+margin_bottom = 80.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 6 )
+
+[node name="SlideLeftBtn" type="TextureButton" parent="."]
+margin_left = 5.0
+margin_top = 58.0
+margin_right = 16.0
+margin_bottom = 80.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 6 )
+flip_h = true
+
+[connection signal="pressed" from="SlideRightBtn" to="." method="onSlideRight"]
+[connection signal="pressed" from="SlideLeftBtn" to="." method="onSlideLeft"]

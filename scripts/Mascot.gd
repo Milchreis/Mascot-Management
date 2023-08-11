@@ -153,6 +153,10 @@ func getRemainingDays():
 	if is_ill:
 		return ill_days_remaining
 
+func amountOfUpcomingEvents() -> int:
+	if currentEvent: return 1 + eventWaitlist.size()
+	else: return eventWaitlist.size()
+
 func hasEvent(event:Event) -> bool:
 	return currentEvent == event or eventWaitlist.find(event) != -1
 

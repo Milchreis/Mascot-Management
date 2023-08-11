@@ -26,3 +26,6 @@ func dimmMusicTo(volume_db:float):
 func toggleMusic():
 	if target_volume == -100: target_volume = -10.0
 	else: target_volume = -100
+
+func isSilent() -> bool:
+	return $Music.volume_db == -100

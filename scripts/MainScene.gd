@@ -13,6 +13,8 @@ var inactiv_theme = load("res://gfx/header_buttons_theme.tres")
 func _ready():
 	$"/root/Music".dimmMusicTo(-25)
 	
+	Input.set_custom_mouse_cursor(load("res://gfx/hand.png"), Input.CURSOR_POINTING_HAND)
+	
 	dayTimer.connect("timeout", self, "onDayPassed")
 	dayTimer.wait_time = model.dayDurationInSeconds
 	add_child(dayTimer)
@@ -30,6 +32,8 @@ func _ready():
 	
 	$Areas/JobApplication.connect("hired", self, "onMascotHired")
 	$Areas/MascotDetails.connect("accept", self, "onAcceptEvent")
+	$Areas/MascotDetails.connect("close", self, "onOpenInventory")
+	$Areas/Inventory.connect("select", self, "onOpenMascotDetails")
 	
 	onOpenJobApplication()
 	SlideUtil.slideControl(self, $Desk, Vector2(240,0), Vector2.ZERO, 0.5)
@@ -38,7 +42,8 @@ func _ready():
 	$IntroPlayer.play()
 
 func introFinished():
-	$"/root/Music".dimmMusicTo(-10.0)
+	if !$"/root/Music".isSilent():
+		$"/root/Music".dimmMusicTo(-10.0)
 	
 func onTryAgain():
 	model._reset()
