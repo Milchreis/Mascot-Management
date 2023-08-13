@@ -156,6 +156,7 @@ margin_left = -38.0
 margin_top = -24.0
 margin_right = 43.0
 margin_bottom = -6.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
 text = "Try again"
 
