@@ -3,6 +3,7 @@ extends Control
 signal select(mascot)
 
 var showStats = true
+var showInfo = false
 var showName = true
 var showHover = true
 var salaryPerDay = 10
@@ -18,7 +19,7 @@ func _ready():
 	$name.text = mascot.nickname.to_upper()
 	$hoverBg.visible = false
 		
-	if showStats: 
+	if showStats or showInfo: 
 		$hoverBg.rect_size.y = 105
 	else: 
 		$hoverBg.rect_size.y = 76
@@ -32,6 +33,7 @@ func _process(_delta):
 	if clickable and isOver: mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	else: mouse_default_cursor_shape = Control.CURSOR_ARROW
 	
+	$Info.visible = showInfo
 	$StatsPanel.visible = showStats
 	$name.visible = showName
 	$Busy.visible = mascot.in_training or mascot.isInEvent()
@@ -60,6 +62,21 @@ func _process(_delta):
 		$StatsPanel/Impro.value = mascot.improvisation
 		$StatsPanel/Charisma.value = mascot.charisma
 		$StatsPanel/Reliable.value = mascot.reliable
+	
+	if showInfo:
+		if mascot.is_ill:
+			$Info/state.text = "is sick"
+			$Info/state.set("custom_colors/font_color", Color("cf5d8b"))
+		elif mascot.isInEvent():
+			$Info/state.text = "at work"
+			$Info/state.set("custom_colors/font_color", Color("66aa5d"))
+		else:
+			$Info/state.text = "is bored"
+			$Info/state.set("custom_colors/font_color", Color("635d96"))
+		
+		$Info/jobs.text = str("done jobs: ", mascot.jobs)
+		$Info/employed.text = str("EMPLOYED: ", mascot.daysEmployeed, " d")
+		$Info/ClientSatisfaction.value = mascot.client_satisfaction
 	
 	if isOver:
 		$pic/AnimationPlayer.get_animation("hover").loop = true
