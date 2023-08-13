@@ -71,7 +71,7 @@ func _updateIllness():
 		ill_days_remaining -= 1
 		is_ill = ill_days_remaining >= 0
 	
-	elif !in_training and !inSabat() and RandomUtil.withChanceOf(_calcIllnessRisk()):
+	elif !in_training and !inSabbat() and RandomUtil.withChanceOf(_calcIllnessRisk()):
 		is_ill = true
 		ill_days_remaining = 3
 		if isInEvent():
@@ -79,8 +79,8 @@ func _updateIllness():
 			currentEvent = null
 			client_satisfaction = max(0.0, client_satisfaction - 0.01)
 
-func inSabat() -> bool:
-	return currentEvent != null and currentEvent.isSabat()
+func inSabbat() -> bool:
+	return currentEvent != null and currentEvent.isSabbat()
 
 func _updateWork() -> void:
 	if daysAtCurrentEvent == currentEvent.duration:

@@ -16,7 +16,7 @@ func _init(_id, parts):
 	duration = int(parts[3])
 	costs = int(parts[4])
 
-func isSabat() -> bool:
+func isSabbat() -> bool:
 	return id == -1
 
 func _to_string():

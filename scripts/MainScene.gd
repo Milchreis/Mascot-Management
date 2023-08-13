@@ -22,7 +22,7 @@ func _ready():
 	$Gameover.connect("try_again", self, "onTryAgain")
 
 	model.connect("employee_gone", self, "onEmployeeIsGone")
-	model.connect("employee_sabbat", self, "onEmployeeIsInSabat")
+	model.connect("employee_sabbat", self, "onEmployeeIsInSabbat")
 	
 	$Desk.model = model
 	$Areas/Benefits.model = model
@@ -86,7 +86,7 @@ func onEmployeeIsGone(mascot:Mascot):
 	$Areas/Inventory.updateUI()
 	$Areas/MascotDetails.updateUI()
 	
-func onEmployeeIsInSabat(mascot:Mascot):
+func onEmployeeIsInSabbat(mascot:Mascot):
 	$Alert.showError(mascot.nickname + " is without salary in sabbat for " + str(mascot.currentEvent.duration) + " days.")
 	$Areas/MascotDetails.updateUI()
 
