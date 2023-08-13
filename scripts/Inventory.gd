@@ -8,15 +8,19 @@ var model:GameModel
 func onOpen():
 	onClose()
 	updateUI()
-	model.connect("employee_gone", self, "updateUI")
+	model.connect("employee_gone", self, "updateEmployeeView")
 	
 func onClose():
-	model.disconnect("employee_gone", self, "updateUI")
+	model.disconnect("employee_gone", self, "updateEmployeeView")
 	
 	for polaroid in $HScroller.getItems():
 		polaroid.disconnect("select", self, "onSelect")
 		polaroid.queue_free()
 		$HScroller.removeItem(polaroid)
+
+func updateEmployeeView():
+	onClose()
+	updateUI()
 
 func updateUI():
 	for employee in model.employees:
