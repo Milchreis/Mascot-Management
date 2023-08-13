@@ -15,7 +15,7 @@ func onOpen(mascot:Mascot):
 	employee = mascot
 	polaroid = Polaroid.instance()
 	polaroid.mascot = mascot
-	polaroid.showHover = false	
+	polaroid.showHover = false
 	polaroid.clickable = false
 	polaroid.rect_position = Vector2(4, 3)
 	$LeftSideBackground.add_child(polaroid)
@@ -29,7 +29,7 @@ func onClose():
 	model.disconnect("day_passed", self, "updateUI")
 	
 	if polaroid:
-		remove_child(polaroid)
+		$LeftSideBackground.remove_child(polaroid)
 
 func onAccept(eventScene:EventScene):
 	eventScene.connect("animationFinished", self, "reloadEvents")
