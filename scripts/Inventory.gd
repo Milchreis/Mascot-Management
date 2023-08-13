@@ -8,8 +8,11 @@ var model:GameModel
 func onOpen():
 	onClose()
 	updateUI()
+	model.connect("employee_gone", self, "updateUI")
 	
 func onClose():
+	model.disconnect("employee_gone", self, "updateUI")
+	
 	for polaroid in $HScroller.getItems():
 		polaroid.disconnect("select", self, "onSelect")
 		polaroid.queue_free()
@@ -20,6 +23,7 @@ func updateUI():
 		var polaroid = Polaroid.instance()
 		polaroid.mascot = employee
 		polaroid.showStats = false
+		polaroid.showInfo = true
 		polaroid.connect("select", self, "onSelect")
 		$HScroller.addItem(polaroid)
 		
