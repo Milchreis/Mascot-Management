@@ -67,8 +67,14 @@ func _process(_delta):
 		if mascot.is_ill:
 			$Info/state.text = "is sick"
 			$Info/state.set("custom_colors/font_color", Color("cf5d8b"))
+		elif mascot.in_training:
+			$Info/state.text = "in training"
+			$Info/state.set("custom_colors/font_color", Color("66aa5d"))
 		elif mascot.isInEvent():
-			$Info/state.text = "at work"
+			if mascot.currentEvent.isSabbat():
+				$Info/state.text = "in sabbat"
+			else:
+				$Info/state.text = "at work"
 			$Info/state.set("custom_colors/font_color", Color("66aa5d"))
 		else:
 			$Info/state.text = "is bored"
