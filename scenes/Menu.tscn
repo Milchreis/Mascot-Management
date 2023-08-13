@@ -314,6 +314,7 @@ margin_left = -75.5
 margin_top = -30.0
 margin_right = 75.5
 margin_bottom = -6.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
 text = "start your company"
 
@@ -333,6 +334,7 @@ position = Vector2( 121, 62 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 16 )
 animation = "walk"
+frame = 1
 speed_scale = 1.25
 playing = true
 

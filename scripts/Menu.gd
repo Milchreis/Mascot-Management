@@ -3,6 +3,7 @@ extends Node2D
 export var target_volume:=-10.0
 
 func _ready():
+	Input.set_custom_mouse_cursor(load("res://gfx/hand.png"), Input.CURSOR_POINTING_HAND)
 	$AnimationPlayer.play("intro")
 
 func onStart():
