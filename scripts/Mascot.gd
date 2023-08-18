@@ -3,7 +3,7 @@ class_name Mascot
 signal eventDone(event)
 
 var RandomNames = load("res://scripts/random_names.gd").new()
-var spriteIndex = randi() % 40
+var spriteIndex = randi() % 44
 
 export var nickname:String = RandomNames.get_first_name()
 

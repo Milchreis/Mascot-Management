@@ -43,17 +43,19 @@ func _ready():
 
 func introFinished():
 	if !$"/root/Music".isSilent():
-		$"/root/Music".dimmMusicTo(-10.0)
+		$"/root/Music".dimmMusicTo(-15.0)
 	
 func onTryAgain():
 	model._reset()
 	dayTimer.stop()
 	$Areas/JobApplication.reset()
+	$Areas/Benefits.reset()
 	
 	onOpenJobApplication()
 
 func onDayPassed():
 	$DayoverPlayer.play()
+	$WonParticles.emitting = false
 	model.onDayIsOver()
 	$Desk.onDayPassed()
 	$Areas/JobApplication.updateUI()
@@ -68,9 +70,8 @@ func onDayPassed():
 		$Alert.showMessage("All clients love you. Keep your business as long as possible")
 	
 	if model.daysInFullSatisfaction == 11:
-		$ApplausePlayer.play()
-		$Alert.showMessage("Your company is loved for 10 days. You won the game!")
-
+		onWon()
+		
 func _process(_delta):
 	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
 	$Desk/Appbar/Day/Background/Progess.value = model.getDayProgress()
@@ -89,6 +90,12 @@ func onEmployeeIsGone(mascot:Mascot):
 func onEmployeeIsInSabbat(mascot:Mascot):
 	$Alert.showError(mascot.nickname + " is without salary in sabbat for " + str(mascot.currentEvent.duration) + " days.")
 	$Areas/MascotDetails.updateUI()
+
+func onWon():
+	$WonParticles.emitting = true
+	$ApplausePlayer.play()
+	$Alert.showMessage("Your company is loved for 10 days. You won the game!", 10)
+
 
 func onOpenStatistics():
 	if activeButton == $Desk/BenefitsBtn: return
@@ -146,3 +153,4 @@ func onMascotFire():
 
 func onToggleMusic():
 	$"/root/Music".toggleMusic()
+	$IntroPlayer.volume_db = -100

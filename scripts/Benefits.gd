@@ -10,7 +10,11 @@ func onOpen():
 		node.connect("clicked", self, "onBenefitClicked")
 		node.connect("over", self, "onBenefitIsOver")
 		node.model = model
-		
+
+func reset():
+	for node in $Buttons.get_children():
+		node.working_day = 0
+
 func _process(_delta):
 	updateUI()
 	

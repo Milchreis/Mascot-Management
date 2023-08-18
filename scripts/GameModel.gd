@@ -22,14 +22,6 @@ func _init(dayTimer:Timer):
 	createRandomEvents(10)
 	increaseApplicantsPool(3)
 
-func loadSavegame(resource:SaveGame):
-	balance = resource.balance
-	passedDays = resource.passedDays
-	dayDurationInSeconds = resource.dayDurationInSeconds
-	employees = resource.employees
-	openEvents = resource.openEvents
-	applicants = resource.applicants
-
 func _reset():
 	balance = 100
 	passedDays = 0

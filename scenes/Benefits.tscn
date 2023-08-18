@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://gfx/theme.tres" type="Theme" id=1]
 [ext_resource path="res://fonts/mascot-management.ttf" type="DynamicFontData" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sfx/gym.mp3" type="AudioStream" id=8]
 [ext_resource path="res://sfx/freshfruits.mp3" type="AudioStream" id=9]
 [ext_resource path="res://sfx/teambuilding.mp3" type="AudioStream" id=10]
+[ext_resource path="res://gfx/progressbar_fg.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.603922, 0.560784, 0.878431, 1 )
@@ -67,10 +68,22 @@ icon = ExtResource( 6 )
 align = 0
 script = ExtResource( 4 )
 price = 100
-tooltip = "Start a party for your mascots. It will keep your mascots for more days."
+tooltip = "Start a party for your mascots. It will stay your mascots for more days in your company."
 days = 1
 type = "celebration"
 audio = ExtResource( 7 )
+
+[node name="Progess" type="TextureProgress" parent="Buttons/Celebration"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -71.0
+margin_top = 13.0
+margin_right = 71.0
+margin_bottom = 14.0
+max_value = 1.0
+step = 0.01
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
 
 [node name="TeamBuilding" type="Button" parent="Buttons"]
 margin_left = 9.0
@@ -86,10 +99,22 @@ icon = ExtResource( 6 )
 align = 0
 script = ExtResource( 4 )
 price = 200
-tooltip = "Shape your team into a strong unit. It will increase the reliabilty and keeps your mascots in company."
+tooltip = "Shape your team into a strong unit. It will decrease permanent the risk for leaving and let stay the mascots for some days in your company."
 days = 1
 type = "teambuilding"
 audio = ExtResource( 10 )
+
+[node name="Progess" type="TextureProgress" parent="Buttons/TeamBuilding"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -71.0
+margin_top = 13.0
+margin_right = 71.0
+margin_bottom = 14.0
+max_value = 1.0
+step = 0.01
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
 
 [node name="FreshFruits" type="Button" parent="Buttons"]
 margin_left = 9.0
@@ -110,6 +135,18 @@ days = 5
 type = "fruits"
 audio = ExtResource( 9 )
 
+[node name="Progess" type="TextureProgress" parent="Buttons/FreshFruits"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -71.0
+margin_top = 13.0
+margin_right = 71.0
+margin_bottom = 14.0
+max_value = 1.0
+step = 0.01
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
+
 [node name="SportCourses" type="Button" parent="Buttons"]
 margin_left = 9.0
 margin_top = 85.0
@@ -128,6 +165,18 @@ tooltip = "Let your mascots do some free workouts. It will decrease the risk for
 days = 10
 type = "gym"
 audio = ExtResource( 8 )
+
+[node name="Progess" type="TextureProgress" parent="Buttons/SportCourses"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -71.0
+margin_top = 13.0
+margin_right = 71.0
+margin_bottom = 14.0
+max_value = 1.0
+step = 0.01
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
 
 [node name="InfoPanel" type="MarginContainer" parent="."]
 margin_left = 159.0

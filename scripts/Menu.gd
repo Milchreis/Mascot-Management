@@ -1,6 +1,10 @@
 extends Node2D
 
-export var target_volume:=-10.0
+export var target_volume:=-25.0
+
+var slientDB = -100
+var steps = 0
+
 
 func _ready():
 	Input.set_custom_mouse_cursor(load("res://gfx/hand.png"), Input.CURSOR_POINTING_HAND)
@@ -17,16 +21,16 @@ func switchScene(animationName):
 func _process(_delta):
 	var node = $Music
 	if node.volume_db > target_volume:
-		node.volume_db = max($Music.volume_db-2, target_volume)
+		node.volume_db = max(node.volume_db-2, target_volume)
 	else:
-		node.volume_db = min($Music.volume_db+2, target_volume)
+		node.volume_db = min(node.volume_db+2, target_volume)
 
 func dimmMusicTo(volume_db:float):
 	target_volume = volume_db
 
 func toggleMusic():
-	if target_volume == -100: target_volume = -10.0
-	else: target_volume = -100
+	if target_volume == slientDB: target_volume = -15.0
+	else: target_volume = slientDB
 
 func isSilent() -> bool:
-	return $Music.volume_db == -100
+	return $Music.volume_db == slientDB

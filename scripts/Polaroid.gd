@@ -29,6 +29,30 @@ func _ready():
 	$StatsPanel/Charisma.value = mascot.charisma
 	$StatsPanel/Reliable.value = mascot.reliable
 
+func playBalanceChanged(value):
+		var label = $salaryChanged
+		label.text = str(value) + "$   "
+		label.visible = true
+		label.rect_position = Vector2(12, 60)
+		
+		var tween := create_tween() \
+			.set_trans(Tween.TRANS_CUBIC) \
+			.set_ease(Tween.EASE_OUT) \
+			.set_parallel()
+		
+		var targetPosition
+				
+		if sign(value) == -1:
+			label.add_color_override("font_color", Color("cf5d8b"))
+			targetPosition = Vector2(label.rect_position.x, label.rect_position.y + 20)
+			
+		elif sign(value) == 1:
+			label.add_color_override("font_color", Color("b0d07e"))
+			targetPosition = Vector2(label.rect_position.x, label.rect_position.y - 30)
+	
+		tween.tween_property(label, "visible", false, 1)
+		tween.tween_property(label, "rect_position", targetPosition, 1)
+
 func _process(_delta):
 	if clickable and isOver: mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	else: mouse_default_cursor_shape = Control.CURSOR_ARROW
@@ -70,12 +94,14 @@ func _process(_delta):
 		elif mascot.in_training:
 			$Info/state.text = "in training"
 			$Info/state.set("custom_colors/font_color", Color("66aa5d"))
+			
 		elif mascot.isInEvent():
 			if mascot.currentEvent.isSabbat():
 				$Info/state.text = "in sabbat"
 			else:
 				$Info/state.text = "at work"
-			$Info/state.set("custom_colors/font_color", Color("66aa5d"))
+			if isOver: $Info/state.set("custom_colors/font_color", Color("635d96"))
+			else: $Info/state.set("custom_colors/font_color", Color("66aa5d"))
 		else:
 			$Info/state.text = "is bored"
 			$Info/state.set("custom_colors/font_color", Color("635d96"))

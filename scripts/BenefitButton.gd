@@ -26,6 +26,9 @@ func updateUI():
 	if !model: return
 	
 	disabled = model.balance <= price or is_active()
+	
+	$Progess.visible = working_day != 0
+	$Progess.value = 1.0 - (working_day / days as float)
 
 func onDayOver():
 	if is_active():

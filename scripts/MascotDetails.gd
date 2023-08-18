@@ -87,7 +87,7 @@ func reloadEvents():
 			var eventScene = addEventScene(event)
 			eventScene.find_node("AcceptBtn").visible = false
 			eventScene.find_node("state_label").visible = true
-			eventScene.find_node("state_label").text = "TODO #" + str(c)
+			eventScene.find_node("state_label").text = "NEXT #" + str(c)
 			c+=1
 		
 		for event in model.openEvents:

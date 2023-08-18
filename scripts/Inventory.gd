@@ -9,16 +9,23 @@ func onOpen():
 	onClose()
 	updateUI()
 	model.connect("employee_gone", self, "updateEmployeeView")
+	model.connect("day_passed", self, "uploadPolaroids")
 	
 func onClose():
+	model.disconnect("day_passed", self, "uploadPolaroids")
 	model.disconnect("employee_gone", self, "updateEmployeeView")
 	
 	for polaroid in $HScroller.getItems():
+		$HScroller.removeItem(polaroid)
 		polaroid.disconnect("select", self, "onSelect")
 		polaroid.queue_free()
-		$HScroller.removeItem(polaroid)
 
-func updateEmployeeView():
+func uploadPolaroids():
+	for polaroid in $HScroller.getItems():
+		polaroid.playBalanceChanged(polaroid.mascot.getBalance())
+
+func updateEmployeeView(mascot:Mascot):
+	print("!")
 	onClose()
 	updateUI()
 
