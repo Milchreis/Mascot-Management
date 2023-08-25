@@ -14,9 +14,19 @@ default_font = SubResource( 3 )
 margin_right = 58.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 58, 8 )
+rect_pivot_offset = Vector2( -163, -31 )
 mouse_filter = 1
 mouse_default_cursor_shape = 1
 script = ExtResource( 2 )
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+position = Vector2( 41, 1 )
+emitting = false
+one_shot = true
+explosiveness = 0.75
+emission_shape = 2
+emission_rect_extents = Vector2( 10, 1 )
+color = Color( 0.964706, 0.776471, 0.368627, 1 )
 
 [node name="position" type="Node2D" parent="."]
 position = Vector2( 14, 1 )

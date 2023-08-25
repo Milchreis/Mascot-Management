@@ -1,6 +1,7 @@
 class_name Mascot
 
 signal eventDone(event)
+signal trainingDone
 
 var RandomNames = load("res://scripts/random_names.gd").new()
 var spriteIndex = randi() % 44
@@ -131,6 +132,7 @@ func _updateTraining() -> void:
 		improvisation = min(improvisation + rand_range(0.5, 1.0), 5)
 		charisma = min(charisma + rand_range(0.5, 1.0), 5)
 		_loadEventFromWaitlist()
+		emit_signal("trainingDone")
 
 func getBalance() -> int:
 	if currentEvent == null: return -salaryPerDay

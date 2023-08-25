@@ -29,6 +29,11 @@ func _ready():
 	$StatsPanel/Charisma.value = mascot.charisma
 	$StatsPanel/Reliable.value = mascot.reliable
 
+func onTrainingDone():
+	$StatsPanel/Impro.playTrainingDoneAnimation()
+	$StatsPanel/Charisma.playTrainingDoneAnimation()
+	$StatsPanel/Reliable.playTrainingDoneAnimation()
+
 func playBalanceChanged(value):
 		var label = $salaryChanged
 		label.text = str(value) + "$   "

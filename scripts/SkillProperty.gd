@@ -15,7 +15,15 @@ func _ready():
 
 func _process(_delta):
 	setStats($position, value)
+
+func playTrainingDoneAnimation():
+	$Particles.emitting = true
 	
+	for n in range(0, 5):
+		if value > float(n) + 0.49 or int(value) > n:
+			var stat:Sprite = $position.get_children()[n]
+			SlideUtil.jump(self, stat, 5, 0.25, n*0.1)
+
 func createStats(positionNode:Node2D, propertyValue:float):
 	for n in range(0, 5):
 		var stat = Sprite.new()

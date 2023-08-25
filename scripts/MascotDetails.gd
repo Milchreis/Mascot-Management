@@ -21,15 +21,20 @@ func onOpen(mascot:Mascot):
 	$LeftSideBackground.add_child(polaroid)
 	
 	model.connect("day_passed", self, "updateUI")
+	employee.connect("trainingDone", self, "onTrainingDone")
 	
 	reloadEvents()
 	updateUI()
 
 func onClose():
 	model.disconnect("day_passed", self, "updateUI")
+	if employee: employee.disconnect("trainingDone", self, "onTrainingDone")
 	
 	if polaroid:
 		$LeftSideBackground.remove_child(polaroid)
+
+func onTrainingDone():
+	polaroid.onTrainingDone()
 
 func onAccept(eventScene:EventScene):
 	eventScene.connect("animationFinished", self, "reloadEvents")
