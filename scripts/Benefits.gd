@@ -4,7 +4,8 @@ class_name Benefits
 var model:GameModel
 
 func onOpen():
-	model.connect("day_passed", self, "onDayOver")
+	if !model.is_connected("day_passed", self, "onDayOver"):
+		model.connect("day_passed", self, "onDayOver")
 	
 	for node in $Buttons.get_children():
 		node.connect("clicked", self, "onBenefitClicked")
@@ -32,8 +33,6 @@ func updateUI():
 			$InfoPanel.visible = true
 
 func onClose():
-	model.disconnect("day_passed", self, "onDayOver")
-	
 	for node in $Buttons.get_children():
 		node.disconnect("clicked", self, "onBenefitClicked")
 		node.disconnect("over", self, "onBenefitIsOver")
