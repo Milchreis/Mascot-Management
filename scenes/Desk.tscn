@@ -138,7 +138,7 @@ modulate = Color( 0.964706, 0.776471, 0.368627, 1 )
 position = Vector2( -8, 4 )
 texture = ExtResource( 5 )
 
-[node name="Progess" type="TextureProgress" parent="Appbar/ClientSatisfaction/Background"]
+[node name="Progress" type="TextureProgress" parent="Appbar/ClientSatisfaction/Background"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -27.0
@@ -193,7 +193,7 @@ text = "5000$"
 
 [node name="PositiveBalancePlayer" type="AudioStreamPlayer" parent="Appbar/Balance"]
 stream = ExtResource( 7 )
-volume_db = -40.0
+volume_db = -20.0
 
 [node name="BalanceAnimationPlayer" type="AnimationPlayer" parent="Appbar"]
 anims/BalanceUpdate = SubResource( 1 )

@@ -10,6 +10,7 @@ func onOpen():
 	updateUI()
 	model.connect("employee_gone", self, "updateEmployeeView")
 	model.connect("day_passed", self, "uploadPolaroids")
+	$HScroller.reset()
 	
 func onClose():
 	model.disconnect("day_passed", self, "uploadPolaroids")
@@ -25,7 +26,6 @@ func uploadPolaroids():
 		polaroid.playBalanceChanged(polaroid.mascot.getBalance())
 
 func updateEmployeeView(mascot:Mascot):
-	print("!")
 	onClose()
 	updateUI()
 

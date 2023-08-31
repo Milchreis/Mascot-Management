@@ -18,6 +18,8 @@ func onOpen():
 		polaroid.mascot = applicant
 		polaroid.connect("select", self, "onHire")
 		$HScroller.addItem(polaroid)
+
+	$HScroller.reset()
 	
 func onClose():
 	for polaroid in $HScroller.getItems():

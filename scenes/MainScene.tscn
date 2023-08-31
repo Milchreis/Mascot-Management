@@ -139,6 +139,7 @@ margin_left = 224.0
 margin_top = 144.0
 margin_right = 239.0
 margin_bottom = 159.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 6 )
 toggle_mode = true
 texture_normal = ExtResource( 34 )

@@ -61,7 +61,7 @@ func onDayPassed():
 	$Areas/JobApplication.updateUI()
 	$Areas/MascotDetails.reloadEvents()
 	$Areas/MascotDetails.updateUI()
-	
+
 	if model.balance < 0:
 		dayTimer.stop()
 		$Gameover.showScreen(model)
@@ -72,10 +72,7 @@ func onDayPassed():
 	if model.daysInFullSatisfaction == 11:
 		onWon()
 		
-func _process(_delta):
-	$Desk/Appbar/ClientSatisfaction/Background/Progess.value = model.getClientSatisfaction()
-	$Desk/Appbar/Day/Background/Progess.value = model.getDayProgress()
-	
+func _process(_delta):	
 	$Desk/BenefitsBtn.theme = inactiv_theme
 	$Desk/ApplicantsBtn.theme = inactiv_theme
 	$Desk/EmployeesBtn.theme = inactiv_theme

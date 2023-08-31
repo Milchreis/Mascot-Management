@@ -11,7 +11,6 @@ var employee:Mascot
 var polaroid:Node
 
 func onOpen(mascot:Mascot):
-	$HScroller.reset()
 	employee = mascot
 	polaroid = Polaroid.instance()
 	polaroid.mascot = mascot
@@ -25,6 +24,7 @@ func onOpen(mascot:Mascot):
 	
 	reloadEvents()
 	updateUI()
+	$HScroller.reset()
 
 func onClose():
 	model.disconnect("day_passed", self, "updateUI")

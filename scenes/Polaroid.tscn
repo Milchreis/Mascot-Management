@@ -196,7 +196,6 @@ text = "Name"
 clip_text = true
 
 [node name="StatsPanel" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.0
@@ -227,6 +226,7 @@ shortLabel = "CHARIS"
 longLabel = "CHARISMA"
 
 [node name="Info" type="Control" parent="."]
+visible = false
 margin_left = 5.0
 margin_top = 72.0
 margin_right = 61.0

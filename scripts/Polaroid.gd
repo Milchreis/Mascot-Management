@@ -35,28 +35,30 @@ func onTrainingDone():
 	$StatsPanel/Reliable.playTrainingDoneAnimation()
 
 func playBalanceChanged(value):
-		var label = $salaryChanged
-		label.text = str(value) + "$   "
-		label.visible = true
-		label.rect_position = Vector2(12, 60)
-		
-		var tween := create_tween() \
-			.set_trans(Tween.TRANS_CUBIC) \
-			.set_ease(Tween.EASE_OUT) \
-			.set_parallel()
-		
-		var targetPosition
-				
-		if sign(value) == -1:
-			label.add_color_override("font_color", Color("cf5d8b"))
-			targetPosition = Vector2(label.rect_position.x, label.rect_position.y + 20)
-			
-		elif sign(value) == 1:
-			label.add_color_override("font_color", Color("b0d07e"))
-			targetPosition = Vector2(label.rect_position.x, label.rect_position.y - 30)
+	if value == 0: return
 	
-		tween.tween_property(label, "visible", false, 1)
-		tween.tween_property(label, "rect_position", targetPosition, 1)
+	var label = $salaryChanged
+	label.text = str(value) + "$   "
+	label.visible = true
+	label.rect_position = Vector2(12, 60)
+	
+	var tween := create_tween() \
+		.set_trans(Tween.TRANS_CUBIC) \
+		.set_ease(Tween.EASE_OUT) \
+		.set_parallel()
+	
+	var targetPosition
+			
+	if sign(value) == -1:
+		label.add_color_override("font_color", Color("cf5d8b"))
+		targetPosition = Vector2(label.rect_position.x, label.rect_position.y + 20)
+		
+	elif sign(value) == 1:
+		label.add_color_override("font_color", Color("b0d07e"))
+		targetPosition = Vector2(label.rect_position.x, label.rect_position.y - 30)
+
+	tween.tween_property(label, "visible", false, 1)
+	tween.tween_property(label, "rect_position", targetPosition, 1)
 
 func _process(_delta):
 	if clickable and isOver: mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
